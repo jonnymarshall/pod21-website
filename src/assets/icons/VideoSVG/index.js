@@ -1,0 +1,8 @@
+import React from "react";
+import { createIconComponent } from "../../../utils/createIconComponent.jsx";
+
+const svgContent = `<svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 6.48V2C16 0.9 15.1 0 14 0H2C0.9 0 0 0.9 0 2V14C0 15.1 0.9 16 2 16H14C15.1 16 16 15.1 16 14V9.52L19.15 12.65C19.46 12.97 20 12.74 20 12.3V3.7C20 3.26 19.46 3.03 19.15 3.35L16 6.48ZM3.6 11.2L4.98 9.37C5.18 9.1 5.58 9.1 5.78 9.37L7 11L9.23 8.03C9.43 7.76 9.83 7.76 10.03 8.03L12.41 11.2C12.66 11.53 12.42 12 12.01 12H4C3.59 12 3.35 11.53 3.6 11.2Z" fill="#F3EFEB"/>
+</svg>`;
+
+export const VideoSVG = createIconComponent(svgContent, "VideoSVG");

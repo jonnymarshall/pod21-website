@@ -1,0 +1,25 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://pod21.com/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Disallow crawling of unnecessary paths
+User-agent: *
+Disallow: /api/
+Disallow: /admin/

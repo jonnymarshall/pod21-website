@@ -1,0 +1,8 @@
+import React from "react";
+import { createIconComponent } from "../../../utils/createIconComponent.jsx";
+
+const svgContent = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.4225 9.445L10.5175 9.2275C10.06 9.175 9.61003 9.3325 9.28753 9.655L7.90753 11.035C5.78503 9.955 4.04503 8.2225 2.96503 6.0925L4.35253 4.705C4.67503 4.3825 4.83253 3.9325 4.78003 3.475L4.56253 1.585C4.47253 0.8275 3.83503 0.2575 3.07003 0.2575H1.77253C0.925031 0.2575 0.22003 0.9625 0.27253 1.81C0.67003 8.215 5.79253 13.33 12.19 13.7275C13.0375 13.78 13.7425 13.075 13.7425 12.2275V10.93C13.75 10.1725 13.18 9.535 12.4225 9.445Z" fill="#212121"/>
+</svg>`;
+
+export const PhoneSVG = createIconComponent(svgContent, "PhoneSVG");

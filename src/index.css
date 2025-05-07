@@ -1,0 +1,80 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bone-white: #f3efeb;
+    --carbon-black: #1d1d1d;
+    --text-body: #aeaeae;
+    --bg-primary: #0b0c0f;
+    --bg-secondary: #101116;
+    --stroke: #1d1d1d;
+
+    --primary-100: #bbf298;
+    --primary-60: #d6f7c1;
+    --primary-40: #e4fad6;
+    --primary-30: #ebfbe0;
+    --primary-10: #f8fef5;
+
+    --red-100: #bf103d;
+    --red-60: #d9708b;
+    --red-40: #e59fb1;
+    --red-30: #ecb7c5;
+    --red-10: #f9e7ec;
+
+    --blue-100: #120551;
+    --blue-60: #716997;
+    --blue-40: #a09bb9;
+    --blue-30: #b8b4cb;
+    --blue-10: #e7e6ee;
+  }
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+  }
+
+  body {
+    @apply font-roboto;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-kanit font-bold;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply text-boneWhite text-body-sm transition-colors whitespace-nowrap hover:text-primary-100;
+  }
+  .footer-social-links {
+    @apply flex items-center text-body-lg text-boneWhite hover:text-primary-100 transition-colors;
+  }
+  .footer-social-links-icon {
+    @apply h-6 w-6 rounded-full flex items-center justify-center mr-[10px];
+  }
+
+  /* Add animation for platform marquee */
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-100% / 3)); }
+  }
+  
+  /* Add card image styles for WhyPodcast */
+  .podcast-card-image {
+    @apply w-full h-full object-contain;
+  }
+}
