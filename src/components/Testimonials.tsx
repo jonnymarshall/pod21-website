@@ -30,7 +30,7 @@ const Testimonials = () => {
     <section
       id="testimonials"
       className={cn(
-        "relative bg-bgPrimary py-side-spacing overflow-hidden",
+        "relative bg-bgPrimary py-side-spacing overflow-hidden scroll-mt-[100px]",
         "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
       )}
     >

@@ -3,8 +3,10 @@ import { ArrowRightSVG } from "@/assets/icons";
 import { Button, RotatingIcon } from "./ui/button";
 import { cn } from "@/lib/utils";
 import AnimatedWordCycle from "./ui/AnimatedWordCycle";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -82,7 +84,7 @@ const Hero = () => {
           <Button
             variant="default"
             size="md"
-            onClick={() => window.open("https://calendly.com/pod21", "_blank")}
+            onClick={() => navigate("/contact")}
           >
             Book a free call
             <RotatingIcon>

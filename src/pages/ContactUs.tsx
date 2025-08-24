@@ -177,7 +177,10 @@ const ContactUs = () => {
                 variant="default"
                 size="md"
                 onClick={() =>
-                  window.open("https://calendly.com/pod21", "_blank")
+                  window.open(
+                    "https://calendly.com/pod21/discoverycall",
+                    "_blank"
+                  )
                 }
               >
                 Book a free call now

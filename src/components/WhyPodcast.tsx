@@ -12,7 +12,7 @@ const WhyPodcast = () => {
   const audienceCards = [
     {
       title: "For Individuals",
-      imageSrc: "/image1.png",
+      imageSrc: "/why_start_a_podcast_for_individuals.png",
       features: [
         {
           title: "Build a Personal Brand",
@@ -53,7 +53,7 @@ const WhyPodcast = () => {
     },
     {
       title: "For Businesses & Brands",
-      imageSrc: "/image2.png",
+      imageSrc: "/why_start_a_podcast_for_business_brand.png",
       features: [
         {
           title: "Educate & Inform",
@@ -71,7 +71,7 @@ const WhyPodcast = () => {
             "Though podcasting, you can build towards becoming an authority in your field - and lead the conversation in your industry.",
         },
         {
-          title: "Convert listeners into customer",
+          title: "Convert listeners into customers",
           description:
             "With podcasting, the line between entertainment and advertising is blurred. Every listener is a potential customer (and that's a good thing)!",
         },
@@ -94,7 +94,7 @@ const WhyPodcast = () => {
     },
     {
       title: "For Artists, Musicians & Creators",
-      imageSrc: "/image3.png",
+      imageSrc: "/why_start_a_podcast_for_artists_musicians_creators.png",
       features: [
         {
           title: "Deepen Your Connection with Fans",
@@ -130,7 +130,8 @@ const WhyPodcast = () => {
     },
     {
       title: "For Organizations, Movements & Nonprofits",
-      imageSrc: "/image4.png",
+      imageSrc:
+        "/why_start_a_podcast_for_organizations_movements_nonprofits.png",
       features: [
         {
           title: "Raise Awareness",
@@ -161,7 +162,7 @@ const WhyPodcast = () => {
     },
     {
       title: "For Educators, Coaches, Consultants",
-      imageSrc: "/image5.png",
+      imageSrc: "/why_start_a_podcast_for_educators_coaches_consultants.png",
       features: [
         {
           title: "Teach & Inspire",
@@ -201,7 +202,7 @@ const WhyPodcast = () => {
       id="why-podcast"
       ref={ref}
       className={cn(
-        "py-side-spacing bg-bgPrimary",
+        "py-side-spacing bg-bgPrimary scroll-mt-[100px]",
         "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
       )}
     >

@@ -1,4 +1,3 @@
-
 # pod21 - Podcast Production Service
 
 ## Project info
@@ -18,7 +17,7 @@ This project is built with:
 
 ## How to run the project locally
 
-Follow these steps:
+Follow these steps very carefully:
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.

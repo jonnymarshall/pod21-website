@@ -1,4 +1,3 @@
-
 import { Button, RotatingIcon } from "./ui/button";
 import { ArrowRightSVG } from "@/assets/icons";
 import { Card } from "@/components/ui/card";
@@ -87,7 +86,7 @@ const Services = () => {
     <section
       id="services"
       className={cn(
-        "relative bg-bgPrimary py-side-spacing overflow-hidden",
+        "relative bg-bgPrimary py-side-spacing overflow-hidden scroll-mt-[100px]",
         "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
       )}
     >

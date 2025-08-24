@@ -8,6 +8,7 @@ import {
 import { useInView } from "@/hooks/useInView";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Counter animation hook
 const useCounter = (
@@ -175,6 +176,7 @@ const StatCard = ({
 };
 
 const WhyUs = () => {
+  const navigate = useNavigate();
   const [titleRef, isTitleInView] = useInView({ threshold: 0.2 });
   const [statsRef, isStatsInView] = useInView({ threshold: 0.2 });
   const [featuresRef, isFeaturesInView] = useInView({ threshold: 0.2 });
@@ -209,7 +211,7 @@ const WhyUs = () => {
     <section
       id="why"
       className={cn(
-        "relative py-side-spacing bg-bgSecondary overflow-hidden",
+        "relative py-side-spacing bg-bgSecondary overflow-hidden scroll-mt-[100px]",
         "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
       )}
     >
@@ -331,7 +333,7 @@ const WhyUs = () => {
           <Button
             variant="default"
             size="md"
-            onClick={() => window.open("https://calendly.com/pod21", "_blank")}
+            onClick={() => navigate("/contact")}
           >
             Tell us why on a free call
             <RotatingIcon>

@@ -37,8 +37,12 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <Link to="/blogs" className="text-body-lg text-boneWhite hover:text-primary-100 transition-colors" onClick={() => window.scrollTo(0, 0)}>
-                Blogs
+              <Link
+                to="/blog"
+                className="text-body-lg text-boneWhite hover:text-primary-100 transition-colors"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                Blog
               </Link>
             </li>
             <li>
@@ -56,11 +60,11 @@ const Footer = () => {
           <p className="text-body-sm-medium text-textBody mb-8">Social Links</p>
           <ul className="space-y-8">
             <li>
-              <a href="#features" className="footer-social-links">
+              <a href="https://x.com/pod21hq" className="footer-social-links">
                 <div className="footer-social-links-icon">
                   <TwitterSVG height={24} width={24} />
                 </div>
-                Twitter
+                X (Formerly Twitter)
               </a>
             </li>
             <li>

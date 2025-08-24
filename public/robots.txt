@@ -2,7 +2,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pod21.com/sitemap.xml
+Sitemap: https://pod21.xyz/sitemap.xml
 
 User-agent: Googlebot
 Allow: /

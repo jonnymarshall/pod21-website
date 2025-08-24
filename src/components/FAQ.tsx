@@ -1,7 +1,4 @@
 import { useInView } from "@/hooks/useInView";
-import { Link } from "react-router-dom";
-import { Button, RotatingIcon } from "./ui/button";
-import { ArrowRightSVG } from "@/assets/icons";
 import {
   Accordion,
   AccordionContent,
@@ -12,7 +9,6 @@ import { cn } from "@/lib/utils";
 
 const FAQ = () => {
   const [titleRef, isTitleInView] = useInView({ threshold: 0.2 });
-  const [ctaRef, isCtaInView] = useInView({ threshold: 0.2 });
 
   const faqs = [
     {
@@ -74,7 +70,7 @@ const FAQ = () => {
     <section
       id="faq"
       className={cn(
-        "py-side-spacing bg-bgSecondary",
+        "py-side-spacing bg-bgSecondary scroll-mt-[100px]",
         "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
       )}
     >
@@ -123,27 +119,6 @@ const FAQ = () => {
             </AccordionItem>
           ))}
         </Accordion>
-      </div>
-      <div
-        ref={ctaRef}
-        className={cn(
-          "text-center transition-all duration-1000 delay-200",
-          isCtaInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        )}
-      >
-        <p className="text-body-sm-medium text-textBody mt-[60px] mb-4">
-          Got a different question?
-        </p>
-        <Button
-          variant="default"
-          size="md"
-          onClick={() => window.open("https://calendly.com/pod21", "_blank")}
-        >
-          Book a free call
-          <RotatingIcon>
-            <ArrowRightSVG width={14} height={10} />
-          </RotatingIcon>
-        </Button>
       </div>
     </section>
   );
