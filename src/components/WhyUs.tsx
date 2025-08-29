@@ -211,7 +211,7 @@ const WhyUs = () => {
     <section
       id="why"
       className={cn(
-        "relative py-side-spacing bg-bgSecondary overflow-hidden scroll-mt-[100px]",
+        "relative py-side-spacing bg-bgSecondary overflow-hidden scroll-mt-[20px]",
         "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
       )}
     >

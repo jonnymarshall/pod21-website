@@ -202,7 +202,7 @@ const WhyPodcast = () => {
       id="why-podcast"
       ref={ref}
       className={cn(
-        "py-side-spacing bg-bgPrimary scroll-mt-[100px]",
+        "py-side-spacing bg-bgPrimary scroll-mt-[20px]",
         "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
       )}
     >

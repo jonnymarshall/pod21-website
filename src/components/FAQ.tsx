@@ -70,7 +70,7 @@ const FAQ = () => {
     <section
       id="faq"
       className={cn(
-        "py-side-spacing bg-bgSecondary scroll-mt-[100px]",
+        "py-side-spacing bg-bgSecondary scroll-mt-[20px]",
         "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
       )}
     >

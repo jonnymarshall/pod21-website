@@ -64,7 +64,7 @@ const Footer = () => {
                 <div className="footer-social-links-icon">
                   <TwitterSVG height={24} width={24} />
                 </div>
-                X (Formerly Twitter)
+                X
               </a>
             </li>
             <li>

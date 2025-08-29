@@ -46,7 +46,7 @@ const Process = () => {
     <section
       id="work"
       className={cn(
-        "relative bg-bgSecondary py-side-spacing overflow-hidden scroll-mt-[100px]",
+        "relative bg-bgSecondary py-side-spacing overflow-hidden scroll-mt-[20px]",
         "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
       )}
     >
@@ -218,11 +218,11 @@ const Process = () => {
           )}
         >
           <p className="text-body-sm-medium text-textBody mt-[60px] mb-4">
-            Want to launch or level up your podcast?
+            Ready to make it happen?
           </p>
           <Link to="/contact">
             <Button variant="default" size="md">
-              Let's talk
+              Book a free call
               <RotatingIcon>
                 <ArrowRightSVG width={14} height={10} />
               </RotatingIcon>

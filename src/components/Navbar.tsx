@@ -50,13 +50,13 @@ const Navbar = () => {
       label: "FAQs",
     },
     {
+      href: "#why",
+      label: "About",
+    },
+    {
       href: "/blog",
       label: "Blog",
       isPage: true,
-    },
-    {
-      href: "#why",
-      label: "About",
     },
   ];
 

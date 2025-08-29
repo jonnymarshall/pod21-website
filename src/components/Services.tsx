@@ -86,7 +86,7 @@ const Services = () => {
     <section
       id="services"
       className={cn(
-        "relative bg-bgPrimary py-side-spacing overflow-hidden scroll-mt-[100px]",
+        "relative bg-bgPrimary py-side-spacing overflow-hidden scroll-mt-[20px]",
         "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
       )}
     >
