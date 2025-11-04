@@ -14,8 +14,8 @@ const Contact = () => {
     <section
       id="contact"
       className={cn(
-        "py-side-spacing bg-bgPrimary relative overflow-hidden",
-        "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
+        "py-side-spacing bg-bgPrimary relative overflow-hidden "
+        // "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
       )}
     >
       {/* Background pattern */}
@@ -31,8 +31,9 @@ const Contact = () => {
       <div
         ref={containerRef}
         className={cn(
-          "relative z-10 transition-all duration-1000",
-          isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          "relative z-10 transition-all duration-1000  max-w-[1440px] mx-auto ",
+          isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
+          "px-side-spacing-mobile md:px-side-spacing-tablet "
         )}
       >
         <div

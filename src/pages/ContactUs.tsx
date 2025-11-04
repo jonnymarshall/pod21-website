@@ -149,215 +149,217 @@ const ContactUs = () => {
   return (
     <>
       <Navbar />
-      <section
-        className={cn(
-          "relative pb-side-spacing pt-[218px] bg-bgPrimary",
-          "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
-        )}
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[60px] items-start">
-          <div>
+      <section className="bg-bgPrimary">
+        <div
+          className={cn(
+            " pb-side-spacing pt-[218px] max-w-[1440px] mx-auto overflow-hidden",
+            "px-side-spacing-mobile md:px-side-spacing-tablet "
+          )}
+        >
+          <div className="xl:relative  grid grid-cols-1 lg:grid-cols-2 gap-[60px] items-start  overflow-hidden">
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              >
+                <h1 className="font-kanit font-bold text-boneWhite !text-h1 lg:text-banner">
+                  Let's <span className="text-primary-100">talk.</span>
+                </h1>
+                <p className="text-body-lg text-textBody mt-4">
+                  Drop us a message below. No fluff, no forms disappearing into
+                  the void. We'll get back to you asap. If you want to jump on a
+                  free call, just check the box, and we'll make it happen.
+                </p>
+                <p className="text-body-sm-medium text-textBody mt-8 mb-4">
+                  Don't be shy - it's free!
+                </p>
+                <Button
+                  variant="default"
+                  size="md"
+                  onClick={() =>
+                    window.open(
+                      "https://calendly.com/pod21/discoverycall",
+                      "_blank"
+                    )
+                  }
+                >
+                  Book a free call now
+                  <RotatingIcon>
+                    <ArrowRightSVG width={14} height={10} />
+                  </RotatingIcon>
+                </Button>
+                <div
+                  className={cn(
+                    "absolute -left-[100px] -bottom-9 w-[720px] h-[620px]",
+                    "hidden lg:block"
+                  )}
+                >
+                  <img
+                    src="/tilt-arrow-lines.png"
+                    alt="Background pattern"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </motion.div>
+            </div>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              ref={containerRef}
+              initial={{ opacity: 0, x: 50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className={cn(
+                "bg-bgSecondary rounded-xl border border-none p-8",
+                "!bg-opacity-100" // Force 100% opacity on all screen sizes
+              )}
+              style={{ backgroundColor: "var(--bg-secondary)" }} // Adding a direct style for more specificity
             >
-              <h1 className="font-kanit font-bold text-boneWhite !text-h1 lg:text-banner">
-                Let's <span className="text-primary-100">talk.</span>
-              </h1>
-              <p className="text-body-lg text-textBody mt-4">
-                Drop us a message below. No fluff, no forms disappearing into
-                the void. We'll get back to you asap. If you want to jump on a
-                free call, just check the box, and we'll make it happen.
-              </p>
-              <p className="text-body-sm-medium text-textBody mt-8 mb-4">
-                Don't be shy - it's free!
-              </p>
-              <Button
-                variant="default"
-                size="md"
-                onClick={() =>
-                  window.open(
-                    "https://calendly.com/pod21/discoverycall",
-                    "_blank"
-                  )
-                }
-              >
-                Book a free call now
-                <RotatingIcon>
-                  <ArrowRightSVG width={14} height={10} />
-                </RotatingIcon>
-              </Button>
-              <div
-                className={cn(
-                  "absolute -left-[100px] -bottom-9 w-[720px] h-[620px]",
-                  "hidden lg:block"
-                )}
-              >
-                <img
-                  src="/tilt-arrow-lines.png"
-                  alt="Background pattern"
-                  className="w-full h-full object-contain"
-                />
-              </div>
+              <h4 className="text-h4 text-boneWhite">Drop us a message</h4>
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-6 mt-8"
+                >
+                  <FormField
+                    control={form.control}
+                    name="fullName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-boneWhite">
+                          Enter your full name{" "}
+                          <span className="text-primary-100">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="John Doe"
+                            {...field}
+                            className="bg-bgPrimary text-boneWhite text-body-lg"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-boneWhite">
+                          Enter your email address{" "}
+                          <span className="text-primary-100">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="john@example.com"
+                            type="email"
+                            {...field}
+                            className="bg-bgPrimary border-stroke text-boneWhite"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field: { value, onChange, ...field } }) => (
+                      <FormItem>
+                        <FormLabel className="text-boneWhite">
+                          Enter contact number
+                        </FormLabel>
+                        <FormControl>
+                          <PhoneInput
+                            country={"us"}
+                            value={value}
+                            onChange={onChange}
+                            inputProps={{
+                              ...field,
+                              className:
+                                "!text-boneWhite !text-body-lg rounded-full border border-input border-stroke bg-bgPrimary !px-24 py-4 w-full",
+                            }}
+                            inputClass=""
+                            containerClass="!w-full custom-phone-dropdown"
+                            buttonClass="!bg-bgPrimary !border-stroke !rounded-l-full w-20 flex items-center justify-center"
+                            dropdownClass="!bg-bgSecondary !text-boneWhite !rounded-xl !p-4"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="source"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-boneWhite">
+                          Where did you hear about Pod21?
+                        </FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger className="bg-bgPrimary border-stroke text-boneWhite">
+                              <SelectValue placeholder="Select an option" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="bg-bgSecondary border-stroke text-boneWhite">
+                            <SelectItem value="google">Google</SelectItem>
+                            <SelectItem value="social">Social Media</SelectItem>
+                            <SelectItem value="friend">
+                              Friend Referral
+                            </SelectItem>
+                            <SelectItem value="linkedin">LinkedIn</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-boneWhite">
+                          Message <span className="text-primary-100">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Tell us what you're looking for..."
+                            {...field}
+                            className="bg-bgPrimary border-stroke text-boneWhite min-h-[120px]"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="flex justify-center !mt-10">
+                    <Button
+                      type="submit"
+                      className="w-full"
+                      disabled={submitting}
+                    >
+                      {submitting ? "Sending..." : "Send your message"}
+                      <RotatingIcon>
+                        <ArrowRightSVG />
+                      </RotatingIcon>
+                    </Button>
+                  </div>
+                </form>
+              </Form>
             </motion.div>
           </div>
-          <motion.div
-            ref={containerRef}
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className={cn(
-              "bg-bgSecondary rounded-xl border border-none p-8",
-              "!bg-opacity-100" // Force 100% opacity on all screen sizes
-            )}
-            style={{ backgroundColor: "var(--bg-secondary)" }} // Adding a direct style for more specificity
-          >
-            <h4 className="text-h4 text-boneWhite">Drop us a message</h4>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6 mt-8"
-              >
-                <FormField
-                  control={form.control}
-                  name="fullName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-boneWhite">
-                        Enter your full name{" "}
-                        <span className="text-primary-100">*</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="John Doe"
-                          {...field}
-                          className="bg-bgPrimary text-boneWhite text-body-lg"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-boneWhite">
-                        Enter your email address{" "}
-                        <span className="text-primary-100">*</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="john@example.com"
-                          type="email"
-                          {...field}
-                          className="bg-bgPrimary border-stroke text-boneWhite"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field: { value, onChange, ...field } }) => (
-                    <FormItem>
-                      <FormLabel className="text-boneWhite">
-                        Enter contact number
-                      </FormLabel>
-                      <FormControl>
-                        <PhoneInput
-                          country={"us"}
-                          value={value}
-                          onChange={onChange}
-                          inputProps={{
-                            ...field,
-                            className:
-                              "!text-boneWhite !text-body-lg rounded-full border border-input border-stroke bg-bgPrimary !px-24 py-4 w-full",
-                          }}
-                          inputClass=""
-                          containerClass="!w-full custom-phone-dropdown"
-                          buttonClass="!bg-bgPrimary !border-stroke !rounded-l-full w-20 flex items-center justify-center"
-                          dropdownClass="!bg-bgSecondary !text-boneWhite !rounded-xl !p-4"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="source"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-boneWhite">
-                        Where did you hear about Pod21?
-                      </FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="bg-bgPrimary border-stroke text-boneWhite">
-                            <SelectValue placeholder="Select an option" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className="bg-bgSecondary border-stroke text-boneWhite">
-                          <SelectItem value="google">Google</SelectItem>
-                          <SelectItem value="social">Social Media</SelectItem>
-                          <SelectItem value="friend">
-                            Friend Referral
-                          </SelectItem>
-                          <SelectItem value="linkedin">LinkedIn</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-boneWhite">
-                        Message <span className="text-primary-100">*</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Tell us what you're looking for..."
-                          {...field}
-                          className="bg-bgPrimary border-stroke text-boneWhite min-h-[120px]"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <div className="flex justify-center !mt-10">
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    disabled={submitting}
-                  >
-                    {submitting ? "Sending..." : "Send your message"}
-                    <RotatingIcon>
-                      <ArrowRightSVG />
-                    </RotatingIcon>
-                  </Button>
-                </div>
-              </form>
-            </Form>
-          </motion.div>
         </div>
       </section>
 

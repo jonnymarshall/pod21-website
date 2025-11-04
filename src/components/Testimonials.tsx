@@ -27,105 +27,101 @@ const Testimonials = () => {
   ];
 
   return (
-    <section
-      id="testimonials"
-      className={cn(
-        "relative bg-bgPrimary py-side-spacing overflow-hidden scroll-mt-[20px]",
-        "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
-      )}
-    >
-      {/* Background diagonal stripes - bottom right */}
-      <div className="absolute -bottom-[90px] -right-[56px] w-[440px] h-[330px] opacity-20">
-        <img
-          src="/arrow-lines.png"
-          alt="Background pattern"
-          className="w-full h-full object-contain"
-        />
-      </div>
-      <div className="relative z-10">
-        <div
-          ref={titleRef}
-          className={cn(
-            "text-center transition-all duration-1000",
-            isTitleInView
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          )}
-        >
-          <h2 className="text-h2">
-            Real podcasts, real{" "}
-            <span className="text-primary-100">results</span>
-          </h2>
-          <p className="text-base text-textBody mt-4">
-            Creating a podcast is hard. Keeping one alive is even harder. 95% of
-            podcasts don't make it past 21 episodes. With our help, you don't
-            have to be a statistic. Here's how we've turned things around for
-            our clients.
-          </p>
+    <section id="testimonials" className={cn("relative bg-bgPrimary ", "")}>
+      <div className="relative max-w-[1440px] mx-auto overflow-hidden px-side-spacing-mobile md:px-side-spacing-tablet  py-side-spacing  scroll-mt-[20px] ">
+        {/* Background diagonal stripes - bottom right */}
+        <div className="absolute -bottom-[90px] -right-[56px] w-[440px] h-[330px] opacity-20">
+          <img
+            src="/arrow-lines.png"
+            alt="Background pattern"
+            className="w-full h-full object-contain"
+          />
         </div>
+        <div className="relative z-10">
+          <div
+            ref={titleRef}
+            className={cn(
+              "text-center transition-all duration-1000",
+              isTitleInView
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            )}
+          >
+            <h2 className="text-h2">
+              Real podcasts, real{" "}
+              <span className="text-primary-100">results</span>
+            </h2>
+            <p className="text-base text-textBody mt-4">
+              Creating a podcast is hard. Keeping one alive is even harder. 95%
+              of podcasts don't make it past 21 episodes. With our help, you
+              don't have to be a statistic. Here's how we've turned things
+              around for our clients.
+            </p>
+          </div>
 
-        <div
-          ref={testimonialsRef}
-          className={cn(
-            "grid gap-8 mt-[66px] transition-all duration-1000",
-            "md:grid-cols-2",
-            isTestimonialsInView
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          )}
-        >
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center text-center p-6"
-              style={{
-                transitionDelay: `${index * 200}ms`,
-                opacity: isTestimonialsInView ? 1 : 0,
-                transform: isTestimonialsInView
-                  ? "translateY(0)"
-                  : "translateY(20px)",
-                transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
-              }}
-            >
-              <div className="w-40 h-40 rounded-full overflow-hidden">
-                <img
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="w-full h-full object-cover"
-                />
+          <div
+            ref={testimonialsRef}
+            className={cn(
+              "grid gap-8 mt-[66px] transition-all duration-1000",
+              "md:grid-cols-2",
+              isTestimonialsInView
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            )}
+          >
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center text-center p-6"
+                style={{
+                  transitionDelay: `${index * 200}ms`,
+                  opacity: isTestimonialsInView ? 1 : 0,
+                  transform: isTestimonialsInView
+                    ? "translateY(0)"
+                    : "translateY(20px)",
+                  transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+                }}
+              >
+                <div className="w-40 h-40 rounded-full overflow-hidden">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-body-lg-medium mt-6">{testimonial.name}</p>
+                <p className="text-base text-textBody mt-2">
+                  {testimonial.title}
+                </p>
+                <blockquote className="text-body-lg italic mt-8 leading-relaxed">
+                  {testimonial.quote}
+                </blockquote>
               </div>
-              <p className="text-body-lg-medium mt-6">{testimonial.name}</p>
-              <p className="text-base text-textBody mt-2">
-                {testimonial.title}
-              </p>
-              <blockquote className="text-body-lg italic mt-8 leading-relaxed">
-                {testimonial.quote}
-              </blockquote>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {/* Call to action */}
-        <div
-          ref={ctaRef}
-          className={cn(
-            "text-center transition-all duration-1000 delay-200 mt-[60px]",
-            isCtaInView
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          )}
-        >
-          <p className="text-base text-textBody mb-4">
-            Want to launch, scale, or streamline your podcast?
-          </p>
-          <Link to="/contact">
-            <Button variant="default" size="md">
-              Get in touch
-              <RotatingIcon>
-                <ArrowRightSVG width={14} height={10} />
-              </RotatingIcon>
-            </Button>
-          </Link>
+          {/* Call to action */}
+          <div
+            ref={ctaRef}
+            className={cn(
+              "text-center transition-all duration-1000 delay-200 mt-[60px]",
+              isCtaInView
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            )}
+          >
+            <p className="text-base text-textBody mb-4">
+              Want to launch, scale, or streamline your podcast?
+            </p>
+            <Link to="/contact">
+              <Button variant="default" size="md">
+                Get in touch
+                <RotatingIcon>
+                  <ArrowRightSVG width={14} height={10} />
+                </RotatingIcon>
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>

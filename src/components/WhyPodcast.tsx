@@ -198,15 +198,13 @@ const WhyPodcast = () => {
   ];
 
   return (
-    <section
-      id="why-podcast"
-      ref={ref}
-      className={cn(
-        "py-side-spacing bg-bgPrimary scroll-mt-[20px]",
-        "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
-      )}
-    >
-      <div className="mx-auto">
+    <section id="why-podcast" ref={ref} className="bg-bgPrimary">
+      <div
+        className={cn(
+          "py-side-spacing bg-bgPrimary scroll-mt-[20px] max-w-[1440px] mx-auto",
+          "px-side-spacing-mobile md:px-side-spacing-tablet "
+        )}
+      >
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}

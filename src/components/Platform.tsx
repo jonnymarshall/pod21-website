@@ -1,4 +1,3 @@
-
 import { useInView } from "@/hooks/useInView";
 import { motion } from "framer-motion";
 
@@ -78,14 +77,13 @@ const Platform = () => {
   ];
 
   return (
-    <section
-      ref={ref}
-      className={cn(
-        "py-side-spacing bg-bgSecondary relative overflow-hidden",
-        "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
-      )}
-    >
-      <div className="mx-auto">
+    <section ref={ref} className="bg-bgSecondary">
+      <div
+        className={cn(
+          "py-side-spacing  relative overflow-hidden max-w-[1440px] mx-auto",
+          "px-side-spacing-mobile md:px-side-spacing-tablet "
+        )}
+      >
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -104,35 +102,41 @@ const Platform = () => {
 
         <div className="relative overflow-hidden">
           <div className="w-full overflow-hidden relative">
-            <div 
+            <div
               className="flex items-center"
               style={{
-                width: "max-content", 
+                width: "max-content",
                 animation: "marquee 80s linear infinite",
-                paddingRight: "50px" // Add extra space for seamless transition
+                paddingRight: "50px", // Add extra space for seamless transition
               }}
             >
-              {[...platforms, ...platforms, ...platforms].map((platform, index) => (
-                <div
-                  key={index}
-                  className="flex flex-row items-center flex-shrink-0 mx-7"
-                >
-                  <span className="flex-shrink-0">{platform.icon}</span>
-                  <span className="ml-[10px] text-body-sm text-textBody whitespace-nowrap">
-                    {platform.name}
-                  </span>
-                </div>
-              ))}
+              {[...platforms, ...platforms, ...platforms].map(
+                (platform, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-row items-center flex-shrink-0 mx-7"
+                  >
+                    <span className="flex-shrink-0">{platform.icon}</span>
+                    <span className="ml-[10px] text-body-sm text-textBody whitespace-nowrap">
+                      {platform.name}
+                    </span>
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>
       </div>
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(calc(-100% / 3)); }
         }
-      `}} />
+      `,
+        }}
+      />
     </section>
   );
 };

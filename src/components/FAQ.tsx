@@ -67,14 +67,13 @@ const FAQ = () => {
   ];
 
   return (
-    <section
-      id="faq"
-      className={cn(
-        "py-side-spacing bg-bgSecondary scroll-mt-[20px]",
-        "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
-      )}
-    >
-      <div className="relative z-10">
+    <section id="faq" className="bg-bgSecondary">
+      <div
+        className={cn(
+          "py-side-spacing scroll-mt-[20px]  relative max-w-[1440px] mx-auto",
+          "px-side-spacing-mobile md:px-side-spacing-tablet "
+        )}
+      >
         <div
           ref={titleRef}
           className={cn(

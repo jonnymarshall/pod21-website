@@ -50,8 +50,9 @@ const Navbar = () => {
       label: "FAQs",
     },
     {
-      href: "#why",
+      href: "/about",
       label: "About",
+      isPage: true,
     },
     {
       href: "/blog",
@@ -93,8 +94,8 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed border-[1px] border-stroke top-[20px] right-0 left-0 rounded-2xl z-50 transition-all duration-300 bg-bgPrimary",
-        "mx-side-spacing-mobile md:mx-side-spacing-tablet lg:mx-side-spacing"
+        "fixed border-[1px] border-stroke top-[20px] right-0 left-0 rounded-2xl z-50 transition-all duration-300 bg-bgPrimary max-w-[1360px] ",
+        "mx-side-spacing-mobile md:mx-side-spacing-tablet lg:mx-side-spacing xl:mx-auto"
       )}
     >
       <div

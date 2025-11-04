@@ -9,7 +9,7 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1.5rem",
     },
     extend: {
       backgroundColor: {

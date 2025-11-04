@@ -208,138 +208,139 @@ const WhyUs = () => {
   ];
 
   return (
-    <section
-      id="why"
-      className={cn(
-        "relative py-side-spacing bg-bgSecondary overflow-hidden scroll-mt-[20px]",
-        "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
-      )}
-    >
-      {/* Background diagonal stripes - top left */}
-      <div className="absolute -top-[90px] -left-[60px] w-[224px] h-[300px] opacity-20">
-        <img
-          src="/straight-lines.png"
-          alt="Background pattern"
-          className="w-full h-full object-contain"
-        />
-      </div>
-
-      {/* Background diagonal stripes - bottom right */}
-      <div className="absolute -bottom-[90px] -right-[60px] w-[224px] h-[300px] opacity-20">
-        <img
-          src="/straight-lines.png"
-          alt="Background pattern"
-          className="w-full h-full object-contain"
-        />
-      </div>
-
-      <div className="mx-auto relative z-10">
-        {/* Heading */}
-        <div
-          ref={titleRef}
-          className={cn(
-            "text-center mb-12 transition-all duration-1000",
-            isTitleInView
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          )}
-        >
-          <h2 className="text-h2">
-            Why <span className="text-primary-100">Pod21?</span>
-          </h2>
-          <p className="text-body-lg text-textBody mt-4">
-            We are a no-nonsense podcast production team built by podcasters,
-            for podcasters. We're like your trusty sidekick who's been there,
-            done that, and knows the game. We streamline and take on the often
-            overwhelming production side of podcasting, so you can focus on the
-            message.
-          </p>
+    <section id="why" className="bg-bgSecondary">
+      <div
+        className={cn(
+          "relative py-side-spacing  overflow-hidden scroll-mt-[20px] max-w-[1440px] mx-auto",
+          "px-side-spacing-mobile md:px-side-spacing-tablet "
+        )}
+      >
+        {/* Background diagonal stripes - top left */}
+        <div className="absolute -top-[90px] -left-[60px] w-[224px] h-[300px] opacity-20">
+          <img
+            src="/straight-lines.png"
+            alt="Background pattern"
+            className="w-full h-full object-contain"
+          />
         </div>
 
-        {/* Stats Section */}
-        <div
-          ref={statsRef}
-          className={cn(
-            "grid gap-[20px] transition-all duration-1000",
-            "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
-            isStatsInView
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          )}
-        >
-          {stats.map((stat, index) => (
-            <StatCard
-              key={index}
-              stat={stat}
-              index={index}
-              isInView={isStatsInView}
-            />
-          ))}
+        {/* Background diagonal stripes - bottom right */}
+        <div className="absolute -bottom-[90px] -right-[60px] w-[224px] h-[300px] opacity-20">
+          <img
+            src="/straight-lines.png"
+            alt="Background pattern"
+            className="w-full h-full object-contain"
+          />
         </div>
 
-        {/* Features Section */}
-        <div
-          ref={featuresRef}
-          className={cn(
-            "grid gap-[20px] mt-[20px] transition-all duration-1000",
-            "grid-cols-1 md:grid-cols-3",
-            isFeaturesInView
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          )}
-        >
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="flex flex-row items-center bg-bgPrimary items-start rounded-xl p-6 gap-4"
-              style={{
-                transitionDelay: `${index * 150}ms`,
-                opacity: isFeaturesInView ? 1 : 0,
-                transform: isFeaturesInView
-                  ? "translateY(0)"
-                  : "translateY(20px)",
-                transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
-              }}
-            >
-              <div className="rounded-full bg-bgSecondary p-[20px]">
-                {feature.icon}
-              </div>
-              <div className="flex flex-col">
-                <h3 className="text-body-lg-medium text-boneWhite">
-                  {feature.title}
-                </h3>
-                <p className="text-body-sm text-textBody mt-2">
-                  {feature.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Call to action */}
-        <div
-          ref={ctaRef}
-          className={cn(
-            "text-center transition-all duration-1000 delay-200",
-            isCtaInView
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          )}
-        >
-          <p className="text-body-sm-medium text-textBody mt-[60px] mb-4">
-            Not convinced yet?
-          </p>
-
-          <Button
-            variant="default"
-            size="md"
-            onClick={() => navigate("/contact")}
+        <div className="mx-auto relative z-10">
+          {/* Heading */}
+          <div
+            ref={titleRef}
+            className={cn(
+              "text-center mb-12 transition-all duration-1000",
+              isTitleInView
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            )}
           >
-            Tell us why on a free call
-            <RotatingIcon>
-              <ArrowRightSVG width={14} height={10} />
-            </RotatingIcon>
-          </Button>
+            <h2 className="text-h2">
+              Why <span className="text-primary-100">Pod21?</span>
+            </h2>
+            <p className="text-body-lg text-textBody mt-4">
+              We are a no-nonsense podcast production team built by podcasters,
+              for podcasters. We're like your trusty sidekick who's been there,
+              done that, and knows the game. We streamline and take on the often
+              overwhelming production side of podcasting, so you can focus on
+              the message.
+            </p>
+          </div>
+
+          {/* Stats Section */}
+          <div
+            ref={statsRef}
+            className={cn(
+              "grid gap-[20px] transition-all duration-1000",
+              "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
+              isStatsInView
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            )}
+          >
+            {stats.map((stat, index) => (
+              <StatCard
+                key={index}
+                stat={stat}
+                index={index}
+                isInView={isStatsInView}
+              />
+            ))}
+          </div>
+
+          {/* Features Section */}
+          <div
+            ref={featuresRef}
+            className={cn(
+              "grid gap-[20px] mt-[20px] transition-all duration-1000",
+              "grid-cols-1 md:grid-cols-3",
+              isFeaturesInView
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            )}
+          >
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="flex flex-row items-center bg-bgPrimary items-start rounded-xl p-6 gap-4"
+                style={{
+                  transitionDelay: `${index * 150}ms`,
+                  opacity: isFeaturesInView ? 1 : 0,
+                  transform: isFeaturesInView
+                    ? "translateY(0)"
+                    : "translateY(20px)",
+                  transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+                }}
+              >
+                <div className="rounded-full bg-bgSecondary p-[20px]">
+                  {feature.icon}
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="text-body-lg-medium text-boneWhite">
+                    {feature.title}
+                  </h3>
+                  <p className="text-body-sm text-textBody mt-2">
+                    {feature.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Call to action */}
+          <div
+            ref={ctaRef}
+            className={cn(
+              "text-center transition-all duration-1000 delay-200",
+              isCtaInView
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            )}
+          >
+            <p className="text-body-sm-medium text-textBody mt-[60px] mb-4">
+              Not convinced yet?
+            </p>
+
+            <Button
+              variant="default"
+              size="md"
+              onClick={() => navigate("/contact")}
+            >
+              Tell us why on a free call
+              <RotatingIcon>
+                <ArrowRightSVG width={14} height={10} />
+              </RotatingIcon>
+            </Button>
+          </div>
         </div>
       </div>
     </section>
