@@ -107,7 +107,7 @@ const AboutHero = () => {
                 variants={itemVariants}
               >
                 This is the story of how late nights, too much coffee, and the
-                highs and lows of podcasting built Pod21.
+                highs and lows of podcasting built pod21.
               </motion.p>
             </div>
           </motion.div>

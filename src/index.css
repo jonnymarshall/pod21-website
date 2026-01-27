@@ -40,6 +40,7 @@
   }
 
   html {
+    scroll-padding-top: 120px; /* Account for fixed navbar */
   }
 
   body {
@@ -76,5 +77,15 @@
   /* Add card image styles for WhyPodcast */
   .podcast-card-image {
     @apply w-full h-full object-contain;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
   }
 }

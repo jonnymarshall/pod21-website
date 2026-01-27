@@ -31,7 +31,7 @@ const Navbar = () => {
     },
     {
       href: "#why",
-      label: "Why Pod21?",
+      label: "Why pod21?",
     },
     {
       href: "#services",
@@ -74,18 +74,18 @@ const Navbar = () => {
         setTimeout(() => {
           const element = document.querySelector(href);
           if (element) {
-            element.scrollIntoView({
-              behavior: "smooth",
-            });
+            const yOffset = -100; // Offset for navbar
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: "smooth" });
           }
         }, 100);
       } else {
         // We're already on the home page, just scroll
         const element = document.querySelector(href);
         if (element) {
-          element.scrollIntoView({
-            behavior: "smooth",
-          });
+          const yOffset = -100; // Offset for navbar
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
         }
       }
     }

@@ -64,7 +64,7 @@ const PodcastAudienceCard = ({
       </div>
 
       {/* Card Content */}
-      <h5 className="text-h5 text-boneWhite mb-4">{title}</h5>
+      <h4 className="text-h4 text-boneWhite mb-4">{title}</h4>
 
       <div className="flex-1 mb-3">
         {features.map((feature, index) => (

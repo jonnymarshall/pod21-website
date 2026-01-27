@@ -86,7 +86,7 @@ const Services = () => {
     <section id="services" className="bg-bgPrimary">
       <div
         className={cn(
-          "relative  py-side-spacing overflow-hidden scroll-mt-[20px] max-w-[1440px] mx-auto",
+          "relative  py-side-spacing overflow-hidden scroll-mt-[120px] max-w-[1440px] mx-auto",
           "px-side-spacing-mobile md:px-side-spacing-tablet "
         )}
       >

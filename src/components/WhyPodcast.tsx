@@ -201,7 +201,7 @@ const WhyPodcast = () => {
     <section id="why-podcast" ref={ref} className="bg-bgPrimary">
       <div
         className={cn(
-          "py-side-spacing bg-bgPrimary scroll-mt-[20px] max-w-[1440px] mx-auto",
+          "py-side-spacing bg-bgPrimary scroll-mt-[120px] max-w-[1440px] mx-auto",
           "px-side-spacing-mobile md:px-side-spacing-tablet "
         )}
       >

@@ -211,7 +211,7 @@ const WhyUs = () => {
     <section id="why" className="bg-bgSecondary">
       <div
         className={cn(
-          "relative py-side-spacing  overflow-hidden scroll-mt-[20px] max-w-[1440px] mx-auto",
+          "relative py-side-spacing  overflow-hidden scroll-mt-[120px] max-w-[1440px] mx-auto",
           "px-side-spacing-mobile md:px-side-spacing-tablet "
         )}
       >
@@ -245,7 +245,7 @@ const WhyUs = () => {
             )}
           >
             <h2 className="text-h2">
-              Why <span className="text-primary-100">Pod21?</span>
+              Why <span className="text-primary-100">pod21?</span>
             </h2>
             <p className="text-body-lg text-textBody mt-4">
               We are a no-nonsense podcast production team built by podcasters,

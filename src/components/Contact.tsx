@@ -14,7 +14,7 @@ const Contact = () => {
     <section
       id="contact"
       className={cn(
-        "py-side-spacing bg-bgPrimary relative overflow-hidden "
+        "py-side-spacing bg-bgPrimary relative overflow-hidden scroll-mt-[120px] "
         // "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
       )}
     >

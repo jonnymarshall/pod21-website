@@ -91,7 +91,7 @@ const AboutHistory = () => {
                   <br />
                   <br />
                   At this point I should probably introduce myself. I'm Jonny,
-                  the founder of Pod21. I've been a podcast addict from as far
+                  the founder of pod21. I've been a podcast addict from as far
                   back as I remember, and one day I realised I wouldn't be
                   satisfied if I didn't try starting my own. So I started The
                   Staying Free Podcast - a podcast where I discuss ideas and
@@ -158,7 +158,7 @@ const AboutHistory = () => {
             animate={isFinalTextInView ? "visible" : "hidden"}
           >
             <p className="text-body-sm lg:text-body-md text-textBody ">
-              At Pod21, we take care of the heavy lifting: editing, mastering,
+              At pod21, we take care of the heavy lifting: editing, mastering,
               shownotes, artwork, guest scheduling, publishing, promotion - all
               the backstage chaos that eats your time and drains your energy. We
               build workflows tailored to you, so your podcast achieves it's
@@ -166,7 +166,7 @@ const AboutHistory = () => {
               it.
               <br />
               <br />
-              The name Pod21 isn't an accident. Only 1% of podcasts make it past
+              The name pod21 isn't an accident. Only 1% of podcasts make it past
               episode 21. Most stall out from burnout, lack of time, or lack of
               support. We think that's a waste. So everything we do is designed
               to help you smash through that barrier and keep going. So you can
@@ -177,7 +177,7 @@ const AboutHistory = () => {
               className="text-h3 italic text-center "
               variants={itemVariants}
             >
-              "<span className="text-primary-100">Pod21</span> exists so your
+              "<span className="text-primary-100">pod21</span> exists so your
               podcast supports, not competes with, your mission."
             </motion.h2>
           </motion.div>

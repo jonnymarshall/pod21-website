@@ -32,12 +32,13 @@ const Footer = () => {
             </p>
             <ul className="space-y-8">
               <li>
-                <a
-                  href="#features"
+                <Link
+                  to="/about"
                   className="text-body-lg text-boneWhite hover:text-primary-100 transition-colors"
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   About
-                </a>
+                </Link>
               </li>
               <li>
                 <Link

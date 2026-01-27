@@ -47,15 +47,17 @@ const Blogs = () => {
     setCurrentPage(pageNumber);
     const element = document.getElementById("blogs-grid");
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const yOffset = -100; // Offset for navbar
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
   return (
     <>
       <SEO
-        title="Podcast Blog - Pod21"
-        description="Read the latest articles about podcast production, tips and industry insights from Pod21."
+        title="Podcast Blog - pod21"
+        description="Read the latest articles about podcast production, tips and industry insights from pod21."
       />
       <Navbar />
 

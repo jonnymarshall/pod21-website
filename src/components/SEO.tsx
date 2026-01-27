@@ -9,8 +9,8 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = "Pod21 - Professional Podcast Production",
-  description = "Pod21 - Professional podcast production services including editing, hosting, promotion and more. Take your podcast to the next level with pod21.",
+  title = "pod21 - Professional Podcast Production",
+  description = "pod21 - Professional podcast production services including editing, hosting, promotion and more. Take your podcast to the next level with pod21.",
   image = "/assets/logo.png",
   type = "website",
   url,
@@ -48,6 +48,19 @@ const SEO = ({
         content="podcast, podcast production, podcast editing, podcast hosting, podcast promotion"
       />
       <meta name="author" content="pod21" />
+      
+      {/* Favicons and Icons */}
+      <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo.png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo.png" />
+      <link rel="icon" type="image/png" sizes="192x192" href="/assets/logo.png" />
+      <link rel="icon" type="image/png" sizes="512x512" href="/assets/logo.png" />
+      <link rel="manifest" href="/site.webmanifest" />
+      <meta name="theme-color" content="#0A0A0C" />
+      <meta name="msapplication-TileColor" content="#0A0A0C" />
+      <meta name="msapplication-TileImage" content="/assets/logo.png" />
+      
       <link rel="canonical" href={currentUrl} />
 
       {/* <!-- Open Graph / Facebook --> */}
@@ -60,9 +73,9 @@ const SEO = ({
       <meta property="og:image:height" content="630" />
       <meta
         property="og:image:alt"
-        content="Pod21 Logo - Professional Podcast Production"
+        content="pod21 Logo - Professional Podcast Production"
       />
-      <meta property="og:site_name" content="Pod21" />
+      <meta property="og:site_name" content="pod21" />
       <meta property="og:locale" content="en_US" />
       <meta property="og:image:type" content="image/png" />
       <meta property="og:image:secure_url" content={imageUrl} />
@@ -78,7 +91,7 @@ const SEO = ({
       <meta name="twitter:image" content={imageUrl} />
       <meta
         name="twitter:image:alt"
-        content="Pod21 Logo - Professional Podcast Production"
+        content="pod21 Logo - Professional Podcast Production"
       />
       <meta name="twitter:image:width" content="1200" />
       <meta name="twitter:image:height" content="630" />

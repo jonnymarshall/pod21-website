@@ -4,7 +4,7 @@ const WhyPodBornCard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 border border-textBody rounded-lg p-6 md:p-8">
         <div className="col-span-1 lg:col-span-2 flex flex-col justify-center">
           <h2 className="text-h3">
-            That’s when <span className="text-primary-100">Pod21</span> was
+            That’s when <span className="text-primary-100">pod21</span> was
             born.
           </h2>
           <p className="text-body-sm lg:text-body-md mt-4 text-textBody">

@@ -24,8 +24,8 @@ const BlogPost = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = currentPost
-      ? `${currentPost.title} | Pod21`
-      : "Blog Post | Pod21";
+      ? `${currentPost.title} | pod21`
+      : "Blog Post | pod21";
   }, [currentPost]);
 
   // Social sharing functionality
@@ -147,13 +147,13 @@ const BlogPost = () => {
   // Generate meta description from content
   const metaDescription =
     currentPost?.contentText?.substring(0, 160) ||
-    "Read our latest blog post on Pod21";
+    "Read our latest blog post on pod21";
 
   return (
     <>
       {currentPost && (
         <SEO
-          title={`${currentPost.title} | Pod21`}
+          title={`${currentPost.title} | pod21`}
           description={currentPost.contentText?.substring(0, 160)}
           image={currentPost.coverImage}
           type="article"

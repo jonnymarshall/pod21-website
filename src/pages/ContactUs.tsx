@@ -298,7 +298,7 @@ const ContactUs = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-boneWhite">
-                          Where did you hear about Pod21?
+                          Where did you hear about pod21?
                         </FormLabel>
                         <Select
                           onValueChange={field.onChange}
