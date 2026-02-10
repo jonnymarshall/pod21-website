@@ -4,7 +4,8 @@ const CRAWLER_UA =
   /facebookexternalhit|WhatsApp|Twitterbot|LinkedInBot|Slackbot|TelegramBot|Pinterest|Googlebot|bingbot/i;
 
 export const config = {
-  matcher: ["/blog/:slug*"],
+  // Must match /blog/xxx (one or more path segments) so crawlers get OG meta from API
+  matcher: ["/blog/:path*"],
 };
 
 export default function middleware(request) {

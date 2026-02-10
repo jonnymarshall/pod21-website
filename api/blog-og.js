@@ -1,4 +1,4 @@
-import { createClient } from "contentful";
+// Dynamic import inside handler so Contentful load failures don't crash the function (FUNCTION_INVOCATION_FAILED)
 
 // VERCEL_URL is set automatically by Vercel at runtime (you don't add it to .env).
 // When missing (e.g. local) or when it's your production domain, we use pod21.xyz.
@@ -90,38 +90,40 @@ function sendOgHtml(res, { title, description, imageUrl, pageUrl }) {
 </html>`;
   res.setHeader("Content-Type", "text/html; charset=utf-8");
   res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
+  res.setHeader("X-Served-By", "blog-og"); // so you can confirm API is hit (e.g. curl -I)
   res.status(200).send(html);
 }
 
 export default async function handler(req, res) {
-  const slug =
-    typeof req.query?.slug === "string"
-      ? req.query.slug
-      : Array.isArray(req.query?.slug)
-        ? req.query.slug[0]
-        : null;
-  if (!slug) {
-    res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.status(400).end("<h1>Missing slug</h1>");
-    return;
-  }
-
-  const pageUrl = `${BASE_URL}/blog/${encodeURIComponent(slug)}`;
-  const fallbackMeta = {
+  const pageUrlFromSlug = (s) => `${BASE_URL}/blog/${encodeURIComponent(s)}`;
+  const fallbackMeta = (s) => ({
     title: "Blog | pod21",
     description: "Read this article on pod21.",
     imageUrl: DEFAULT_OG_IMAGE,
-    pageUrl,
-  };
-
-  const { spaceId, accessToken } = getContentfulConfig();
-  if (!spaceId || !accessToken) {
-    console.error("blog-og: missing CONTENTFUL env (VITE_CONTENTFUL_SPACE_ID / VITE_CONTENTFUL_ACCESS_TOKEN or CONTENTFUL_*). Add them in Vercel → Settings → Environment Variables for Production.");
-    sendOgHtml(res, fallbackMeta);
-    return;
-  }
+    pageUrl: pageUrlFromSlug(s),
+  });
 
   try {
+    const slug =
+      typeof req.query?.slug === "string"
+        ? req.query.slug
+        : Array.isArray(req.query?.slug)
+          ? req.query.slug[0]
+          : null;
+    if (!slug) {
+      res.setHeader("Content-Type", "text/html; charset=utf-8");
+      res.status(400).end("<h1>Missing slug</h1>");
+      return;
+    }
+
+    const { spaceId, accessToken } = getContentfulConfig();
+    if (!spaceId || !accessToken) {
+      console.error("blog-og: missing CONTENTFUL env. Add VITE_CONTENTFUL_* or CONTENTFUL_* in Vercel → Settings → Environment Variables.");
+      sendOgHtml(res, fallbackMeta(slug));
+      return;
+    }
+
+    const { createClient } = await import("contentful");
     const client = createClient({ space: spaceId, accessToken });
     const response = await client.getEntries({
       content_type: "blogPost",
@@ -132,7 +134,7 @@ export default async function handler(req, res) {
 
     const post = response?.items?.[0];
     if (!post?.fields) {
-      sendOgHtml(res, fallbackMeta);
+      sendOgHtml(res, fallbackMeta(slug));
       return;
     }
 
@@ -153,10 +155,16 @@ export default async function handler(req, res) {
       title: `${title} | pod21`,
       description,
       imageUrl,
-      pageUrl,
+      pageUrl: pageUrlFromSlug(slug),
     });
   } catch (err) {
+    const slug = typeof req?.query?.slug === "string" ? req.query.slug : Array.isArray(req?.query?.slug) ? req.query.slug?.[0] : "?";
     console.error("blog-og error [slug=%s]:", slug, err?.message || err);
-    sendOgHtml(res, fallbackMeta);
+    try {
+      sendOgHtml(res, fallbackMeta(slug || "unknown"));
+    } catch (sendErr) {
+      res.setHeader("Content-Type", "text/html; charset=utf-8");
+      res.status(200).end("<!DOCTYPE html><html><head><meta property=\"og:title\" content=\"Blog | pod21\"/><meta property=\"og:image\" content=\"" + DEFAULT_OG_IMAGE + "\"/></head><body>Blog | pod21</body></html>");
+    }
   }
 }
