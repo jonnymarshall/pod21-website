@@ -29,7 +29,3 @@ Twitter and other platforms require the preview image to be at least **300 x 157
 - Use Canva (e.g. “Facebook Post” or “Open Graph” 1200x630), Figma, or any design tool.
 - Export as PNG or JPG, under 300 KB.
 - Name it `og-image.png` or `og-image.jpg` and put it in `public/`.
-
-## Base URL vs blog URL (after deploy)
-- **Base URL** (`https://pod21.xyz/`): Uses `og-image.png` from `index.html`. If the preview still shows a placeholder, clear cache: [Twitter Card Validator](https://cards-dev.twitter.com/validator), [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) → enter URL → Scrape Again / Preview.
-- **Blog URLs** (`/blog/:slug`): Crawlers are served by `api/blog-preview` with the post’s feature image (from Contentful **thumbnail**). Ensure `VITE_CONTENTFUL_SPACE_ID` and `VITE_CONTENTFUL_ACCESS_TOKEN` are set in Vercel (Project → Settings → Environment Variables).

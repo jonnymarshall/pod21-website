@@ -24,10 +24,15 @@ const SEO = ({
   const currentUrl =
     url || (typeof window !== "undefined" ? window.location.href : baseUrl);
 
-  // Ensure image URL is absolute; use default og-image if missing or placeholder
+  // Ensure image URL is absolute and always use our site's image for reliability.
+  // Crawlers often don't run JS; when they do, third-party URLs (e.g. Contentful) may 403.
   const defaultImage = `${baseUrl}/og-image.png`;
   const resolvedImage =
-    image && image !== "/placeholder.svg" ? image : defaultImage;
+    image && image !== "/placeholder.svg" && image.startsWith("http")
+      ? image
+      : image && image !== "/placeholder.svg" && image.startsWith("/")
+        ? `${baseUrl}${image}`
+        : defaultImage;
   const timestamp = Date.now();
   let imageUrl = resolvedImage.startsWith("http")
     ? resolvedImage
