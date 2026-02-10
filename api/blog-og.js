@@ -1,7 +1,9 @@
 import { createClient } from "contentful";
 
+// VERCEL_URL is set automatically by Vercel at runtime (you don't add it to .env).
+// When missing (e.g. local) or when it's your production domain, we use pod21.xyz.
 const BASE_URL =
-  process.env.VERCEL_URL && process.env.VERCEL_URL !== "pod21.xyz"
+  process.env.VERCEL_URL && !process.env.VERCEL_URL.startsWith("pod21")
     ? `https://${process.env.VERCEL_URL}`
     : "https://pod21.xyz";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.png`;
@@ -15,16 +17,61 @@ function escapeHtml(s) {
     .replace(/"/g, "&quot;");
 }
 
+// Support both VITE_ (shared with frontend) and plain CONTENTFUL_ (server-only) env vars
+function getContentfulConfig() {
+  const spaceId =
+    process.env.VITE_CONTENTFUL_SPACE_ID || process.env.CONTENTFUL_SPACE_ID;
+  const accessToken =
+    process.env.VITE_CONTENTFUL_ACCESS_TOKEN ||
+    process.env.CONTENTFUL_ACCESS_TOKEN;
+  return { spaceId, accessToken };
+}
+
+function getImageUrlFromPost(post, response, defaultUrl) {
+  const thumb = post?.fields?.thumbnail;
+  if (!thumb) return defaultUrl;
+  // Resolved asset: has fields.file.url
+  if (thumb.fields?.file?.url) {
+    const raw = thumb.fields.file.url;
+    return raw.startsWith("http") ? raw : `https:${raw}`;
+  }
+  // Unresolved link: resolve from response.includes
+  const id = thumb.sys?.id;
+  if (id && response?.includes?.Asset) {
+    const asset = response.includes.Asset.find((a) => a.sys?.id === id);
+    const url = asset?.fields?.file?.url;
+    if (url) return url.startsWith("http") ? url : `https:${url}`;
+  }
+  return defaultUrl;
+}
+
+function plainTextFromRichText(node, depth = 0) {
+  if (!node || depth > 20) return "";
+  try {
+    if (node.nodeType === "text" && typeof node.value === "string")
+      return node.value;
+    if (Array.isArray(node.content))
+      return node.content.map((n) => plainTextFromRichText(n, depth + 1)).join(" ");
+  } catch (_) {
+    return "";
+  }
+  return "";
+}
+
 export default async function handler(req, res) {
-  const slug = req.query?.slug;
+  const slug =
+    typeof req.query?.slug === "string"
+      ? req.query.slug
+      : Array.isArray(req.query?.slug)
+        ? req.query.slug[0]
+        : null;
   if (!slug) {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     res.status(400).end("<h1>Missing slug</h1>");
     return;
   }
 
-  const spaceId = process.env.VITE_CONTENTFUL_SPACE_ID;
-  const accessToken = process.env.VITE_CONTENTFUL_ACCESS_TOKEN;
+  const { spaceId, accessToken } = getContentfulConfig();
   if (!spaceId || !accessToken) {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     res.status(500).end("<h1>Server configuration error</h1>");
@@ -37,7 +84,7 @@ export default async function handler(req, res) {
       content_type: "blogPost",
       "fields.slug": slug,
       limit: 1,
-      include: 2, // resolve linked Assets so thumbnail has file.url
+      include: 2,
     });
 
     const post = response?.items?.[0];
@@ -48,17 +95,17 @@ export default async function handler(req, res) {
     }
 
     const title = post.fields.title || "Blog | pod21";
-    const description =
-      post.fields.summary ||
-      (post.fields.content
-        ? plainTextFromRichText(post.fields.content).slice(0, 160)
-        : "Read this article on pod21.");
-    let imageUrl = DEFAULT_OG_IMAGE;
-    const thumb = post.fields.thumbnail;
-    if (thumb?.fields?.file?.url) {
-      const raw = thumb.fields.file.url;
-      imageUrl = raw.startsWith("http") ? raw : `https:${raw}`;
+    let description = "Read this article on pod21.";
+    if (post.fields.summary && typeof post.fields.summary === "string") {
+      description = post.fields.summary;
+    } else if (post.fields.content) {
+      try {
+        const text = plainTextFromRichText(post.fields.content);
+        if (text) description = text.slice(0, 160);
+      } catch (_) {}
     }
+
+    const imageUrl = getImageUrlFromPost(post, response, DEFAULT_OG_IMAGE);
 
     const pageUrl = `${BASE_URL}/blog/${encodeURIComponent(slug)}`;
     const safeTitle = escapeHtml(title);
@@ -96,17 +143,8 @@ export default async function handler(req, res) {
     res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
     res.status(200).send(html);
   } catch (err) {
-    console.error("blog-og error:", err);
+    console.error("blog-og error:", err?.message || err);
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     res.status(500).end("<h1>Error loading post</h1>");
   }
-}
-
-function plainTextFromRichText(node) {
-  if (!node) return "";
-  if (node.nodeType === "text" && typeof node.value === "string") return node.value;
-  if (Array.isArray(node.content)) {
-    return node.content.map(plainTextFromRichText).join(" ");
-  }
-  return "";
 }
