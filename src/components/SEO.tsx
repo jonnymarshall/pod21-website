@@ -4,6 +4,7 @@ interface SEOProps {
   title?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   type?: string;
   url?: string;
 }
@@ -11,7 +12,8 @@ interface SEOProps {
 const SEO = ({
   title = "pod21 - Professional Podcast Production",
   description = "pod21 - Professional podcast production services including editing, hosting, promotion and more. Take your podcast to the next level with pod21.",
-  image = "/assets/logo.png",
+  image = "/og-image.png",
+  imageAlt = "pod21 - Professional Podcast Production",
   type = "website",
   url,
 }: SEOProps) => {
@@ -22,10 +24,15 @@ const SEO = ({
   const currentUrl =
     url || (typeof window !== "undefined" ? window.location.href : baseUrl);
 
-  // Ensure image URL is absolute and includes cache-busting
+  // Ensure image URL is absolute; use default og-image if missing or placeholder
+  const defaultImage = `${baseUrl}/og-image.png`;
+  const resolvedImage =
+    image && image !== "/placeholder.svg" ? image : defaultImage;
   const timestamp = Date.now();
-  let imageUrl = image.startsWith("http") ? image : `${baseUrl}${image}`;
-  imageUrl += image.includes("?") ? `&v=${timestamp}` : `?v=${timestamp}`;
+  let imageUrl = resolvedImage.startsWith("http")
+    ? resolvedImage
+    : `${baseUrl}${resolvedImage}`;
+  imageUrl += imageUrl.includes("?") ? `&v=${timestamp}` : `?v=${timestamp}`;
 
   // Debug logging
   if (typeof window !== "undefined") {
@@ -72,10 +79,7 @@ const SEO = ({
       <meta property="og:image" content={imageUrl} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta
-        property="og:image:alt"
-        content="pod21 Logo - Professional Podcast Production"
-      />
+      <meta property="og:image:alt" content={imageAlt} />
       <meta property="og:site_name" content="pod21" />
       <meta property="og:locale" content="en_US" />
       <meta property="og:image:type" content="image/png" />
@@ -90,10 +94,7 @@ const SEO = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={imageUrl} />
-      <meta
-        name="twitter:image:alt"
-        content="pod21 Logo - Professional Podcast Production"
-      />
+      <meta name="twitter:image:alt" content={imageAlt} />
       <meta name="twitter:image:width" content="1200" />
       <meta name="twitter:image:height" content="630" />
 

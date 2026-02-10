@@ -156,7 +156,9 @@ const BlogPost = () => {
           title={`${currentPost.title} | pod21`}
           description={currentPost.contentText?.substring(0, 160)}
           image={currentPost.coverImage}
+          imageAlt={currentPost.title}
           type="article"
+          url={typeof window !== "undefined" ? window.location.href : undefined}
         />
       )}
       <Navbar />
