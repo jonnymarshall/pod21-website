@@ -70,13 +70,11 @@ const Testimonials = () => {
         "As one of Bitcoin’s most respected voices, Guy Swann built a powerhouse podcast. But as his influence grew, so did his commitments - investing, speaking engagements, and most importantly - family time. He brought us in to handle production, freeing him up to focus on what matters most. While we worked on production, including a newly created and highly popular episode series, Guy was able to focus on the bigger picture with his newfound time, ultimately securing several sponsorships which fund all of our production costs, and then some. All this while maintaining top-tier quality.",
     },
     {
-      avatar: "/bffs.png",
+      avatar: "/bffs.[png]",
       name: "Jordan Guess & Wyatt O'Rourke",
       title: "Hosts of Bitcoin for Financial Services Podcast",
       quote:
-        "As active practitioners running CPA and Wealth Management firms, Jordan and Wyatt bridge the gap between traditional finance and Bitcoin. Recognizing a podcast was essential to their message, they needed a solution that wouldn't distract from their core businesses - all without them ever having to trade their spreadsheets for soundboards!.
-
-They partnered with pod21 to design, launch, and manage the Bitcoin for Financial Services Podcast.The result is a professional weekly show that establishes authority, provides business exposure, and drives attendance to their annual Summit",
+        "As active practitioners running CPA and Wealth Management firms, Jordan and Wyatt bridge the gap between traditional finance and Bitcoin. Recognizing a podcast was essential to their message, they needed a solution that wouldn't distract from their core businesses. They partnered with pod21 to design, launch, and manage the Bitcoin for Financial Services Podcast. The result is a professional weekly show that establishes authority, provides business exposure, and drives attendance to their annual Summit - all without them ever having to trade their spreadsheets for soundboards!",
     },
   ];
 
