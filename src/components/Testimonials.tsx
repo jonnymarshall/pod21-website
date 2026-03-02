@@ -70,7 +70,7 @@ const Testimonials = () => {
         "As one of Bitcoin’s most respected voices, Guy Swann built a powerhouse podcast. But as his influence grew, so did his commitments - investing, speaking engagements, and most importantly - family time. He brought us in to handle production, freeing him up to focus on what matters most. While we worked on production, including a newly created and highly popular episode series, Guy was able to focus on the bigger picture with his newfound time, ultimately securing several sponsorships which fund all of our production costs, and then some. All this while maintaining top-tier quality.",
     },
     {
-      avatar: "/bffs.[png]",
+      avatar: "/bffs.png",
       name: "Jordan Guess & Wyatt O'Rourke",
       title: "Hosts of Bitcoin for Financial Services Podcast",
       quote:
