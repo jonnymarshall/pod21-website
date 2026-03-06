@@ -7,6 +7,11 @@ interface SEOProps {
   imageAlt?: string;
   type?: string;
   url?: string;
+  keywords?: string;
+  canonicalUrl?: string;
+  schemaMarkup?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+  nofollow?: boolean;
 }
 
 const SEO = ({
@@ -16,6 +21,11 @@ const SEO = ({
   imageAlt = "pod21 - Professional Podcast Production",
   type = "website",
   url,
+  keywords = "podcast, podcast production, podcast editing, podcast hosting, podcast promotion",
+  canonicalUrl,
+  schemaMarkup,
+  noindex = false,
+  nofollow = false,
 }: SEOProps) => {
   const baseUrl =
     typeof window !== "undefined"
@@ -23,6 +33,9 @@ const SEO = ({
       : "https://pod21.xyz"; // Fallback for SSR
   const currentUrl =
     url || (typeof window !== "undefined" ? window.location.href : baseUrl);
+
+  // Use provided canonical URL or current URL
+  const canonical = canonicalUrl || currentUrl;
 
   // Ensure image URL is absolute; use default og-image if missing or placeholder
   const defaultImage = `${baseUrl}/og-image.png`;
@@ -34,6 +47,12 @@ const SEO = ({
     : `${baseUrl}${resolvedImage}`;
   imageUrl += imageUrl.includes("?") ? `&v=${timestamp}` : `?v=${timestamp}`;
 
+  // Build robots content
+  const robotsContent = [
+    !noindex ? "index" : "noindex",
+    !nofollow ? "follow" : "nofollow",
+  ].join(", ");
+
   // Debug logging
   if (typeof window !== "undefined") {
     console.log("SEO Meta Tags Generated:");
@@ -42,6 +61,7 @@ const SEO = ({
     console.log("Base URL:", baseUrl);
     console.log("Image URL:", imageUrl);
     console.log("Current URL:", currentUrl);
+    console.log("Canonical URL:", canonical);
   }
 
   return (
@@ -50,30 +70,60 @@ const SEO = ({
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>{title}</title>
       <meta name="description" content={description} />
-      <meta
-        name="keywords"
-        content="podcast, podcast production, podcast editing, podcast hosting, podcast promotion"
-      />
+      {keywords && <meta name="keywords" content={keywords} />}
       <meta name="author" content="pod21" />
-      
+
       {/* Favicons and Icons */}
-      <link rel="shortcut icon" href={`${baseUrl}/favicon.ico`} type="image/x-icon" />
-      <link rel="icon" href={`${baseUrl}/favicon.ico`} type="image/x-icon" />
-      <link rel="icon" type="image/png" sizes="32x32" href={`${baseUrl}/assets/logo.png`} />
-      <link rel="icon" type="image/png" sizes="16x16" href={`${baseUrl}/assets/logo.png`} />
-      <link rel="apple-touch-icon" sizes="180x180" href={`${baseUrl}/assets/logo.png`} />
-      <link rel="icon" type="image/png" sizes="192x192" href={`${baseUrl}/assets/logo.png`} />
-      <link rel="icon" type="image/png" sizes="512x512" href={`${baseUrl}/assets/logo.png`} />
+      <link
+        rel="shortcut icon"
+        href={`${baseUrl}/favicon.ico`}
+        type="image/x-icon"
+      />
+      <link
+        rel="icon"
+        href={`${baseUrl}/favicon.ico`}
+        type="image/x-icon"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href={`${baseUrl}/assets/logo.png`}
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href={`${baseUrl}/assets/logo.png`}
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href={`${baseUrl}/assets/logo.png`}
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="192x192"
+        href={`${baseUrl}/assets/logo.png`}
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="512x512"
+        href={`${baseUrl}/assets/logo.png`}
+      />
       <link rel="manifest" href="/site.webmanifest" />
       <meta name="theme-color" content="#0A0A0C" />
       <meta name="msapplication-TileColor" content="#0A0A0C" />
       <meta name="msapplication-TileImage" content="/assets/logo.png" />
-      
-      <link rel="canonical" href={currentUrl} />
 
-      {/* <!-- Open Graph / Facebook --> */}
+      {/* Canonical URL */}
+      <link rel="canonical" href={canonical} />
+
+      {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
-      <meta property="og:url" content={currentUrl} />
+      <meta property="og:url" content={canonical} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={imageUrl} />
@@ -88,7 +138,7 @@ const SEO = ({
       <meta property="og:determiner" content="the" />
       <meta property="og:updated_time" content={new Date().toISOString()} />
 
-      {/* <!-- Twitter --> */}
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@pod21" />
       <meta name="twitter:title" content={title} />
@@ -98,8 +148,15 @@ const SEO = ({
       <meta name="twitter:image:width" content="1200" />
       <meta name="twitter:image:height" content="630" />
 
-      {/* <!-- Additional meta tags --> */}
-      <meta name="robots" content="index, follow" />
+      {/* Robots */}
+      <meta name="robots" content={robotsContent} />
+
+      {/* JSON-LD Schema Markup */}
+      {schemaMarkup && (
+        <script type="application/ld+json">
+          {JSON.stringify(Array.isArray(schemaMarkup) ? schemaMarkup : schemaMarkup)}
+        </script>
+      )}
     </Helmet>
   );
 };
