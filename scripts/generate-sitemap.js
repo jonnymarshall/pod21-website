@@ -5,7 +5,8 @@
  * Run this before building for production: `node scripts/generate-sitemap.js`
  */
 
-import { createClient } from "contentful";
+import pkg from "contentful";
+const { createClient } = pkg;
 import fs from "fs";
 import path from "path";
 
