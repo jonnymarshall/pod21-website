@@ -1,25 +1,43 @@
+# pod21 Robots.txt
+# Allows search engines to crawl all public pages
+# Dynamic blog posts are generated and included in sitemap.xml
 
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /node_modules/
 
-Sitemap: https://pod21.xyz/sitemap.xml
-
+# Google-specific
 User-agent: Googlebot
 Allow: /
+Disallow: /api/
 
+# Bing-specific
 User-agent: Bingbot
 Allow: /
+Disallow: /api/
 
+# Twitter Bot
 User-agent: Twitterbot
 Allow: /
 
+# Facebook External Hit
 User-agent: facebookexternalhit
 Allow: /
 
+# LinkedIn Bot
 User-agent: LinkedInBot
 Allow: /
 
-# Disallow crawling of unnecessary paths
-User-agent: *
-Disallow: /api/
-Disallow: /admin/
+# Crawl delay recommendations
+Crawl-delay: 1
+
+# Sitemap location - dynamically generated with blog posts
+Sitemap: https://pod21.xyz/sitemap.xml
+
+# Additional metadata
+# Last updated: auto-generated during build
+# Contact: support@pod21.xyz

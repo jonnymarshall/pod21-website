@@ -32,6 +32,8 @@ import "react-phone-input-2/lib/style.css";
 import FAQ from "@/components/FAQ";
 import { useLocation } from "react-router-dom";
 import emailjs from "@emailjs/browser"; // Import EmailJS
+import SEO from "@/components/SEO";
+import { generateBreadcrumbSchema } from "@/lib/schemaMarkup";
 
 // Updated form schema to make phone and source optional
 const formSchema = z.object({
@@ -146,8 +148,27 @@ const ContactUs = () => {
     emailjs.init(EMAILJS_PUBLIC_KEY);
   }, []);
 
+  const baseUrl = "https://pod21.xyz";
+  const breadcrumbSchema = generateBreadcrumbSchema(
+    [
+      { name: "Home", url: "/" },
+      { name: "Contact", url: "/contact" }
+    ],
+    baseUrl
+  );
+
   return (
     <>
+      <SEO
+        title="Contact pod21 - Get Your Podcast Production Started"
+        description="Have questions about podcast production? Contact pod21 today for a free consultation. We're here to help take your podcast to the next level."
+        image="/og-image.png"
+        imageAlt="Contact pod21"
+        type="website"
+        keywords="contact pod21, podcast production contact, podcast help, podcast services inquiry"
+        canonicalUrl={`${baseUrl}/contact`}
+        schemaMarkup={breadcrumbSchema}
+      />
       <Navbar />
       <section className="bg-bgPrimary">
         <div
