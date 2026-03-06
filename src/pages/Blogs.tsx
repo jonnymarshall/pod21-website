@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import { ArrowRightSVG } from "@/assets/icons";
 import { useBlogs } from "@/hooks/useBlogs";
 import { getPlainTextFromContent } from "@/types/blog";
-import { Helmet } from "react-helmet-async";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -21,6 +20,7 @@ import {
 } from "@/components/ui/pagination";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
+import { generateBreadcrumbSchema } from "@/lib/schemaMarkup";
 
 const Blogs = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,11 +53,26 @@ const Blogs = () => {
     }
   };
 
+  const baseUrl = "https://pod21.xyz";
+  const breadcrumbSchema = generateBreadcrumbSchema(
+    [
+      { name: "Home", url: "/" },
+      { name: "Blog", url: "/blog" }
+    ],
+    baseUrl
+  );
+
   return (
     <>
       <SEO
-        title="Podcast Blog - pod21"
-        description="Read the latest articles about podcast production, tips and industry insights from pod21."
+        title="Podcast Blog & Production Tips - pod21"
+        description="Read the latest articles about podcast production, tips, and industry insights from pod21. Learn how to improve your podcast with expert advice."
+        image="/og-image.png"
+        imageAlt="pod21 Blog"
+        type="website"
+        keywords="podcast blog, podcast tips, podcast production guide, podcast editing tips, podcast hosting guide"
+        canonicalUrl={`${baseUrl}/blog`}
+        schemaMarkup={breadcrumbSchema}
       />
       <Navbar />
 

@@ -5,6 +5,7 @@ import { useBlogPost } from "@/hooks/useBlogPost";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import moment from "moment";
 import SEO from "@/components/SEO";
+import { generateArticleSchema, generateBreadcrumbSchema } from "@/lib/schemaMarkup";
 
 import Navbar from "@/components/Navbar";
 import Contact from "@/components/Contact";
@@ -149,16 +150,48 @@ const BlogPost = () => {
     currentPost?.contentText?.substring(0, 160) ||
     "Read our latest blog post on pod21";
 
+  const baseUrl = "https://pod21.xyz";
+
+  // Generate schema markup for the article
+  let schemaMarkup: Record<string, unknown>[] = [];
+  
+  if (currentPost) {
+    const articleSchema = generateArticleSchema(
+      {
+        title: currentPost.title,
+        description: currentPost.contentText?.substring(0, 160) || "",
+        image: currentPost.coverImage,
+        publishedDate: currentPost.publishedDate,
+        author: "pod21",
+      },
+      baseUrl
+    );
+
+    const breadcrumbSchema = generateBreadcrumbSchema(
+      [
+        { name: "Home", url: "/" },
+        { name: "Blog", url: "/blog" },
+        { name: currentPost.title, url: `/blog/${slug}` }
+      ],
+      baseUrl
+    );
+
+    schemaMarkup = [articleSchema, breadcrumbSchema];
+  }
+
   return (
     <>
       {currentPost && (
         <SEO
-          title={`${currentPost.title} | pod21`}
+          title={`${currentPost.title} | pod21 Blog`}
           description={currentPost.contentText?.substring(0, 160)}
           image={currentPost.coverImage}
           imageAlt={currentPost.title}
           type="article"
           url={typeof window !== "undefined" ? window.location.href : undefined}
+          canonicalUrl={typeof window !== "undefined" ? window.location.href : undefined}
+          keywords={`podcast, ${currentPost.title.toLowerCase()}, blog article`}
+          schemaMarkup={schemaMarkup}
         />
       )}
       <Navbar />
