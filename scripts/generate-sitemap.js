@@ -9,6 +9,8 @@ import pkg from "contentful";
 const { createClient } = pkg;
 import fs from "fs";
 import path from "path";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const SPACE_ID = process.env.VITE_CONTENTFUL_SPACE_ID;
 const ACCESS_TOKEN = process.env.VITE_CONTENTFUL_ACCESS_TOKEN;
@@ -32,7 +34,7 @@ async function generateSitemap() {
     
     // Fetch all blog posts
     const response = await client.getEntries({
-      content_type: "blog",
+      content_type: "blogPost",
       limit: 1000,
     });
 
