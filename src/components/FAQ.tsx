@@ -46,7 +46,7 @@ const FAQ = () => {
     {
       question: "Do you offer coaching or consulting for podcast hosts?",
       answer:
-        "Yes. We desire to know your content deeply, and we're always here to offer advise free of charge.",
+        "Yes. We desire to know your content deeply, and we're always here to offer advice free of charge.",
     },
     {
       question: "Can you help promote my podcast and grow my audience?",
@@ -56,7 +56,7 @@ const FAQ = () => {
     {
       question: "Can you help me to land a sponsor?",
       answer:
-        "No. We are not experts in sponsorship acquisition, but do we ensure sponsor content and responsibilities are managed effectively once acquired.",
+        "No. We are not experts in sponsorship acquisition, but we do ensure sponsor content and responsibilities are managed effectively once acquired.",
     },
     {
       question:
