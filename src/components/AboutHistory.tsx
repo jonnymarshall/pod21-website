@@ -159,10 +159,10 @@ const AboutHistory = () => {
           >
             <p className="text-body-sm lg:text-body-md text-textBody ">
               At pod21, we take care of the heavy lifting: editing, mastering,
-              shownotes, artwork, guest scheduling, publishing, promotion - all
+              show notes, artwork, guest scheduling, publishing, promotion - all
               the backstage chaos that eats your time and drains your energy. We
-              build workflows tailored to you, so your podcast achieves it's
-              goals whilst fitting into your life, instead of fighting against
+              build workflows tailored to you, so your podcast achieves its
+              goals, whilst fitting into your life, instead of fighting against
               it.
               <br />
               <br />
