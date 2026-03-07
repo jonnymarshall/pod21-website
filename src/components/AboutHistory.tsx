@@ -169,8 +169,8 @@ const AboutHistory = () => {
               The name pod21 isn't an accident. Only 1% of podcasts make it past
               episode 21. Most stall out from burnout, lack of time, or lack of
               support. We think that's a waste. So everything we do is designed
-              to help you smash through that barrier and keep going. So you can
-              have a top performing, professional podcast without it costing
+              to help you smash through that barrier and keep going so that you can
+              have a top performing, professional podcast without it consuming your life.
             </p>
 
             <motion.h2
