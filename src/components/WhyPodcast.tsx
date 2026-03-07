@@ -32,7 +32,7 @@ const WhyPodcast = () => {
         {
           title: "Grow Your Circle",
           description:
-            "The worlds' most interesting people can be found in the podcast circuit. Podcasting is your chance to join them.",
+            "The world's most interesting people can be found in the podcast circuit. Podcasting is your chance to join them.",
         },
         {
           title: "Advocate for a Cause",
@@ -68,7 +68,7 @@ const WhyPodcast = () => {
         {
           title: "Become a Thought Leader",
           description:
-            "Though podcasting, you can build towards becoming an authority in your field - and lead the conversation in your industry.",
+            "Through podcasting, you can build towards becoming an authority in your field - and lead the conversation in your industry.",
         },
         {
           title: "Convert listeners into customers",
@@ -151,7 +151,7 @@ const WhyPodcast = () => {
         {
           title: "Feed the feeds",
           description:
-            "Never run out of things to post. Use clip from your podcast as a source of digital outreach.",
+            "Never run out of things to post. Use clips from your podcast as a source of digital outreach.",
         },
         {
           title: "Monetize Your Show",
@@ -217,7 +217,7 @@ const WhyPodcast = () => {
           </h2>
           <p className="text-base text-textBody mt-4">
             Podcasting is one of the most powerful mediums available today,
-            offering a rare, direct line to a worldwise audience. Unlike
+            offering a rare, direct line to a worldwide audience. Unlike
             fleeting social media posts, algorithm-controlled feeds, or (God
             forbid) paid commercials - a podcast is your space, your voice, and
             your rules. An authentic and unfiltered way to broadcast to the
