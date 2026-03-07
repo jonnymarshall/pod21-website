@@ -34,7 +34,7 @@ async function generateSitemap() {
     
     // Fetch all blog posts
     const response = await client.getEntries({
-      content_type: "blog",
+      content_type: "blogPost",
       limit: 1000,
     });
 
