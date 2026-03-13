@@ -80,25 +80,25 @@ const Links = () => {
           backgroundSize: "900px",
         }}
       >
-        <div className="w-full max-w-[400px] flex flex-col items-center px-5 py-12">
+        <div className="w-full max-w-[400px] flex flex-col items-center px-5 py-16">
 
           {/* Profile */}
-          <div className="flex flex-col items-center mb-6 text-center">
-            <div className="w-20 h-20 rounded-full overflow-hidden bg-[#1a1a1a] mb-3 flex items-center justify-center border-2 border-white/10">
+          <div className="flex flex-col items-center mb-10 text-center">
+            <div className="w-20 h-20 rounded-full overflow-hidden bg-[#1a1a1a] mb-5 flex items-center justify-center border-2 border-white/10">
               <img
                 src="https://ugc.production.linktr.ee/100e80b1-45e3-4915-8d7a-4ecd88934736_4JWZDLRC-400x400.jpeg"
                 alt="pod21"
                 className="w-full h-full object-cover"
               />
             </div>
-            <h1 className="text-white font-kanit text-[18px] font-bold mb-1">pod21</h1>
+            <h1 className="text-white font-kanit text-[18px] font-bold mb-3">pod21</h1>
             <p className="text-white/70 font-roboto text-[13px] leading-snug max-w-[260px]">
               We are a team of podcast production experts ready to bring your show to life.
             </p>
           </div>
 
           {/* Social icons */}
-          <div className="flex items-center gap-4 mb-7">
+          <div className="flex items-center gap-4 mb-12">
             {socials.map((social) => (
               <a
                 key={social.label}
@@ -114,7 +114,7 @@ const Links = () => {
           </div>
 
           {/* Links */}
-          <div className="w-full flex flex-col gap-3">
+          <div className="w-full flex flex-col gap-5">
             {links.map((link) => (
               <a
                 key={link.title}
@@ -132,12 +132,12 @@ const Links = () => {
                         className="w-full h-full object-cover object-center"
                       />
                     </div>
-                    <div className="flex items-center justify-center px-4 py-3">
+                    <div className="flex items-center justify-center px-4 py-5">
                       <span className="text-[#bbf298] font-roboto text-[13px] font-normal text-center">{link.title}</span>
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center px-4 py-[14px]">
+                  <div className="flex items-center justify-center px-4 py-[22px]">
                     <span className="text-[#bbf298] font-roboto text-[13px] font-normal text-center">{link.title}</span>
                   </div>
                 )}
