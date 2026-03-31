@@ -280,7 +280,7 @@ const Invoice = () => {
                     variant="outline"
                     className="flex-1 border-stroke hover:bg-bgPrimary text-boneWhite"
                   >
-                    Change Price
+                    Go Back
                   </Button>
                   <Button
                     onClick={handlePaymentMade}
