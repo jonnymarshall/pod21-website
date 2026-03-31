@@ -228,13 +228,6 @@ const InvoiceConfirmation = () => {
               <code className="text-primary-60 text-body-sm-medium break-all block p-4 bg-black/30 rounded border border-stroke font-mono">
                 {invoice.btcAddress}
               </code>
-              <p className="text-textBody text-body-xs mt-4">
-                Make sure to send exactly{" "}
-                <span className="text-primary-100 font-medium">
-                  {payment.btcAmount.toFixed(8)} BTC
-                </span>
-                {" "}to this address. Network fees may apply.
-              </p>
             </div>
           </div>
 
@@ -294,7 +287,7 @@ const InvoiceConfirmation = () => {
               This is a payment registration receipt. Final confirmation will be sent once funds are verified.
             </p>
             <p className="text-textBody text-body-xs mt-4">
-              For support, contact: support@pod21.xyz
+              For support, contact: jonny@pod21.xyz
             </p>
           </div>
         </div>
