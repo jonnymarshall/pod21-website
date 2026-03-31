@@ -26,3 +26,7 @@ dist-ssr
 
 # Temporary reference assets — safe to delete
 TEMPORARY_DELETEME
+
+# Secrets - keep private and local only
+secrets/*.json
+!secrets/*.json.example

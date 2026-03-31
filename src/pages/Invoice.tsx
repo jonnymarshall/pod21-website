@@ -32,7 +32,7 @@ const Invoice = () => {
   useEffect(() => {
     const fetchInvoice = async () => {
       try {
-        const response = await fetch("/invoices.json");
+        const response = await fetch("/secrets/invoices.json");
         if (!response.ok) throw new Error("Failed to load invoices");
 
         const invoices: InvoiceData[] = await response.json();
