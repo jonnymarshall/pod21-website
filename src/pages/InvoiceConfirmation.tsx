@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Check, Download, Home } from "lucide-react";
 import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
+import { loadCompanyInfo } from "@/utils/secretsLoader";
 
 // EmailJS configuration - same as contact page
 const EMAILJS_SERVICE_ID = "service_ytteklz";
@@ -52,9 +53,8 @@ const InvoiceConfirmation = () => {
     // Fetch company info
     const fetchCompanyInfo = async () => {
       try {
-        const response = await fetch("/secrets/company-info.json");
-        if (response.ok) {
-          const data = await response.json();
+        const data = await loadCompanyInfo();
+        if (data) {
           setCompanyInfo(data);
         }
       } catch (error) {
