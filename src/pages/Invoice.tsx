@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { AlertCircle, Loader2, Check } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { LogoSVG } from "@/assets/icons";
+import { loadInvoices } from "@/utils/secretsLoader";
 
 interface InvoiceData {
   id: string;
@@ -32,10 +33,13 @@ const Invoice = () => {
   useEffect(() => {
     const fetchInvoice = async () => {
       try {
-        const response = await fetch("/secrets/invoices.json");
-        if (!response.ok) throw new Error("Failed to load invoices");
+        const invoices: InvoiceData[] | null = await loadInvoices();
 
-        const invoices: InvoiceData[] = await response.json();
+        if (!invoices) {
+          setInvoiceError("Error loading invoice data");
+          return;
+        }
+
         const foundInvoice = invoices.find((inv) => inv.id === invoiceId);
 
         if (!foundInvoice) {
