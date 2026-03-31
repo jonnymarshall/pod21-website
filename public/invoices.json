@@ -3,21 +3,18 @@
     "id": "BA20260331",
     "customerName": "Guy Swann",
     "usdAmount": 1920.00,
-    "btcAddress": "bc1qx4mwm024rmj7gkm8j4zaldn23hd2zhsyknt3k9",
-    "qrCodeImagePath": "/qr-codes/BA20260331_QR.png"
+    "btcAddress": "bc1qx4mwm024rmj7gkm8j4zaldn23hd2zhsyknt3k9"
   },
   {
     "id": "INV-002",
     "customerName": "Tech Startup Inc",
     "usdAmount": 5000,
-    "btcAddress": "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
-    "qrCodeImagePath": "/qr-codes/INV-002-qr.png"
+    "btcAddress": "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq"
   },
   {
     "id": "INV-003",
     "customerName": "Global Solutions LLC",
     "usdAmount": 1500,
-    "btcAddress": "bc1pw508d6qejxtdg4y5r3zarvary0c5xw7kw508d6qejxtdg4y5r3zarvary0c5xw7k7grwdj",
-    "qrCodeImagePath": "/qr-codes/INV-003-qr.png"
+    "btcAddress": "bc1pw508d6qejxtdg4y5r3zarvary0c5xw7kw508d6qejxtdg4y5r3zarvary0c5xw7k7grwdj"
   }
 ]
