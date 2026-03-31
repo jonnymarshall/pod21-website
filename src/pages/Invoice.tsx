@@ -2,6 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { AlertCircle, Loader2, Check } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
+import { LogoSVG } from "@/assets/icons";
 
 interface InvoiceData {
   id: string;
@@ -137,8 +139,8 @@ const Invoice = () => {
           <div className="mb-12 pb-8 border-b border-stroke">
             <div className="flex items-start justify-between mb-8">
               <div>
-                <div className="w-12 h-12 bg-primary-100 rounded-lg mb-4 flex items-center justify-center">
-                  <span className="text-black font-bold text-lg">P</span>
+                <div className="mb-4">
+                  <LogoSVG width={120} height={50} color="#bbf298" />
                 </div>
                 <h1 className="text-h4 mb-2">INVOICE</h1>
                 <p className="text-textBody">Invoice #{invoice.id}</p>
@@ -200,7 +202,7 @@ const Invoice = () => {
 
             {!payment ? (
               <div className="bg-bgPrimary rounded-lg p-8 text-center">
-                <p className="text-textBody text-body-lg mb-6">
+                <p className="text-boneWhite text-body-lg mb-6">
                   Click below to lock in the current Bitcoin price and generate
                   your payment QR code.
                 </p>
@@ -255,14 +257,12 @@ const Invoice = () => {
                   <p className="text-textBody text-body-sm mb-6">
                     Scan to pay with Bitcoin
                   </p>
-                  <div className="w-64 h-64 bg-white rounded-lg flex items-center justify-center overflow-hidden">
-                    <img
-                      src={invoice.qrCodeImagePath}
-                      alt="Bitcoin QR Code"
-                      className="w-full h-full object-cover"
-                      onError={() => {
-                        // Fallback: show placeholder if image doesn't exist
-                      }}
+                  <div className="w-64 h-64 bg-white rounded-lg flex items-center justify-center overflow-hidden p-4">
+                    <QRCodeSVG
+                      value={`bitcoin:${invoice.btcAddress}?amount=${payment.btcAmount.toFixed(8)}&label=${encodeURIComponent(invoice.customerName)}&message=${encodeURIComponent(`Invoice ${invoice.id}`)}`}
+                      size={240}
+                      level="H"
+                      includeMargin={false}
                     />
                   </div>
                   <p className="text-textBody text-body-xs mt-6 text-center">
