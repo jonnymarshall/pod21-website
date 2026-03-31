@@ -5,6 +5,7 @@ import { AlertCircle, Loader2, Check } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { LogoSVG } from "@/assets/icons";
 import { loadInvoices } from "@/utils/secretsLoader";
+import { SecretsWarning } from "@/components/SecretsWarning";
 
 interface InvoiceData {
   id: string;
@@ -134,8 +135,10 @@ const Invoice = () => {
   }
 
   return (
-    <div className="min-h-screen bg-bgPrimary text-boneWhite py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
+    <>
+      <SecretsWarning />
+      <div className="min-h-screen bg-bgPrimary text-boneWhite py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto">
         {/* Invoice Container */}
         <div className="bg-bgSecondary rounded-lg border border-stroke p-8 sm:p-12">
           {/* Header */}
@@ -306,8 +309,9 @@ const Invoice = () => {
             </p>
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
