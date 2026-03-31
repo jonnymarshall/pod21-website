@@ -90,6 +90,13 @@ const InvoiceConfirmation = () => {
     window.print();
   };
 
+  const maskBitcoinAddress = (address: string): string => {
+    if (address.length <= 14) return address;
+    const start = address.substring(0, 8);
+    const end = address.substring(address.length - 6);
+    return `${start}...${end}`;
+  };
+
   if (!invoice || !payment) {
     return null;
   }
@@ -226,8 +233,11 @@ const InvoiceConfirmation = () => {
                 Bitcoin Address
               </p>
               <code className="text-primary-60 text-body-sm-medium break-all block p-4 bg-black/30 rounded border border-stroke font-mono">
-                {invoice.btcAddress}
+                {maskBitcoinAddress(invoice.btcAddress)}
               </code>
+              <p className="text-textBody text-body-xs mt-3">
+                Full address available in your email confirmation
+              </p>
             </div>
           </div>
 
