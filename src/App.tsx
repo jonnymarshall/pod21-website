@@ -11,6 +11,8 @@ import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
 import AboutUs from "./pages/AboutUs";
 import Links from "./pages/Links";
+import Invoice from "./pages/Invoice";
+import InvoiceConfirmation from "./pages/InvoiceConfirmation";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,8 @@ const App = () => (
             <Route path="/blog" element={<Blogs />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/links" element={<Links />} />
+            <Route path="/pay/:invoiceId" element={<Invoice />} />
+            <Route path="/pay/:invoiceId/payment-registered" element={<InvoiceConfirmation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
