@@ -4,6 +4,7 @@ import { Check, Download, Home } from "lucide-react";
 import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { loadCompanyInfo } from "@/utils/secretsLoader";
+import { SecretsWarning } from "@/components/SecretsWarning";
 
 // EmailJS configuration - same as contact page
 const EMAILJS_SERVICE_ID = "service_ytteklz";
@@ -145,8 +146,10 @@ const InvoiceConfirmation = () => {
   });
 
   return (
-    <div className="min-h-screen bg-bgPrimary text-boneWhite py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
+    <>
+      <SecretsWarning />
+      <div className="min-h-screen bg-bgPrimary text-boneWhite py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto">
         {/* Confirmation Container */}
         <div className="bg-bgSecondary rounded-lg border border-stroke p-8 sm:p-12">
           {/* Success Header */}
@@ -324,6 +327,7 @@ const InvoiceConfirmation = () => {
             )}
           </div>
         </div>
+        </div>
       </div>
 
       {/* Print Styles */}
@@ -346,7 +350,7 @@ const InvoiceConfirmation = () => {
           }
         }
       `}</style>
-    </div>
+    </>
   );
 };
 

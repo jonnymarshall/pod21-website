@@ -5,8 +5,9 @@
  * or from secrets/ folder (development)
  */
 
-interface FetchSecretsOptions {
-  development?: boolean;
+export interface SecretsStatus {
+  usingEnvVars: boolean;
+  missingVars: string[];
 }
 
 /**
@@ -41,6 +42,26 @@ export async function loadSecret<T>(
     console.error(`Failed to load secret from ${envVarName} or ${fallbackPath}:`, error);
     return null;
   }
+}
+
+/**
+ * Check if environment variables are being used
+ * Returns status and list of missing variables
+ */
+export function checkSecretsStatus(): SecretsStatus {
+  const requiredVars = ['VITE_INVOICES_JSON', 'VITE_COMPANY_INFO_JSON'];
+  const missingVars: string[] = [];
+
+  requiredVars.forEach((varName) => {
+    if (!import.meta.env[varName]) {
+      missingVars.push(varName);
+    }
+  });
+
+  return {
+    usingEnvVars: missingVars.length === 0,
+    missingVars,
+  };
 }
 
 /**
