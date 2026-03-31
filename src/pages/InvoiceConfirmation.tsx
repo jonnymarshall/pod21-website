@@ -22,6 +22,18 @@ interface PaymentData {
   lockedAt: string;
 }
 
+interface CompanyInfo {
+  name: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+  };
+  taxId: string;
+  supportEmail: string;
+}
+
 const InvoiceConfirmation = () => {
   const { invoiceId } = useParams<{ invoiceId: string }>();
   const navigate = useNavigate();
@@ -29,10 +41,28 @@ const InvoiceConfirmation = () => {
 
   const [invoice, setInvoice] = useState<InvoiceData | null>(null);
   const [payment, setPayment] = useState<PaymentData | null>(null);
+  const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
 
   useEffect(() => {
     // Initialize EmailJS
     emailjs.init(EMAILJS_PUBLIC_KEY);
+  }, []);
+
+  useEffect(() => {
+    // Fetch company info
+    const fetchCompanyInfo = async () => {
+      try {
+        const response = await fetch("/company-info.json");
+        if (response.ok) {
+          const data = await response.json();
+          setCompanyInfo(data);
+        }
+      } catch (error) {
+        console.error("Failed to load company info:", error);
+      }
+    };
+
+    fetchCompanyInfo();
   }, []);
 
   useEffect(() => {
@@ -140,17 +170,19 @@ const InvoiceConfirmation = () => {
             </div>
 
             {/* Billing From Section */}
-            <div className="mb-8 pb-8 border-b border-stroke">
-              <p className="text-body-sm-semiBold text-primary-100 mb-4 uppercase tracking-wider">
-                Billing From
-              </p>
-              <div className="text-body-lg">
-                <p className="text-boneWhite font-medium">POD21 LLC</p>
-                <p className="text-textBody">4834 NW 2ND AVE UNIT #590</p>
-                <p className="text-textBody">BOCA RATON, Florida 33431</p>
-                <p className="text-textBody mt-4">Tax ID: 38-4369206</p>
+            {companyInfo && (
+              <div className="mb-8 pb-8 border-b border-stroke">
+                <p className="text-body-sm-semiBold text-primary-100 mb-4 uppercase tracking-wider">
+                  Billing From
+                </p>
+                <div className="text-body-lg">
+                  <p className="text-boneWhite font-medium">{companyInfo.name}</p>
+                  <p className="text-textBody">{companyInfo.address.street}</p>
+                  <p className="text-textBody">{companyInfo.address.city}, {companyInfo.address.state} {companyInfo.address.zip}</p>
+                  <p className="text-textBody mt-4">Tax ID: {companyInfo.taxId}</p>
+                </div>
               </div>
-            </div>
+            )}
 
             <p className="text-body-sm-semiBold text-primary-100 mb-6 uppercase tracking-wider">
               Payment Details
@@ -282,9 +314,11 @@ const InvoiceConfirmation = () => {
             <p className="text-textBody text-body-xs mt-4">
               This is a payment registration receipt. Final confirmation will be sent once funds are verified.
             </p>
-            <p className="text-textBody text-body-xs mt-4">
-              For support, contact: jonny@pod21.xyz
-            </p>
+            {companyInfo && (
+              <p className="text-textBody text-body-xs mt-4">
+                For support, contact: {companyInfo.supportEmail}
+              </p>
+            )}
           </div>
         </div>
       </div>
