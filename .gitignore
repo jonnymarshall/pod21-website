@@ -30,3 +30,4 @@ TEMPORARY_DELETEME
 # Secrets - keep private and local only
 secrets/*.json
 !secrets/*.json.example
+.env*.local

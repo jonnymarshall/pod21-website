@@ -14,35 +14,41 @@ This means:
 
 ## Setup Steps
 
-### Step 1: Generate Environment Variable Format
+### Step 1: Set Company Info (One-Time Setup)
 
-Run this command to convert your secrets to environment variable format:
+Go to your Vercel project: https://vercel.com/dashboard → Settings → Environment Variables
+
+Add one variable:
+- **Variable Name**: `VITE_COMPANY_INFO_JSON`
+- **Value**: Copy the minified JSON from `secrets/company-info.json` (all on one line, no spaces)
+
+Example:
+```
+{"name":"POD21 LLC","address":{"street":"4834 NW 2ND AVE UNIT #590","city":"BOCA RATON","state":"Florida","zip":"33431"},"taxId":"38-4369206","supportEmail":"jonny@pod21.xyz"}
+```
+
+Make sure it's set for: ✅ Production, ✅ Preview, ✅ Development
+
+### Step 2: Generate and Add Invoices
+
+Run this command to convert invoices to environment variable format:
 
 ```bash
 node scripts/generate-env-secrets.js
 ```
 
-This outputs something like:
+This outputs:
 ```
 VITE_INVOICES_JSON='[{"id":"BA20260331",...}]'
-VITE_COMPANY_INFO_JSON='{"name":"POD21 LLC",...}'
 ```
 
-### Step 2: Add to Vercel Dashboard
+Add to Vercel dashboard:
+- **Variable Name**: `VITE_INVOICES_JSON`
+- **Value**: Paste the full value from the script output
 
-1. Go to your Vercel project: https://vercel.com/dashboard
-2. Click on your project
-3. Go to **Settings** → **Environment Variables**
-4. Add two new environment variables:
-   - `VITE_INVOICES_JSON` - Paste the full value from Step 1
-   - `VITE_COMPANY_INFO_JSON` - Paste the full value from Step 1
+Make sure it's set for: ✅ Production, ✅ Preview, ✅ Development
 
-5. Make sure each variable is set for:
-   - ✅ Production
-   - ✅ Preview
-   - ✅ Development
-
-6. Click "Save"
+Click "Save"
 
 ### Step 3: Redeploy
 
@@ -59,6 +65,19 @@ After deployment, check that:
 1. The invoice page loads at `/pay/YOUR-INVOICE-ID`
 2. Company information displays correctly
 3. No console errors about missing secrets
+
+---
+
+## Updating Invoices in Production
+
+When you add new invoices:
+
+1. **Edit** `secrets/invoices.json` locally
+2. **Run** `node scripts/generate-env-secrets.js`
+3. **Copy** the output to Vercel dashboard (`VITE_INVOICES_JSON`)
+4. **Redeploy** in Vercel
+
+No need to touch company info - it's static once set!
 
 ## For Development Locally
 
