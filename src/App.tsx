@@ -31,7 +31,7 @@ const App = () => (
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/links" element={<Links />} />
             <Route path="/pay/:invoiceId" element={<Invoice />} />
-            <Route path="/pay/:invoiceId/confirmation" element={<InvoiceConfirmation />} />
+            <Route path="/pay/:invoiceId/payment-registered" element={<InvoiceConfirmation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

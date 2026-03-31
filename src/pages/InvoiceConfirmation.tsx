@@ -117,17 +117,22 @@ const InvoiceConfirmation = () => {
               </div>
             </div>
             <h1 className="text-h2 font-kanit mb-4 text-primary-100">
-              Payment Confirmed
+              Payment Registered
             </h1>
             <p className="text-textBody text-body-lg">
-              Thank you for your payment, {invoice.customerName}!
+              Thank you, {invoice.customerName}! Your payment attempt has been registered.
             </p>
           </div>
 
-          {/* Confirmation Details */}
+          {/* Registration Details */}
           <div className="mb-12 pb-8 border-b border-stroke">
+            <div className="bg-primary-10/20 border border-primary-30 rounded-lg p-4 mb-6">
+              <p className="text-boneWhite text-body-sm">
+                <span className="font-semibold">Status:</span> Payment attempt registered and pending verification. A final confirmation email will be sent to your inbox once the funds have been received and verified in the wallet.
+              </p>
+            </div>
             <p className="text-body-sm-semiBold text-primary-100 mb-6 uppercase tracking-wider">
-              Payment Summary
+              Payment Details
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -236,16 +241,20 @@ const InvoiceConfirmation = () => {
           {/* Notes */}
           <div className="bg-primary-10/20 border border-primary-30 rounded-lg p-6 mb-8">
             <p className="text-boneWhite text-body-lg-semiBold mb-2">
-              Payment Instructions
+              Next Steps
             </p>
             <ul className="text-textBody text-body-lg space-y-2">
               <li className="flex items-start gap-3">
                 <span className="text-primary-100 mt-1">•</span>
-                <span>Send exactly {payment.btcAmount.toFixed(8)} BTC to the address above</span>
+                <span>Send exactly {payment.btcAmount.toFixed(8)} BTC to the address shown above</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-primary-100 mt-1">•</span>
                 <span>Bitcoin network confirmation typically takes 10-30 minutes</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-primary-100 mt-1">•</span>
+                <span>Once funds arrive, you will receive a final confirmation email</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-primary-100 mt-1">•</span>
@@ -275,10 +284,16 @@ const InvoiceConfirmation = () => {
 
           {/* Print-only footer */}
           <div className="hidden print:block mt-8 pt-8 border-t border-stroke text-center">
-            <p className="text-textBody text-body-sm">
-              This invoice was generated on {formattedTime}
+            <p className="text-textBody text-body-sm font-semibold mb-2">
+              Payment Registration Receipt
             </p>
-            <p className="text-textBody text-body-xs mt-2">
+            <p className="text-textBody text-body-sm">
+              Payment registered on {formattedTime}
+            </p>
+            <p className="text-textBody text-body-xs mt-4">
+              This is a payment registration receipt. Final confirmation will be sent once funds are verified.
+            </p>
+            <p className="text-textBody text-body-xs mt-4">
               For support, contact: support@pod21.xyz
             </p>
           </div>
