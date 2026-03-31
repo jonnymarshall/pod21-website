@@ -103,14 +103,17 @@ const InvoiceConfirmation = () => {
         submit_date: new Date().toLocaleString(),
       };
 
-      const result = await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
-      );
+      // TEMPORARILY DISABLED TO CONSERVE EMAILJS CREDITS
+      // TODO: Re-enable before pushing to production
+      // const result = await emailjs.send(
+      //   EMAILJS_SERVICE_ID,
+      //   EMAILJS_TEMPLATE_ID,
+      //   templateParams,
+      //   EMAILJS_PUBLIC_KEY
+      // );
 
-      console.log("Confirmation email sent:", result.text);
+      // console.log("Confirmation email sent:", result.text);
+      console.log("Email sending disabled for testing. Template params:", templateParams);
     } catch (error) {
       console.error("Failed to send confirmation email:", error);
     }
