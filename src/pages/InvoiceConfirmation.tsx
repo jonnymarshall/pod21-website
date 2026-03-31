@@ -138,6 +138,20 @@ const InvoiceConfirmation = () => {
                 <span className="font-semibold">Status:</span> Payment attempt registered and pending verification. A final confirmation email will be sent to your inbox once the funds have been received and verified in the wallet.
               </p>
             </div>
+
+            {/* Billing From Section */}
+            <div className="mb-8 pb-8 border-b border-stroke">
+              <p className="text-body-sm-semiBold text-primary-100 mb-4 uppercase tracking-wider">
+                Billing From
+              </p>
+              <div className="text-body-lg">
+                <p className="text-boneWhite font-medium">POD21 LLC</p>
+                <p className="text-textBody">4834 NW 2ND AVE UNIT #590</p>
+                <p className="text-textBody">BOCA RATON, Florida 33431</p>
+                <p className="text-textBody mt-4">Tax ID: 38-4369206</p>
+              </div>
+            </div>
+
             <p className="text-body-sm-semiBold text-primary-100 mb-6 uppercase tracking-wider">
               Payment Details
             </p>
