@@ -5,9 +5,9 @@ This directory contains sensitive, private data that should **never be committed
 ## Files
 
 ### invoices.json
-Contains invoice data with sensitive information like Bitcoin addresses and customer details.
+Contains invoice data with Bitcoin addresses and customer details.
 - Use `invoices.json.example` as a template
-- Copy `invoices.json.example` to `invoices.json` and fill in your data
+- Mark invoices as `"paid": true` to exclude them from production (only unpaid invoices are deployed)
 
 ### company-info.json
 Contains your company's billing information (address, tax ID, support contact).
@@ -30,5 +30,4 @@ Contains your company's billing information (address, tax ID, support contact).
 
 - **Never commit files without the `.example` extension** to this directory
 - **Always update the `.example` files** if you change the data structure
-- The app fetches from `secrets/` during development
-- For production, ensure these files exist in your deployment environment
+- The app automatically uses `secrets/` during development, or environment variables in production

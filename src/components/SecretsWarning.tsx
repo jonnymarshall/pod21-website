@@ -27,6 +27,7 @@ export const SecretsWarning = () => {
               <li>Local: Set variables in <code className="bg-white text-carbonBlack px-1 font-mono">.env.local</code></li>
               <li>Production: Add variables in Vercel dashboard → Settings → Environment Variables</li>
               <li>Then restart dev server or redeploy in Vercel</li>
+              <li>See <code className="bg-white text-carbonBlack px-1 font-mono">SECRETS_SETUP.md</code> (local) or <code className="bg-white text-carbonBlack px-1 font-mono">VERCEL_SETUP.md</code> (production) for detailed instructions</li>
             </ul>
           </div>
         </div>

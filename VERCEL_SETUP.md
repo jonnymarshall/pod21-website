@@ -21,63 +21,67 @@ Go to your Vercel project: https://vercel.com/dashboard → Settings → Environ
 Add one variable:
 - **Variable Name**: `VITE_COMPANY_INFO_JSON`
 - **Value**: Copy the minified JSON from `secrets/company-info.json` (all on one line, no spaces)
+- **Environment**: Production
 
 Example:
 ```
 {"name":"POD21 LLC","address":{"street":"4834 NW 2ND AVE UNIT #590","city":"BOCA RATON","state":"Florida","zip":"33431"},"taxId":"38-4369206","supportEmail":"jonny@pod21.xyz"}
 ```
 
-Make sure it's set for: ✅ Production, ✅ Preview, ✅ Development
-
 ### Step 2: Generate and Add Invoices
 
-Run this command to convert invoices to environment variable format:
+Run this command:
 
 ```bash
 node scripts/generate-env-secrets.js
 ```
 
-This outputs:
+The script outputs the value and next steps:
+
+1. **Update Vercel:**
+   ```bash
+   vercel env update VITE_INVOICES_JSON
+   ```
+   When prompted, copy and paste the value from the script output
+
+2. **Pull to .env.local:**
+   ```bash
+   vercel env pull
+   ```
+
+3. **Push to main:**
+   ```bash
+   git push origin main
+   ```
+
+### Step 3: Test and Deploy
+
+After updating Vercel, test locally with your new invoices, then push to deploy:
+
+```bash
+git push origin main
 ```
-VITE_INVOICES_JSON='[{"id":"BA20260331",...}]'
-```
-
-Add to Vercel dashboard:
-- **Variable Name**: `VITE_INVOICES_JSON`
-- **Value**: Paste the full value from the script output
-
-Make sure it's set for: ✅ Production, ✅ Preview, ✅ Development
-
-Click "Save"
-
-### Step 3: Redeploy
-
-After adding environment variables:
-1. Go to **Deployments** tab
-2. Click the three dots on the latest deployment
-3. Select "Redeploy"
-
-Or simply push a new commit to trigger automatic deployment.
 
 ### Step 4: Verify
 
-After deployment, check that:
-1. The invoice page loads at `/pay/YOUR-INVOICE-ID`
+After deployment, verify:
+1. Invoice page loads at `/pay/YOUR-INVOICE-ID`
 2. Company information displays correctly
-3. No console errors about missing secrets
+3. No warning banner about missing environment variables
 
 ---
 
 ## Updating Invoices in Production
 
-When you add new invoices:
+When you add new invoices or mark invoices as paid:
 
-1. **Edit** `secrets/invoices.json` locally
-2. **Run** `node scripts/generate-env-secrets.js`
-3. **Copy** the output to Vercel dashboard (`VITE_INVOICES_JSON`)
-4. **Redeploy** in Vercel
+1. Edit `secrets/invoices.json` locally
+2. Run `node scripts/generate-env-secrets.js`
+3. Run `vercel env update VITE_INVOICES_JSON` and paste the value from the script
+4. Run `vercel env pull` to update `.env.local`
+5. Push to main to deploy
 
-No need to touch company info - it's static once set!
+**Note:** Mark invoices as `"paid": true` in `secrets/invoices.json` to exclude them from the environment variable.
 
 ## For Development Locally
 
@@ -88,11 +92,10 @@ No need to touch company info - it's static once set!
    cp .env.local.example .env.local
    ```
 
-2. Edit `.env.local` and paste the values from Step 1:
+2. Edit `.env.local` and paste the values:
    ```
    VITE_INVOICES_JSON='[...]'
    VITE_COMPANY_INFO_JSON='{...}'
-   VITE_CLIENTS_JSON='[]'
    ```
 
 3. Restart the dev server:
@@ -102,10 +105,9 @@ No need to touch company info - it's static once set!
 
 ### Option B: Using secrets/ folder (Default)
 
-The app automatically falls back to `secrets/` folder if environment variables aren't set, so you can also just keep using:
+The app automatically falls back to `secrets/` folder if environment variables aren't set:
 - `secrets/invoices.json`
 - `secrets/company-info.json`
-- `secrets/clients.json`
 
 ## Security Checklist
 
@@ -115,30 +117,18 @@ The app automatically falls back to `secrets/` folder if environment variables a
 - ✅ Bitcoin addresses are masked in the UI (only first 8 + last 6 chars)
 - ✅ Full addresses only visible in email confirmations (to admin only)
 
-## Updating Secrets in Production
-
-To update invoices, company info, or clients:
-
-1. Edit the JSON files in `secrets/` folder locally
-2. Run `node scripts/generate-env-secrets.js`
-3. Copy the output to Vercel dashboard (Settings → Environment Variables)
-4. Redeploy the project
 
 ## Troubleshooting
 
-### Variables not loading
-- Check that environment variable names match exactly (they're case-sensitive)
-- Verify they're set for Production environment
-- Redeploy after adding variables
+### Warning banner appears (missing env variables)
+- Check that you ran `vercel env pull` after adding environment variables
+- Verify the variable names are exactly `VITE_INVOICES_JSON` and `VITE_COMPANY_INFO_JSON` (case-sensitive)
+- Restart your dev server after pulling
 
 ### JSON parsing errors
-- Make sure the JSON is valid
-- Run `node scripts/generate-env-secrets.js` again to ensure correct format
-- Check browser console for error messages
-
-### Secrets folder still being used in production
-- This is fine as a fallback, but environment variables take priority
-- In production, Vercel doesn't serve the secrets/ folder anyway
+- Ensure the JSON is valid (no extra spaces, proper quotes)
+- Run `node scripts/generate-env-secrets.js` to regenerate
+- Check the script output matches what you copied to Vercel
 
 ## Questions?
 
