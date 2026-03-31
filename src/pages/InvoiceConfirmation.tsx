@@ -252,31 +252,6 @@ const InvoiceConfirmation = () => {
             </div>
           </div>
 
-          {/* Notes */}
-          <div className="bg-primary-10/20 border border-primary-30 rounded-lg p-6 mb-8">
-            <p className="text-boneWhite text-body-lg-semiBold mb-2">
-              Next Steps
-            </p>
-            <ul className="text-textBody text-body-lg space-y-2">
-              <li className="flex items-start gap-3">
-                <span className="text-primary-100 mt-1">•</span>
-                <span>Send exactly {payment.btcAmount.toFixed(8)} BTC to the address shown above</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-primary-100 mt-1">•</span>
-                <span>Bitcoin network confirmation typically takes 10-30 minutes</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-primary-100 mt-1">•</span>
-                <span>Once funds arrive, you will receive a final confirmation email</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-primary-100 mt-1">•</span>
-                <span>Save this page for your records</span>
-              </li>
-            </ul>
-          </div>
-
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 print:hidden">
             <Button
