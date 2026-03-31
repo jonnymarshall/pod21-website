@@ -26,7 +26,6 @@ This outputs something like:
 ```
 VITE_INVOICES_JSON='[{"id":"BA20260331",...}]'
 VITE_COMPANY_INFO_JSON='{"name":"POD21 LLC",...}'
-VITE_CLIENTS_JSON='[]'
 ```
 
 ### Step 2: Add to Vercel Dashboard
@@ -34,10 +33,9 @@ VITE_CLIENTS_JSON='[]'
 1. Go to your Vercel project: https://vercel.com/dashboard
 2. Click on your project
 3. Go to **Settings** → **Environment Variables**
-4. Add three new environment variables:
+4. Add two new environment variables:
    - `VITE_INVOICES_JSON` - Paste the full value from Step 1
    - `VITE_COMPANY_INFO_JSON` - Paste the full value from Step 1
-   - `VITE_CLIENTS_JSON` - Paste the full value from Step 1
 
 5. Make sure each variable is set for:
    - ✅ Production

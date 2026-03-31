@@ -63,12 +63,3 @@ export async function loadCompanyInfo() {
   );
 }
 
-/**
- * Load clients from environment or secrets folder
- */
-export async function loadClients() {
-  return loadSecret(
-    'VITE_CLIENTS_JSON',
-    '/secrets/clients.json'
-  );
-}
