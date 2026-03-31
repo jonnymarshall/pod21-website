@@ -32,25 +32,25 @@ secrets/
 
 ## For Deployment
 
-When deploying to production (e.g., Vercel), you need to ensure the `secrets/` folder exists with the proper files:
+When deploying to production (e.g., Vercel):
 
-**Option 1: Environment Variables (Recommended)**
-- Convert secrets to environment variables
-- Deploy via Vercel's environment settings
-- Update components to read from process.env
+1. **Company Info** (set once):
+   - Go to Vercel dashboard → Environment Variables
+   - Add `VITE_COMPANY_INFO_JSON` with minified JSON from `secrets/company-info.json`
+   - Done! No need to update this unless company details change
 
-**Option 2: Secrets Management Service**
-- Use a service like AWS Secrets Manager
-- Fetch secrets at build time or runtime
+2. **Invoices** (update as needed):
+   - Edit `secrets/invoices.json` locally
+   - Run `node scripts/generate-env-secrets.js`
+   - Copy output to Vercel's `VITE_INVOICES_JSON` variable
+   - Redeploy
 
-**Option 3: Manual Deployment**
-- Create the `secrets/` folder and files directly on the server
-- Not recommended for public platforms like Vercel
+See `VERCEL_SETUP.md` for detailed instructions.
 
 ## Development vs Production
 
-- **Development**: Files are served from `secrets/` folder locally
-- **Production**: You'll need to set up one of the options above to serve the sensitive data
+- **Development**: Files are served from `secrets/` folder locally OR from `.env.local`
+- **Production**: Environment variables from Vercel dashboard are used
 
 ## Security Notes
 
