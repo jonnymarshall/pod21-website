@@ -2,6 +2,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check, Download, Home } from "lucide-react";
 import { useEffect, useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
 
 interface InvoiceData {
   id: string;
@@ -191,11 +192,12 @@ const InvoiceConfirmation = () => {
               QR Code for Reference
             </p>
             <div className="bg-bgPrimary rounded-lg p-8 flex flex-col items-center">
-              <div className="w-48 h-48 bg-white rounded-lg flex items-center justify-center overflow-hidden">
-                <img
-                  src={invoice.qrCodeImagePath}
-                  alt="Bitcoin QR Code"
-                  className="w-full h-full object-cover"
+              <div className="w-48 h-48 bg-white rounded-lg flex items-center justify-center overflow-hidden p-3">
+                <QRCodeSVG
+                  value={`bitcoin:${invoice.btcAddress}?amount=${payment.btcAmount.toFixed(8)}&label=${encodeURIComponent(invoice.customerName)}&message=${encodeURIComponent(`Invoice ${invoice.id}`)}`}
+                  size={180}
+                  level="H"
+                  includeMargin={false}
                 />
               </div>
             </div>
