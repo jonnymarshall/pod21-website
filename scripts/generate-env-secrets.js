@@ -27,16 +27,10 @@ try {
   const companyContent = fs.readFileSync(companyPath, 'utf8');
   const companyJson = companyContent.replace(/\n/g, '').replace(/'/g, "\\'");
 
-  // Read clients.json
-  const clientsPath = path.join(secretsDir, 'clients.json');
-  const clientsContent = fs.readFileSync(clientsPath, 'utf8');
-  const clientsJson = clientsContent.replace(/\n/g, '').replace(/'/g, "\\'");
-
   // Output
   console.log('# Add these to your .env.local file:\n');
   console.log(`VITE_INVOICES_JSON='${invoicesJson}'`);
   console.log(`VITE_COMPANY_INFO_JSON='${companyJson}'`);
-  console.log(`VITE_CLIENTS_JSON='${clientsJson}'`);
   console.log('\n✅ Copy the above lines to your .env.local file');
 
 } catch (error) {

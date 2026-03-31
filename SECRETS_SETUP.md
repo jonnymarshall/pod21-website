@@ -10,8 +10,6 @@ secrets/
 ├── invoices.json.example (template)
 ├── company-info.json (private - never commit)
 ├── company-info.json.example (template)
-├── clients.json (private - never commit)
-├── clients.json.example (template)
 └── README.md (this directory's documentation)
 ```
 
@@ -22,13 +20,11 @@ secrets/
    cd secrets/
    cp invoices.json.example invoices.json
    cp company-info.json.example company-info.json
-   cp clients.json.example clients.json
    ```
 
 2. **Edit each file with your actual data:**
    - `invoices.json` - Add your invoice details and Bitcoin addresses
    - `company-info.json` - Add your company details
-   - `clients.json` - Add client information (optional, for future use)
 
 3. **Never commit the non-example files:**
    - These are in `.gitignore` for a reason
