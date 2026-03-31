@@ -3,6 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Check, Download, Home } from "lucide-react";
 import { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
+import emailjs from "@emailjs/browser";
+import { toast } from "sonner";
+
+// EmailJS configuration - same as contact page
+const EMAILJS_SERVICE_ID = "service_ytteklz";
+const EMAILJS_TEMPLATE_ID = "template_6dr5yvp";
+const EMAILJS_PUBLIC_KEY = "IEmeJ5e8HtipqemG7";
 
 interface InvoiceData {
   id: string;
@@ -26,6 +33,11 @@ const InvoiceConfirmation = () => {
   const [payment, setPayment] = useState<PaymentData | null>(null);
 
   useEffect(() => {
+    // Initialize EmailJS
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }, []);
+
+  useEffect(() => {
     const state = location.state as {
       invoice: InvoiceData;
       payment: PaymentData;
@@ -34,10 +46,47 @@ const InvoiceConfirmation = () => {
     if (state && state.invoice && state.payment) {
       setInvoice(state.invoice);
       setPayment(state.payment);
+
+      // Send confirmation email
+      sendConfirmationEmail(state.invoice, state.payment);
     } else {
       navigate("/");
     }
   }, [location.state, navigate]);
+
+  const sendConfirmationEmail = async (
+    invoiceData: InvoiceData,
+    paymentData: PaymentData
+  ) => {
+    try {
+      const templateParams = {
+        fullName: invoiceData.customerName,
+        email: "support@pod21.xyz", // You may want to collect customer email
+        message: `Payment Confirmation\n\nInvoice ID: ${invoiceData.id}\nUSD Amount: $${invoiceData.usdAmount.toFixed(
+          2
+        )}\nBTC Amount: ${paymentData.btcAmount.toFixed(
+          8
+        )} BTC\nBTC Price: $${paymentData.btcPrice.toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}\nBitcoin Address: ${invoiceData.btcAddress}\nPayment Time: ${new Date(
+          paymentData.lockedAt
+        ).toLocaleString()}`,
+        submit_date: new Date().toLocaleString(),
+      };
+
+      const result = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      console.log("Confirmation email sent:", result.text);
+    } catch (error) {
+      console.error("Failed to send confirmation email:", error);
+    }
+  };
 
   const handlePrint = () => {
     window.print();
