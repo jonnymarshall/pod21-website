@@ -60,7 +60,7 @@ const InvoiceConfirmation = () => {
       const templateParams = {
         fullName: invoiceData.customerName,
         email: "support@pod21.xyz", // You may want to collect customer email
-        message: `Payment Confirmation\n\nInvoice ID: ${invoiceData.id}\nUSD Amount: $${invoiceData.usdAmount.toFixed(
+        message: `Payment Attempt Registered\n\nInvoice ID: ${invoiceData.id}\nUSD Amount: $${invoiceData.usdAmount.toFixed(
           2
         )}\nBTC Amount: ${paymentData.btcAmount.toFixed(
           8
@@ -235,9 +235,6 @@ const InvoiceConfirmation = () => {
               <code className="text-primary-60 text-body-sm-medium break-all block p-4 bg-black/30 rounded border border-stroke font-mono">
                 {maskBitcoinAddress(invoice.btcAddress)}
               </code>
-              <p className="text-textBody text-body-xs mt-3">
-                Full address available in your email confirmation
-              </p>
             </div>
           </div>
 
