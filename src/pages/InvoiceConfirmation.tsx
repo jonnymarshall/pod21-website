@@ -1,10 +1,8 @@
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check, Download, Home } from "lucide-react";
 import { useEffect, useState } from "react";
-import { QRCodeSVG } from "qrcode.react";
 import emailjs from "@emailjs/browser";
-import { toast } from "sonner";
 
 // EmailJS configuration - same as contact page
 const EMAILJS_SERVICE_ID = "service_ytteklz";
@@ -103,6 +101,7 @@ const InvoiceConfirmation = () => {
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
+    timeZoneName: "short",
   });
 
   return (
@@ -215,7 +214,7 @@ const InvoiceConfirmation = () => {
           {/* Bitcoin Address */}
           <div className="mb-12 pb-8 border-b border-stroke">
             <p className="text-body-sm-semiBold text-primary-100 mb-4 uppercase tracking-wider">
-              Send Payment To
+              Payment Sent To
             </p>
             <div className="bg-bgPrimary rounded-lg p-6">
               <p className="text-textBody text-body-xs mb-4">
@@ -234,23 +233,6 @@ const InvoiceConfirmation = () => {
             </div>
           </div>
 
-          {/* QR Code Display */}
-          <div className="mb-12 pb-8 border-b border-stroke">
-            <p className="text-body-sm-semiBold text-primary-100 mb-6 uppercase tracking-wider">
-              QR Code for Reference
-            </p>
-            <div className="bg-bgPrimary rounded-lg p-8 flex flex-col items-center">
-              <div className="w-48 h-48 bg-white rounded-lg flex items-center justify-center overflow-hidden p-3">
-                <QRCodeSVG
-                  value={`bitcoin:${invoice.btcAddress}?amount=${payment.btcAmount.toFixed(8)}&label=${encodeURIComponent(invoice.customerName)}&message=${encodeURIComponent(`Invoice ${invoice.id}`)}`}
-                  size={180}
-                  level="H"
-                  includeMargin={false}
-                />
-              </div>
-            </div>
-          </div>
-
           {/* Notes */}
           <div className="bg-primary-10/20 border border-primary-30 rounded-lg p-6 mb-8">
             <p className="text-boneWhite text-body-lg-semiBold mb-2">
@@ -260,10 +242,6 @@ const InvoiceConfirmation = () => {
               <li className="flex items-start gap-3">
                 <span className="text-primary-100 mt-1">•</span>
                 <span>Send exactly {payment.btcAmount.toFixed(8)} BTC to the address above</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-primary-100 mt-1">•</span>
-                <span>You can use the QR code for quick scanning with your wallet</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-primary-100 mt-1">•</span>
