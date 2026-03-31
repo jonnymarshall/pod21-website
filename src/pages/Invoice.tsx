@@ -10,7 +10,6 @@ interface InvoiceData {
   customerName: string;
   usdAmount: number;
   btcAddress: string;
-  qrCodeImagePath: string;
 }
 
 interface PaymentData {
@@ -209,7 +208,7 @@ const Invoice = () => {
                 <Button
                   onClick={handleGeneratePayment}
                   disabled={loading}
-                  className="bg-primary-100 hover:bg-primary-60 text-black font-semibold px-8 py-6 h-auto text-body-lg"
+                  className="bg-primary-100 hover:bg-primary-60 !text-carbonBlack font-semibold px-8 py-6 h-auto text-body-lg"
                 >
                   {loading ? (
                     <>

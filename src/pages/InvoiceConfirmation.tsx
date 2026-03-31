@@ -9,7 +9,6 @@ interface InvoiceData {
   customerName: string;
   usdAmount: number;
   btcAddress: string;
-  qrCodeImagePath: string;
 }
 
 interface PaymentData {
