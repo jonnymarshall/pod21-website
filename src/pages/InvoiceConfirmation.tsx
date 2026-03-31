@@ -52,7 +52,7 @@ const InvoiceConfirmation = () => {
     // Fetch company info
     const fetchCompanyInfo = async () => {
       try {
-        const response = await fetch("/company-info.json");
+        const response = await fetch("/secrets/company-info.json");
         if (response.ok) {
           const data = await response.json();
           setCompanyInfo(data);
