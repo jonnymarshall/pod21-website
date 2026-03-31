@@ -94,7 +94,7 @@ const Invoice = () => {
   const handlePaymentMade = () => {
     if (!payment || !invoice) return;
 
-    navigate(`/pay/${invoiceId}/confirmation`, {
+    navigate(`/pay/${invoiceId}/payment-registered`, {
       state: {
         invoice,
         payment,
