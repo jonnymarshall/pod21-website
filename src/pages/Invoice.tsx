@@ -13,6 +13,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { LogoSVG } from "@/assets/icons";
 import { loadInvoices } from "@/utils/secretsLoader";
 import { SecretsWarning } from "@/components/SecretsWarning";
+import { decryptInvoiceData } from "@/utils/encryption";
 
 interface Service {
   description: string;
@@ -24,11 +25,12 @@ interface InvoiceData {
   id: string;
   invoiceDate: string;
   dueWithin: number;
-  customerName: string;
   companyName: string;
-  address: string;
-  services: Service[];
-  btcAddress: string;
+  encryptedData?: string; // Encrypted customer data
+  customerName?: string; // Decrypted at runtime
+  address?: string; // Decrypted at runtime
+  services?: Service[]; // Decrypted at runtime
+  btcAddress?: string; // Decrypted at runtime
 }
 
 interface PaymentData {
@@ -48,17 +50,39 @@ const Invoice = () => {
   const [invoiceError, setInvoiceError] = useState<string | null>(null);
   const [showAddressWarning, setShowAddressWarning] = useState(false);
   const [addressWarningAcknowledged, setAddressWarningAcknowledged] = useState(false);
+  const [passphrase, setPassphrase] = useState("");
+  const [passphraseError, setPassphraseError] = useState<string | null>(null);
+  const [decrypted, setDecrypted] = useState(false);
+
+  // Decrypt invoice data with passphrase
+  const handleDecrypt = () => {
+    if (!invoice?.encryptedData || !passphrase) {
+      setPassphraseError("Please enter a passphrase");
+      return;
+    }
+
+    const decryptedData = decryptInvoiceData(invoice.encryptedData, passphrase);
+    if (!decryptedData) {
+      setPassphraseError("Invalid passphrase");
+      return;
+    }
+
+    setInvoice({
+      ...invoice,
+      ...decryptedData,
+    });
+    setDecrypted(true);
+    setPassphraseError(null);
+  };
 
   // Calculate due date and check if overdue
   const calculateDueDate = (invoiceDate: string, dueWithin: number): { dueDate: Date; isOverdue: boolean } => {
-    console.log("[calculateDueDate] invoiceDate:", invoiceDate, "dueWithin:", dueWithin);
     // Parse YYYY-MM-DD format
     const [year, month, day] = invoiceDate.split('-').map(Number);
     const date = new Date(year, month - 1, day);
     const dueDate = new Date(date);
     dueDate.setDate(dueDate.getDate() + dueWithin);
     const isOverdue = new Date() > dueDate;
-    console.log("[calculateDueDate] result:", { dueDate, isOverdue });
     return { dueDate, isOverdue };
   };
 
@@ -192,6 +216,50 @@ const Invoice = () => {
     return (
       <div className="min-h-screen bg-bgPrimary flex items-center justify-center">
         <Loader2 className="animate-spin text-primary-100" size={32} />
+      </div>
+    );
+  }
+
+  // Show passphrase form if invoice data is encrypted and not yet decrypted
+  if (invoice.encryptedData && !decrypted) {
+    return (
+      <div className="min-h-screen bg-bgPrimary flex items-center justify-center px-4">
+        <div className="max-w-md w-full">
+          <div className="bg-bgSecondary rounded-lg border border-stroke p-8">
+            <h2 className="text-h4 text-boneWhite mb-4">Enter Passphrase</h2>
+            <p className="text-textBody mb-6">This invoice is encrypted. Please enter the passphrase to view details.</p>
+
+            <input
+              type="password"
+              placeholder="Enter passphrase"
+              value={passphrase}
+              onChange={(e) => {
+                setPassphrase(e.target.value);
+                setPassphraseError(null);
+              }}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  handleDecrypt();
+                }
+              }}
+              className="w-full px-4 py-3 bg-bgPrimary border border-stroke rounded-lg text-boneWhite placeholder-textBody mb-4 focus:outline-none focus:border-primary-100"
+            />
+
+            {passphraseError && (
+              <div className="flex items-center gap-3 mb-4 p-3 bg-red-10 border border-red-100 rounded-lg">
+                <AlertCircle className="text-red-100 flex-shrink-0" size={16} />
+                <p className="text-red-100 text-body-sm">{passphraseError}</p>
+              </div>
+            )}
+
+            <Button
+              onClick={handleDecrypt}
+              className="w-full bg-primary-100 hover:bg-primary-60 text-black font-semibold"
+            >
+              Unlock Invoice
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
