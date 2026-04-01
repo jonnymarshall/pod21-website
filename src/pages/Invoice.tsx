@@ -22,6 +22,8 @@ interface Service {
 
 interface InvoiceData {
   id: string;
+  invoiceDate: string;
+  dueWithin: number;
   customerName: string;
   companyName: string;
   address: string;
@@ -47,6 +49,30 @@ const Invoice = () => {
   const [showAddressWarning, setShowAddressWarning] = useState(false);
   const [addressWarningAcknowledged, setAddressWarningAcknowledged] = useState(false);
 
+  // Calculate due date and check if overdue
+  const calculateDueDate = (invoiceDate: string, dueWithin: number): { dueDate: Date; isOverdue: boolean } => {
+    console.log("[calculateDueDate] invoiceDate:", invoiceDate, "dueWithin:", dueWithin);
+    // Parse YYYY-MM-DD format
+    const [year, month, day] = invoiceDate.split('-').map(Number);
+    const date = new Date(year, month - 1, day);
+    const dueDate = new Date(date);
+    dueDate.setDate(dueDate.getDate() + dueWithin);
+    const isOverdue = new Date() > dueDate;
+    console.log("[calculateDueDate] result:", { dueDate, isOverdue });
+    return { dueDate, isOverdue };
+  };
+
+  const formatDate = (date: Date): string => {
+    if (isNaN(date.getTime())) {
+      return "Invalid Date";
+    }
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   // Fetch invoice data
   useEffect(() => {
     const fetchInvoice = async () => {
@@ -63,6 +89,7 @@ const Invoice = () => {
         if (!foundInvoice) {
           setInvoiceError(`Invoice ${invoiceId} not found`);
         } else {
+          console.log("[Invoice] Loaded invoice:", foundInvoice);
           setInvoice(foundInvoice);
         }
       } catch (err) {
@@ -205,14 +232,25 @@ const Invoice = () => {
                   Invoice Date:
                 </p>
                 <p className="text-body-lg-medium text-boneWhite">
-                  {new Date().toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
+                  {invoice.invoiceDate ? formatDate(new Date(invoice.invoiceDate)) : "N/A"}
+                </p>
+                <p className="text-body-sm-medium text-textBody mt-4">
+                  Due Date:
+                </p>
+                <p className="text-body-lg-medium text-boneWhite">
+                  {invoice.invoiceDate ? formatDate(calculateDueDate(invoice.invoiceDate, invoice.dueWithin).dueDate) : "N/A"}
                 </p>
               </div>
             </div>
+
+            {/* Overdue Warning */}
+            {invoice.invoiceDate && calculateDueDate(invoice.invoiceDate, invoice.dueWithin).isOverdue && (
+              <div className="bg-red-10 border border-red-100 rounded-lg p-4 mt-6">
+                <p className="text-red-100 font-semibold">
+                  🚨 Invoice overdue: Due on {formatDate(calculateDueDate(invoice.invoiceDate, invoice.dueWithin).dueDate)}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Billing From Section */}
