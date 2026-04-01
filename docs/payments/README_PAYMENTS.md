@@ -83,16 +83,20 @@ Encrypted invoice (data is hidden, requires passphrase):
 
 ### Encrypting Invoice Data
 
-**Standard workflow:**
+**One-command workflow:**
 
 1. Copy the template:
    ```bash
    cp scripts/invoice-data.template.json my-invoice.json
    ```
 
-2. Edit `my-invoice.json` with customer details and a passphrase:
+2. Edit `my-invoice.json` with invoice details, customer data, and a passphrase:
    ```json
    {
+     "id": "INV-001",
+     "invoiceDate": "2026-04-15",
+     "dueWithin": 30,
+     "companyName": "Your Company Name",
      "passphrase": "my-secret-passphrase",
      "customerName": "John Doe",
      "address": "123 Main St, Durham NC",
@@ -103,19 +107,23 @@ Encrypted invoice (data is hidden, requires passphrase):
    }
    ```
 
-3. Run the encryption script:
+3. Run the encryption script (it automatically updates `secrets/invoices.json`):
    ```bash
    node scripts/encrypt-invoice.js my-invoice.json
    ```
 
-4. The script outputs the encrypted data and next steps. Copy the encrypted string and follow the steps.
+4. The script shows what was added. Then:
+   ```bash
+   node scripts/generate-env-secrets.js
+   vercel env update VITE_INVOICES_JSON  # paste the output
+   vercel env pull
+   git push origin main
+   ```
 
 **For quick testing:**
 ```bash
 node scripts/generate-encrypted-invoice.js "testpassphrase123"
 ```
-
-This generates encrypted test data instantly.
 
 ### Adding Encrypted Invoice to invoices.json
 
