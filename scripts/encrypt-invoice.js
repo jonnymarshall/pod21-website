@@ -61,7 +61,13 @@ try {
 
   if (fs.existsSync(invoicesPath)) {
     const content = fs.readFileSync(invoicesPath, 'utf-8');
-    invoices = JSON.parse(content);
+    if (content.trim()) {
+      try {
+        invoices = JSON.parse(content);
+      } catch (e) {
+        throw new Error(`Invalid JSON in secrets/invoices.json: ${e.message}`);
+      }
+    }
   }
 
   // Remove existing invoice with same ID, then add new one
@@ -82,8 +88,6 @@ try {
 } catch (error) {
   if (error.code === 'ENOENT') {
     console.error(`\n❌ File not found: ${filePath}\n`);
-  } else if (error instanceof SyntaxError) {
-    console.error(`\n❌ Invalid JSON in ${filePath}\n`);
   } else {
     console.error(`\n❌ ${error.message}\n`);
   }
