@@ -85,18 +85,30 @@ Encrypted invoice (data is hidden, requires passphrase):
 
 **Standard workflow:**
 
-1. Copy the template and fill in customer details:
+1. Copy the template:
    ```bash
    cp scripts/invoice-data.template.json my-invoice.json
-   # Edit my-invoice.json with actual customer data
    ```
 
-2. Run the encryption script with the file and passphrase:
+2. Edit `my-invoice.json` with customer details and a passphrase:
+   ```json
+   {
+     "passphrase": "my-secret-passphrase",
+     "customerName": "John Doe",
+     "address": "123 Main St, Durham NC",
+     "btcAddress": "bc1qxxx...",
+     "services": [
+       {"description": "Consulting", "quantity": 10, "unitValue": 100}
+     ]
+   }
+   ```
+
+3. Run the encryption script:
    ```bash
-   node scripts/encrypt-invoice.js my-invoice.json "my-secret-passphrase"
+   node scripts/encrypt-invoice.js my-invoice.json
    ```
 
-3. The script outputs the encrypted data and next steps. Copy the encrypted string.
+4. The script outputs the encrypted data and next steps. Copy the encrypted string and follow the steps.
 
 **For quick testing:**
 ```bash

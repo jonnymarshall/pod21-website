@@ -2,8 +2,10 @@
 
 /**
  * Encrypt invoice customer data
- * Usage: node scripts/encrypt-invoice.js <path-to-json> <passphrase>
- * Example: node scripts/encrypt-invoice.js invoice-data.json "my-secret-passphrase"
+ * Usage: node scripts/encrypt-invoice.js <path-to-json>
+ * Example: node scripts/encrypt-invoice.js my-invoice.json
+ *
+ * The JSON file should contain: passphrase, customerName, address, btcAddress, services
  */
 
 import CryptoJS from 'crypto-js';
@@ -12,14 +14,14 @@ import path from 'path';
 
 const args = process.argv.slice(2);
 
-if (args.length < 2) {
-  console.error('\n❌ Missing arguments\n');
-  console.error('Usage: node scripts/encrypt-invoice.js <path-to-json> <passphrase>');
-  console.error('Example: node scripts/encrypt-invoice.js invoice-data.json "my-secret-passphrase"\n');
+if (args.length < 1) {
+  console.error('\n❌ Missing argument\n');
+  console.error('Usage: node scripts/encrypt-invoice.js <path-to-json>');
+  console.error('Example: node scripts/encrypt-invoice.js my-invoice.json\n');
   process.exit(1);
 }
 
-const [filePath, passphrase] = args;
+const filePath = args[0];
 
 try {
   const fullPath = path.resolve(filePath);
@@ -27,13 +29,14 @@ try {
   const data = JSON.parse(fileContent);
 
   // Validate required fields
-  const required = ['customerName', 'address', 'btcAddress', 'services'];
+  const required = ['passphrase', 'customerName', 'address', 'btcAddress', 'services'];
   const missing = required.filter(field => !data[field]);
   if (missing.length > 0) {
     throw new Error(`Missing required fields: ${missing.join(', ')}`);
   }
 
-  const jsonString = JSON.stringify(data);
+  const { passphrase, ...invoiceData } = data;
+  const jsonString = JSON.stringify(invoiceData);
   const encrypted = CryptoJS.AES.encrypt(jsonString, passphrase).toString();
 
   console.log('\n✅ Encrypted Data:\n');
@@ -50,7 +53,8 @@ try {
   console.log('     "paid": false');
   console.log('   }');
   console.log('3. Run: node scripts/generate-env-secrets.js');
-  console.log('4. Update Vercel and deploy\n');
+  console.log('4. Update Vercel and deploy');
+  console.log('\n🔐 Passphrase saved in your invoice file for future reference\n');
 } catch (error) {
   if (error.code === 'ENOENT') {
     console.error(`\n❌ File not found: ${filePath}\n`);
