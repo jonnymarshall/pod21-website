@@ -1,4 +1,5 @@
 {
+  "passphrase": "your-secret-passphrase-here",
   "customerName": "Customer Name",
   "address": "Street Address, City, State ZIP",
   "btcAddress": "bc1q...",
