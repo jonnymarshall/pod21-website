@@ -4,23 +4,31 @@ Complete guide for managing invoices, payments, and Bitcoin integration.
 
 ## Overview
 
-The payment system uses two JSON files to manage invoices and company information:
+The payment system uses three JSON files to manage invoices and company information:
 
-- `invoices.json` — Array of invoices with customer and service details
+- `unencrypted-invoices.json` — Your source of truth (all invoice data with passphrases)
+- `encrypted-invoices.json` — Generated from above (encrypted customer data)
 - `company-info.json` — Company billing information
 
 In development, these load from `secrets/`. In production, they're stored as Vercel environment variables.
 
 ## File Structure
 
-### invoices.json
-See [`secrets/invoices.json.example`](../../secrets/invoices.json.example) for structure and fields.
+### unencrypted-invoices.json
+See [`secrets/unencrypted-invoices.json.example`](../../secrets/unencrypted-invoices.json.example) for structure and fields.
 
 **Key fields:**
+- `id` — Unique invoice identifier
 - `invoiceDate` — Invoice date in YYYY-MM-DD format
 - `dueWithin` — Number of days until payment is due
-- `services` — Array of line items (auto-calculates total from quantity × unitValue)
+- `companyName` — Your company name (public, not encrypted)
+- `encryptedData` — Encrypted customer details (optional - see below)
 - `paid` — Only invoices with `false` are deployed to production
+
+**How it works:**
+- You edit `unencrypted-invoices.json` with all invoice data including a passphrase
+- Run `node scripts/sync-invoices.js` to encrypt the data and generate `encrypted-invoices.json`
+- Only `encrypted-invoices.json` is deployed to production (unencrypted file is gitignored)
 
 **Due Date Calculation:** Due date = `invoiceDate` + `dueWithin` days. Displays automatically on invoice page. If overdue, a red warning appears.
 
@@ -28,6 +36,125 @@ See [`secrets/invoices.json.example`](../../secrets/invoices.json.example) for s
 See [`secrets/company-info.json.example`](../../secrets/company-info.json.example) for structure and fields.
 
 ⚠️ **Avoid special characters** in all text fields: `#`, `$`, `\`, `` ` ``, `&`, `|`, `;` — they break shell parsing when pushed to Vercel
+
+## Encryption (Optional Security)
+
+For additional security, you can encrypt customer data in invoices. This prevents invoice details from being visible in the browser, even if someone discovers the invoice URL.
+
+### How It Works
+
+**Security Model:**
+- Customer data (name, address, services, Bitcoin address) is encrypted using AES encryption
+- Encrypted data is stored in `encryptedData` field as an unreadable string (e.g., `U2FsdGVkX1...`)
+- The encrypted string is baked into the JavaScript bundle when you deploy
+- **Important**: The encrypted string alone is useless without the passphrase
+- User enters the passphrase on the invoice page to decrypt at runtime (client-side only)
+- Passphrase is never stored, sent to server, or logged - decryption happens entirely in the browser
+- Someone with the URL cannot see invoice data without knowing the passphrase
+
+**Example: Encrypted vs Unencrypted**
+
+Unencrypted invoice (data is visible in browser):
+```json
+{
+  "id": "INV-001",
+  "invoiceDate": "2026-03-31",
+  "dueWithin": 30,
+  "companyName": "Acme Corp",
+  "customerName": "John Doe",
+  "address": "123 Main St, City, State 12345",
+  "services": [
+    { "description": "Consulting", "quantity": 10, "unitValue": 100 }
+  ],
+  "btcAddress": "bc1qxxx...",
+  "paid": false
+}
+```
+
+Encrypted invoice (data is hidden, requires passphrase):
+```json
+{
+  "id": "INV-002",
+  "invoiceDate": "2026-04-01",
+  "dueWithin": 30,
+  "companyName": "Acme Corp",
+  "encryptedData": "U2FsdGVkX195YN53LQajyQiiofu1Y+4ZHMXxV6nJRT2Y/C4LjG+YucBS/in3CQIaeqdNt/CLQxqCGttEcAZ7qzp7o8Md5oezaA+nXnK3Nje9Peu7VxU03ERj/XV34mKt8sbwHF6FnyYBOJ3LNBIqupG3mQpxmfvGzQxyqEgFXhvkLsAMU8q96QW4pi5fQVZY8XwxuxBfkxjh2j2Op3Fde2p+FS8QipeE+JbYRNH8k1YmIWQFaBc2po25TJX7koRAuoatlEnPkgd0BGNv51YjsPPb+AQcftv1kOdd+jfnH2I=",
+  "paid": false
+}
+```
+
+### Managing Invoices (Single Source of Truth)
+
+The `secrets/unencrypted-invoices.json` file is your source of truth. It contains all invoice data with passphrases for encryption (and is gitignored for security). Run one command to sync everything:
+
+**Standard workflow:**
+
+1. Edit `secrets/unencrypted-invoices.json` with your invoices (array format):
+   ```json
+   [
+     {
+       "id": "INV-001",
+       "invoiceDate": "2026-04-15",
+       "dueWithin": 30,
+       "companyName": "Your Company",
+       "passphrase": "my-secret-passphrase",
+       "customerName": "John Doe",
+       "address": "123 Main St, Durham NC",
+       "btcAddress": "bc1qxxx...",
+       "services": [
+         {"description": "Consulting", "quantity": 10, "unitValue": 100}
+       ],
+       "paid": false
+     }
+   ]
+   ```
+
+2. Run one command to sync, encrypt, and generate env vars:
+   ```bash
+   node scripts/sync-invoices.js
+   ```
+
+3. Copy the `VITE_INVOICES_JSON` value and update Vercel:
+   ```bash
+   vercel env update VITE_INVOICES_JSON  # paste the value
+   vercel env pull
+   git push origin main
+   ```
+
+**What the sync script does:**
+- Reads `unencrypted-invoices.json`
+- Encrypts any new invoices and adds them to `encrypted-invoices.json`
+- Updates the `paid` status for all invoices
+- Generates the `VITE_INVOICES_JSON` environment variable value
+- Only unpaid invoices are deployed to production
+
+**Sharing with customers:**
+Share the invoice URL with the customer via one channel, and the passphrase via a **separate secure channel** (not email, use Signal/Wire/etc).
+
+**For quick testing:**
+```bash
+node scripts/generate-encrypted-invoice.js "testpassphrase123"
+```
+
+### Testing Encrypted Invoices Locally
+
+**With environment variables (simulates production):**
+- Invoices appear in your app if `VITE_INVOICES_JSON` is set in `.env.local`
+- Encrypted invoices will prompt for a passphrase
+- Enter the correct passphrase to decrypt and view details
+
+**Without environment variables (fallback to secrets/ folder):**
+1. Comment out `VITE_INVOICES_JSON` in `.env.local`
+2. Restart dev server: `npm run dev`
+3. Now it falls back to `secrets/encrypted-invoices.json`
+4. Visit `/pay/{invoice-id}` and enter the correct passphrase
+
+### Backwards Compatibility
+
+The system supports both encrypted and unencrypted invoices in the same file. You can mix and match:
+- Some invoices with `customerName`, `address`, `services` (unencrypted)
+- Some invoices with `encryptedData` only (encrypted)
+- Same app code handles both automatically
 
 ## Local Development
 
@@ -47,10 +174,10 @@ The app automatically loads invoice and company data from:
 
 ### Updating Invoices
 
-When you add new invoices or mark some as paid:
+When you add new invoices, update details, or mark some as paid:
 
-1. Edit `secrets/invoices.json` locally
-2. Run `node scripts/generate-env-secrets.js`
+1. Edit `secrets/unencrypted-invoices.json` locally
+2. Run `node scripts/sync-invoices.js` to encrypt and generate the env var value
 3. Run `vercel env update VITE_INVOICES_JSON` and paste the new value
 4. Run `vercel env pull`
 5. Commit and push:
@@ -60,12 +187,12 @@ When you add new invoices or mark some as paid:
 
 **Tips:**
 - Mark invoices as `"paid": true` to exclude them from production
-- When updating `invoiceDate` or `dueWithin`, re-run `generate-env-secrets.js` to push changes to Vercel
+- Changes are deployed automatically once you push to main
 
 ### Updating Company Info
 
 1. Edit `secrets/company-info.json` locally
-2. Run `node scripts/generate-env-secrets.js`
+2. Run `node scripts/generate-env-secrets.js` → choose option 2 (Company Info only)
 3. Run `vercel env update VITE_COMPANY_INFO_JSON` and paste the new value
 4. Run `vercel env pull`
 5. Commit and push
@@ -133,8 +260,8 @@ The app loads data in this order:
 - Check for proper JSON formatting (use the script output, don't manual create)
 
 ### Invoice Not Found
-- Invoice IDs are case-insensitive (e.g., `test`, `TEST`, `Test` all work)
-- Verify the invoice exists in `secrets/invoices.json`
+- Invoice IDs are case-insensitive (e.g., `INV-001`, `inv-001` all work)
+- Verify the invoice exists in `secrets/encrypted-invoices.json`
 - Confirm `"paid": false` in the file (paid invoices are excluded)
 
 ### Email Not Sending
@@ -145,10 +272,34 @@ The app loads data in this order:
 ### Invoice Date or Due Date Not Showing
 - Invoice date must be in `YYYY-MM-DD` format (e.g., `2026-04-01`)
 - Both `invoiceDate` and `dueWithin` must be present in the JSON
-- After editing `secrets/invoices.json`, run `node scripts/generate-env-secrets.js` and update Vercel
+- After editing `secrets/unencrypted-invoices.json`, run `node scripts/sync-invoices.js` and update Vercel
 - Run `vercel env pull` to sync changes locally
 
 ### Overdue Warning Not Appearing
 - Ensure `invoiceDate` and `dueWithin` are set correctly
 - Check browser date/time settings (overdue flag compares against current date)
 - Verify the calculated due date is actually in the past
+
+### Encrypted Invoice Not Prompting for Passphrase
+- Ensure the invoice has `encryptedData` field (not unencrypted fields like `customerName`)
+- Make sure you ran `vercel env pull` and restarted dev server after adding encrypted invoices
+- If using fallback mode (env var commented out), the invoice must exist in `secrets/invoices.json`
+
+### "Invalid Passphrase" Error
+- Verify you're entering the exact passphrase used when generating the encrypted data
+- Passphrases are case-sensitive
+- If you forget the passphrase, edit `secrets/unencrypted-invoices.json` and run `node scripts/sync-invoices.js` again
+
+### Sync Script Errors
+- Ensure `secrets/unencrypted-invoices.json` exists and is valid JSON
+- Check that all required fields are present in each invoice (id, invoiceDate, dueWithin, companyName, passphrase, customerName, address, btcAddress, services)
+- Try: `node scripts/sync-invoices.js` to see detailed error messages
+
+### Encryption Working Locally but Not in Production
+- After editing `unencrypted-invoices.json`, run `node scripts/sync-invoices.js`
+- Copy the `VITE_INVOICES_JSON` value from the output
+- Run `vercel env update VITE_INVOICES_JSON` and paste the value
+- Run `vercel env pull` to sync to local dev
+- Restart dev server with `npm run dev`
+- Push to main: `git push origin main`
+- Production deploys automatically
