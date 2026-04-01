@@ -65,7 +65,7 @@ async function main() {
     let totalCount = 0;
 
     if (generateInvoices) {
-      const invoicesPath = path.join(secretsDir, 'invoices.json');
+      const invoicesPath = path.join(secretsDir, 'encrypted-invoices.json');
       const invoicesContent = fs.readFileSync(invoicesPath, 'utf8');
       const allInvoices = JSON.parse(invoicesContent);
       const unpaidInvoices = allInvoices.filter(inv => !inv.paid);
