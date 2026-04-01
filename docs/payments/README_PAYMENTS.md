@@ -17,10 +17,16 @@ In development, these load from `secrets/`. In production, they're stored as Ver
 See [`secrets/invoices.json.example`](../../secrets/invoices.json.example) for structure and fields.
 
 **Key fields:**
+- `id` — Unique invoice identifier
 - `invoiceDate` — Invoice date in YYYY-MM-DD format
 - `dueWithin` — Number of days until payment is due
-- `services` — Array of line items (auto-calculates total from quantity × unitValue)
+- `companyName` — Your company name (public, not encrypted)
+- `encryptedData` — Encrypted customer details (optional - see below)
 - `paid` — Only invoices with `false` are deployed to production
+
+**Encrypted vs Unencrypted:**
+- **Unencrypted:** Include `customerName`, `address`, `services`, `btcAddress` directly in JSON (less secure)
+- **Encrypted:** Include `encryptedData` instead (more secure - requires passphrase to view)
 
 **Due Date Calculation:** Due date = `invoiceDate` + `dueWithin` days. Displays automatically on invoice page. If overdue, a red warning appears.
 
@@ -28,6 +34,121 @@ See [`secrets/invoices.json.example`](../../secrets/invoices.json.example) for s
 See [`secrets/company-info.json.example`](../../secrets/company-info.json.example) for structure and fields.
 
 ⚠️ **Avoid special characters** in all text fields: `#`, `$`, `\`, `` ` ``, `&`, `|`, `;` — they break shell parsing when pushed to Vercel
+
+## Encryption (Optional Security)
+
+For additional security, you can encrypt customer data in invoices. This prevents invoice details from being visible in the browser, even if someone discovers the invoice URL.
+
+### How It Works
+
+**Security Model:**
+- Customer data (name, address, services, Bitcoin address) is encrypted using AES encryption
+- Encrypted data is stored in `encryptedData` field as an unreadable string (e.g., `U2FsdGVkX1...`)
+- The encrypted string is baked into the JavaScript bundle when you deploy
+- **Important**: The encrypted string alone is useless without the passphrase
+- User enters the passphrase on the invoice page to decrypt at runtime (client-side only)
+- Passphrase is never stored, sent to server, or logged - decryption happens entirely in the browser
+- Someone with the URL cannot see invoice data without knowing the passphrase
+
+**Example: Encrypted vs Unencrypted**
+
+Unencrypted invoice (data is visible in browser):
+```json
+{
+  "id": "INV-001",
+  "invoiceDate": "2026-03-31",
+  "dueWithin": 30,
+  "companyName": "Acme Corp",
+  "customerName": "John Doe",
+  "address": "123 Main St, City, State 12345",
+  "services": [
+    { "description": "Consulting", "quantity": 10, "unitValue": 100 }
+  ],
+  "btcAddress": "bc1qxxx...",
+  "paid": false
+}
+```
+
+Encrypted invoice (data is hidden, requires passphrase):
+```json
+{
+  "id": "INV-002",
+  "invoiceDate": "2026-04-01",
+  "dueWithin": 30,
+  "companyName": "Acme Corp",
+  "encryptedData": "U2FsdGVkX195YN53LQajyQiiofu1Y+4ZHMXxV6nJRT2Y/C4LjG+YucBS/in3CQIaeqdNt/CLQxqCGttEcAZ7qzp7o8Md5oezaA+nXnK3Nje9Peu7VxU03ERj/XV34mKt8sbwHF6FnyYBOJ3LNBIqupG3mQpxmfvGzQxyqEgFXhvkLsAMU8q96QW4pi5fQVZY8XwxuxBfkxjh2j2Op3Fde2p+FS8QipeE+JbYRNH8k1YmIWQFaBc2po25TJX7koRAuoatlEnPkgd0BGNv51YjsPPb+AQcftv1kOdd+jfnH2I=",
+  "paid": false
+}
+```
+
+### Encrypting Invoice Data
+
+Choose one of two methods:
+
+#### Option 1: Interactive Script (Recommended)
+For interactive data entry with validation:
+
+```bash
+node scripts/encrypt-invoice.js
+```
+
+The script will prompt you for:
+- Customer name
+- Customer address
+- Services (description, quantity, unit value)
+- Bitcoin address
+- Passphrase (to protect the encrypted data)
+
+It will output the encrypted string — copy this directly into the `encryptedData` field.
+
+#### Option 2: Quick Test Script
+For quick testing with hardcoded data:
+
+```bash
+node scripts/generate-encrypted-invoice.js "your-passphrase"
+```
+
+This generates encrypted test data instantly (useful for verifying the setup works).
+
+### Adding Encrypted Invoice to invoices.json
+
+1. Run one of the encryption scripts above
+2. Copy the encrypted output string
+3. Add the encrypted invoice to `secrets/invoices.json`:
+   ```json
+   {
+     "id": "INV-002",
+     "invoiceDate": "2026-04-01",
+     "dueWithin": 30,
+     "companyName": "Acme Corp",
+     "encryptedData": "U2FsdGVkX1...",
+     "paid": false
+   }
+   ```
+4. Run `node scripts/generate-env-secrets.js` to regenerate env vars
+5. Run `vercel env update VITE_INVOICES_JSON` and paste the output
+6. Run `vercel env pull` to sync changes locally
+7. Share the invoice URL with the customer via one channel, and the passphrase via a **separate secure channel** (not email, use Signal/Wire/etc)
+
+### Testing Encrypted Invoices Locally
+
+**With environment variables (simulates production):**
+- Encrypted invoices appear in your app if `VITE_INVOICES_JSON` is set in `.env.local`
+- The encrypted-test invoice should prompt for a passphrase
+- Enter `testpassphrase123` to decrypt
+
+**Without environment variables (fallback to secrets/ folder):**
+1. Comment out `VITE_INVOICES_JSON` in `.env.local`
+2. Restart dev server: `npm run dev`
+3. Now it falls back to `secrets/invoices.json`
+4. Visit `/pay/encrypted-test` and enter passphrase `testpassphrase123`
+
+### Backwards Compatibility
+
+The system supports both encrypted and unencrypted invoices in the same file. You can mix and match:
+- Some invoices with `customerName`, `address`, `services` (unencrypted)
+- Some invoices with `encryptedData` only (encrypted)
+- Same app code handles both automatically
 
 ## Local Development
 
@@ -152,3 +273,26 @@ The app loads data in this order:
 - Ensure `invoiceDate` and `dueWithin` are set correctly
 - Check browser date/time settings (overdue flag compares against current date)
 - Verify the calculated due date is actually in the past
+
+### Encrypted Invoice Not Prompting for Passphrase
+- Ensure the invoice has `encryptedData` field (not unencrypted fields like `customerName`)
+- Make sure you ran `vercel env pull` and restarted dev server after adding encrypted invoices
+- If using fallback mode (env var commented out), the invoice must exist in `secrets/invoices.json`
+
+### "Invalid Passphrase" Error
+- Verify you're entering the exact passphrase used when generating the encrypted data
+- Passphrases are case-sensitive
+- If you forget the passphrase, regenerate the invoice with `encrypt-invoice.js` or `generate-encrypted-invoice.js`
+
+### Encrypted Data Not Generating
+- Ensure `scripts/encrypt-invoice.js` or `scripts/generate-encrypted-invoice.js` exist in the project
+- Try the quick test script first: `node scripts/generate-encrypted-invoice.js "testpassphrase123"`
+- Check Node.js version (should be 18+)
+- Verify `crypto-js` is installed: `npm list crypto-js`
+
+### Encryption Working Locally but Not in Production
+- After adding encrypted invoices, you must run `node scripts/generate-env-secrets.js`
+- Then run `vercel env update VITE_INVOICES_JSON` with the new value
+- Finally run `vercel env pull` to sync to local dev
+- Restart dev server with `npm run dev`
+- Production deploys automatically after pushing to main
