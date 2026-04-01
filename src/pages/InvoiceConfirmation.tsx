@@ -1,6 +1,6 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Check, Download, Home } from "lucide-react";
+import { Check, Download, ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { loadCompanyInfo } from "@/utils/secretsLoader";
@@ -11,10 +11,18 @@ const EMAILJS_SERVICE_ID = "service_ytteklz";
 const EMAILJS_TEMPLATE_ID = "template_6dr5yvp";
 const EMAILJS_PUBLIC_KEY = "IEmeJ5e8HtipqemG7";
 
+interface Service {
+  description: string;
+  quantity: number;
+  unitValue: number;
+}
+
 interface InvoiceData {
   id: string;
   customerName: string;
-  usdAmount: number;
+  companyName: string;
+  address: string;
+  services: Service[];
   btcAddress: string;
 }
 
@@ -76,8 +84,12 @@ const InvoiceConfirmation = () => {
       setInvoice(state.invoice);
       setPayment(state.payment);
 
-      // Send confirmation email
-      sendConfirmationEmail(state.invoice, state.payment);
+      // Only send email once per browser session using sessionStorage
+      const emailKey = `payment_email_sent_${state.invoice.id.toLowerCase()}`;
+      if (!sessionStorage.getItem(emailKey)) {
+        sessionStorage.setItem(emailKey, 'true');
+        sendConfirmationEmail(state.invoice, state.payment);
+      }
     } else {
       navigate("/");
     }
@@ -91,7 +103,7 @@ const InvoiceConfirmation = () => {
       const templateParams = {
         fullName: invoiceData.customerName,
         email: "support@pod21.xyz", // You may want to collect customer email
-        message: `Payment Attempt Registered\n\nInvoice ID: ${invoiceData.id}\nUSD Amount: $${invoiceData.usdAmount.toFixed(
+        message: `Payment Attempt Registered\n\nInvoice ID: ${invoiceData.id}\nUSD Amount: $${calculateInvoiceTotal(invoiceData.services).toFixed(
           2
         )}\nBTC Amount: ${paymentData.btcAmount.toFixed(
           8
@@ -119,6 +131,17 @@ const InvoiceConfirmation = () => {
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleBackToInvoice = () => {
+    // Clear the email sent flag so a new email can be sent if user goes through payment flow again
+    const emailKey = `payment_email_sent_${invoiceId?.toLowerCase()}`;
+    sessionStorage.removeItem(emailKey);
+    navigate(`/pay/${invoiceId}`);
+  };
+
+  const calculateInvoiceTotal = (services: Service[]): number => {
+    return services.reduce((total, service) => total + (service.quantity * service.unitValue), 0);
   };
 
   const maskBitcoinAddress = (address: string): string => {
@@ -173,19 +196,90 @@ const InvoiceConfirmation = () => {
             </div>
 
             {/* Billing From Section */}
-            {companyInfo && (
-              <div className="mb-8 pb-8 border-b border-stroke">
-                <p className="text-body-sm-semiBold text-primary-100 mb-4 uppercase tracking-wider">
-                  Billing From
-                </p>
-                <div className="text-body-lg">
-                  <p className="text-boneWhite font-medium">{companyInfo.name}</p>
-                  <p className="text-textBody">{companyInfo.address.street}</p>
-                  <p className="text-textBody">{companyInfo.address.city}, {companyInfo.address.state} {companyInfo.address.zip}</p>
-                  <p className="text-textBody mt-4">Tax ID: {companyInfo.taxId}</p>
+            <div className="mb-8 pb-8 border-b border-stroke">
+              <p className="text-body-sm-semiBold text-primary-100 mb-4 uppercase tracking-wider">
+                Billing From
+              </p>
+              <div className="text-body-lg">
+                <p className="text-boneWhite font-medium">{companyInfo?.name || "POD21 LLC"}</p>
+                <p className="text-textBody">{companyInfo?.address.street || "4834 NW 2ND AVE UNIT #590"}</p>
+                <p className="text-textBody">{companyInfo?.address.city || "BOCA RATON"}, {companyInfo?.address.state || "Florida"} {companyInfo?.address.zip || "33431"}</p>
+                <p className="text-textBody mt-4">Tax ID: {companyInfo?.taxId || "38-4369206"}</p>
+              </div>
+            </div>
+
+            {/* Bill To Section */}
+            <div className="mb-8 pb-8 border-b border-stroke">
+              <p className="text-body-sm-semiBold text-primary-100 mb-4 uppercase tracking-wider">
+                Bill To
+              </p>
+              <p className="text-body-lg text-boneWhite font-medium">
+                {invoice.companyName}
+              </p>
+              <p className="text-body-lg text-textBody mt-2">
+                {invoice.address}
+              </p>
+            </div>
+
+            {/* Services Section */}
+            <div className="mb-8 pb-8 border-b border-stroke">
+              <p className="text-body-sm-semiBold text-primary-100 mb-6 uppercase tracking-wider">
+                Services
+              </p>
+              <div className="bg-bgPrimary rounded-lg overflow-hidden border border-stroke">
+                <table className="w-full text-body-sm">
+                  <thead>
+                    <tr className="bg-bgSecondary border-b border-stroke">
+                      <th className="text-left px-6 py-4 text-textBody uppercase tracking-wider font-semibold">
+                        Description
+                      </th>
+                      <th className="text-right px-6 py-4 text-textBody uppercase tracking-wider font-semibold">
+                        Quantity
+                      </th>
+                      <th className="text-right px-6 py-4 text-textBody uppercase tracking-wider font-semibold">
+                        Unit Value
+                      </th>
+                      <th className="text-right px-6 py-4 text-textBody uppercase tracking-wider font-semibold">
+                        Total
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {invoice.services.map((service, index) => (
+                      <tr
+                        key={index}
+                        className={`border-b border-stroke last:border-b-0 ${
+                          index % 2 === 0 ? "bg-bgPrimary" : "bg-bgSecondary/30"
+                        }`}
+                      >
+                        <td className="px-6 py-4 text-boneWhite">
+                          {service.description}
+                        </td>
+                        <td className="px-6 py-4 text-right text-boneWhite">
+                          {service.quantity}
+                        </td>
+                        <td className="px-6 py-4 text-right text-boneWhite">
+                          ${service.unitValue.toFixed(2)}
+                        </td>
+                        <td className="px-6 py-4 text-right text-primary-100 font-semibold">
+                          ${(service.quantity * service.unitValue).toFixed(2)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div className="bg-bgSecondary px-6 py-4 border-t border-stroke flex justify-end">
+                  <div className="text-right">
+                    <p className="text-textBody text-body-xs mb-2 uppercase tracking-wider">
+                      Total
+                    </p>
+                    <p className="text-h4 text-primary-100 font-kanit">
+                      ${calculateInvoiceTotal(invoice.services).toFixed(2)}
+                    </p>
+                  </div>
                 </div>
               </div>
-            )}
+            </div>
 
             <p className="text-body-sm-semiBold text-primary-100 mb-6 uppercase tracking-wider">
               Payment Details
@@ -231,7 +325,7 @@ const InvoiceConfirmation = () => {
                   USD Amount
                 </p>
                 <p className="text-h2 text-primary-100 font-kanit mb-2">
-                  ${invoice.usdAmount.toFixed(2)}
+                  ${calculateInvoiceTotal(invoice.services).toFixed(2)}
                 </p>
                 <p className="text-textBody text-body-sm">United States Dollar</p>
               </div>
@@ -277,7 +371,7 @@ const InvoiceConfirmation = () => {
             <p className="text-body-sm-semiBold text-primary-100 mb-4 uppercase tracking-wider">
               Payment Sent To
             </p>
-            <div className="bg-bgPrimary rounded-lg p-6">
+            <div className="bg-bgPrimary rounded-lg p-6 border border-stroke">
               <p className="text-textBody text-body-xs mb-4">
                 Bitcoin Address
               </p>
@@ -290,19 +384,19 @@ const InvoiceConfirmation = () => {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 print:hidden">
             <Button
+              onClick={handleBackToInvoice}
+              variant="outline"
+              className="flex-1 border-stroke hover:bg-bgPrimary text-boneWhite flex items-center justify-center gap-2"
+            >
+              <ArrowLeft size={20} />
+              Back to Invoice
+            </Button>
+            <Button
               onClick={handlePrint}
               className="flex-1 bg-primary-100 hover:bg-primary-60 text-black font-semibold flex items-center justify-center gap-2"
             >
               <Download size={20} />
               Print / Save as PDF
-            </Button>
-            <Button
-              onClick={() => navigate("/")}
-              variant="outline"
-              className="flex-1 border-stroke hover:bg-bgPrimary text-boneWhite flex items-center justify-center gap-2"
-            >
-              <Home size={20} />
-              Back to Home
             </Button>
           </div>
 
