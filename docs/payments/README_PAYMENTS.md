@@ -83,32 +83,27 @@ Encrypted invoice (data is hidden, requires passphrase):
 
 ### Encrypting Invoice Data
 
-Choose one of two methods:
+**Standard workflow:**
 
-#### Option 1: Interactive Script (Recommended)
-For interactive data entry with validation:
+1. Copy the template and fill in customer details:
+   ```bash
+   cp scripts/invoice-data.template.json my-invoice.json
+   # Edit my-invoice.json with actual customer data
+   ```
 
+2. Run the encryption script with the file and passphrase:
+   ```bash
+   node scripts/encrypt-invoice.js my-invoice.json "my-secret-passphrase"
+   ```
+
+3. The script outputs the encrypted data and next steps. Copy the encrypted string.
+
+**For quick testing:**
 ```bash
-node scripts/encrypt-invoice.js
+node scripts/generate-encrypted-invoice.js "testpassphrase123"
 ```
 
-The script will prompt you for:
-- Customer name
-- Customer address
-- Services (description, quantity, unit value)
-- Bitcoin address
-- Passphrase (to protect the encrypted data)
-
-It will output the encrypted string — copy this directly into the `encryptedData` field.
-
-#### Option 2: Quick Test Script
-For quick testing with hardcoded data:
-
-```bash
-node scripts/generate-encrypted-invoice.js "your-passphrase"
-```
-
-This generates encrypted test data instantly (useful for verifying the setup works).
+This generates encrypted test data instantly.
 
 ### Adding Encrypted Invoice to invoices.json
 

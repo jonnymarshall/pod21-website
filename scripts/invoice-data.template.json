@@ -1,0 +1,12 @@
+{
+  "customerName": "Customer Name",
+  "address": "Street Address, City, State ZIP",
+  "btcAddress": "bc1q...",
+  "services": [
+    {
+      "description": "Service description",
+      "quantity": 1,
+      "unitValue": 100.00
+    }
+  ]
+}
