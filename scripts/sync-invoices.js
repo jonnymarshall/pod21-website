@@ -21,11 +21,15 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // ANSI color codes
-const bold = '\x1b[1m';
+const cyan = '\x1b[36m';
+const green = '\x1b[32m';
 const yellow = '\x1b[33m';
 const reset = '\x1b[0m';
+const bold = '\x1b[1m';
 
 try {
+  console.log(`\n${cyan}${bold}🔐 Invoice Sync${reset}\n`);
+
   // Read unencrypted invoices
   const unencryptedPath = path.join(__dirname, '..', 'secrets', 'unencrypted-invoices.json');
   if (!fs.existsSync(unencryptedPath)) {
@@ -95,32 +99,32 @@ try {
   // Write encrypted invoices
   fs.writeFileSync(encryptedPath, JSON.stringify(newEncrypted, null, 2) + '\n');
 
-  console.log('\n✅ Invoices synced!\n');
+  console.log(`\n${cyan}${bold}✅ Invoices synced!${reset}\n`);
   if (added.length > 0) {
-    console.log(`📝 Added (encrypted):`);
-    added.forEach(id => console.log(`   - ${id}`));
+    console.log(`${cyan}📝 Added (encrypted):${reset}`);
+    added.forEach(id => console.log(`   ${green}✓${reset} ${id}`));
   }
   if (updated.length > 0) {
-    console.log(`🔄 Updated (status only):`);
-    updated.forEach(id => console.log(`   - ${id}`));
+    console.log(`${cyan}🔄 Updated (status only):${reset}`);
+    updated.forEach(id => console.log(`   ${green}✓${reset} ${id}`));
   }
 
   // Generate environment variable value
-  console.log('\n🔧 Generating environment variable...\n');
+  console.log(`\n${cyan}🔧 Generating environment variable...${reset}\n`);
   const unpaidInvoices = newEncrypted.filter(inv => !inv.paid);
   const invoicesJsonValue = JSON.stringify(unpaidInvoices);
 
-  console.log(`📝 Total invoices: ${newEncrypted.length}`);
-  console.log(`✓ Unpaid invoices: ${unpaidInvoices.length}\n`);
+  console.log(`${green}📊 Total invoices: ${newEncrypted.length}${reset}`);
+  console.log(`${green}✓ Unpaid invoices: ${unpaidInvoices.length}${reset}\n`);
   console.log(`${bold}${yellow}VITE_INVOICES_JSON Value:${reset}`);
-  console.log(invoicesJsonValue);
+  console.log(`${bold}${invoicesJsonValue}${reset}`);
 
-  console.log('📋 Next steps:');
-  console.log('1. Copy the VITE_INVOICES_JSON value above');
-  console.log('2. Run: vercel env update VITE_INVOICES_JSON');
-  console.log('3. Run: vercel env pull');
-  console.log('4. Run: git push origin main\n');
+  console.log(`\n${cyan}${bold}📋 Next steps:${reset}\n`);
+  console.log(`${cyan}1. Copy the VITE_INVOICES_JSON value above${reset}`);
+  console.log(`${cyan}2. Run:${reset} ${bold}vercel env update VITE_INVOICES_JSON${reset}`);
+  console.log(`${cyan}3. Run:${reset} ${bold}vercel env pull${reset}`);
+  console.log(`${cyan}4. Run:${reset} ${bold}git push origin main${reset}\n`);
 } catch (error) {
-  console.error(`\n❌ ${error.message}\n`);
+  console.error(`\n${yellow}❌ ${error.message}${reset}\n`);
   process.exit(1);
 }
