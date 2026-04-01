@@ -81,44 +81,50 @@ Encrypted invoice (data is hidden, requires passphrase):
 }
 ```
 
-### Encrypting Invoice Data
+### Managing Invoices (Single Source of Truth)
 
-**One-command workflow:**
+The `scripts/unencrypted-invoices.json` file is your source of truth. It contains all invoice data with passphrases for encryption. Run one command to sync everything:
 
-1. Copy the template:
-   ```bash
-   cp scripts/invoice-data.template.json my-invoice.json
-   ```
+**Standard workflow:**
 
-2. Edit `my-invoice.json` with invoice details, customer data, and a passphrase:
+1. Edit `scripts/unencrypted-invoices.json` with your invoices (array format):
    ```json
-   {
-     "id": "INV-001",
-     "invoiceDate": "2026-04-15",
-     "dueWithin": 30,
-     "companyName": "Your Company Name",
-     "passphrase": "my-secret-passphrase",
-     "customerName": "John Doe",
-     "address": "123 Main St, Durham NC",
-     "btcAddress": "bc1qxxx...",
-     "services": [
-       {"description": "Consulting", "quantity": 10, "unitValue": 100}
-     ]
-   }
+   [
+     {
+       "id": "INV-001",
+       "invoiceDate": "2026-04-15",
+       "dueWithin": 30,
+       "companyName": "Your Company",
+       "passphrase": "my-secret-passphrase",
+       "customerName": "John Doe",
+       "address": "123 Main St, Durham NC",
+       "btcAddress": "bc1qxxx...",
+       "services": [
+         {"description": "Consulting", "quantity": 10, "unitValue": 100}
+       ],
+       "paid": false
+     }
+   ]
    ```
 
-3. Run the encryption script (it automatically updates `secrets/invoices.json`):
+2. Run one command to sync, encrypt, and generate env vars:
    ```bash
-   node scripts/encrypt-invoice.js my-invoice.json
+   node scripts/sync-invoices.js
    ```
 
-4. The script shows what was added. Then:
+3. Copy the `VITE_INVOICES_JSON` value and update Vercel:
    ```bash
-   node scripts/generate-env-secrets.js
-   vercel env update VITE_INVOICES_JSON  # paste the output
+   vercel env update VITE_INVOICES_JSON  # paste the value
    vercel env pull
    git push origin main
    ```
+
+**What the sync script does:**
+- Reads `unencrypted-invoices.json`
+- Encrypts any new invoices and adds them to `encrypted-invoices.json`
+- Updates the `paid` status for all invoices
+- Generates the `VITE_INVOICES_JSON` environment variable value
+- Only unpaid invoices are deployed to production
 
 **For quick testing:**
 ```bash
@@ -299,15 +305,16 @@ The app loads data in this order:
 - Passphrases are case-sensitive
 - If you forget the passphrase, regenerate the invoice with `encrypt-invoice.js` or `generate-encrypted-invoice.js`
 
-### Encrypted Data Not Generating
-- Ensure `scripts/encrypt-invoice.js` or `scripts/generate-encrypted-invoice.js` exist in the project
-- Try the quick test script first: `node scripts/generate-encrypted-invoice.js "testpassphrase123"`
-- Check Node.js version (should be 18+)
-- Verify `crypto-js` is installed: `npm list crypto-js`
+### Sync Script Errors
+- Ensure `scripts/unencrypted-invoices.json` exists and is valid JSON
+- Check that all required fields are present in each invoice (id, invoiceDate, dueWithin, companyName, passphrase, customerName, address, btcAddress, services)
+- Try: `node scripts/sync-invoices.js` to see detailed error messages
 
 ### Encryption Working Locally but Not in Production
-- After adding encrypted invoices, you must run `node scripts/generate-env-secrets.js`
-- Then run `vercel env update VITE_INVOICES_JSON` with the new value
-- Finally run `vercel env pull` to sync to local dev
+- After editing `unencrypted-invoices.json`, run `node scripts/sync-invoices.js`
+- Copy the `VITE_INVOICES_JSON` value from the output
+- Run `vercel env update VITE_INVOICES_JSON` and paste the value
+- Run `vercel env pull` to sync to local dev
 - Restart dev server with `npm run dev`
-- Production deploys automatically after pushing to main
+- Push to main: `git push origin main`
+- Production deploys automatically
