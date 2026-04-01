@@ -1,16 +1,31 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { AlertCircle, Loader2, Check } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { LogoSVG } from "@/assets/icons";
 import { loadInvoices } from "@/utils/secretsLoader";
 import { SecretsWarning } from "@/components/SecretsWarning";
 
+interface Service {
+  description: string;
+  quantity: number;
+  unitValue: number;
+}
+
 interface InvoiceData {
   id: string;
   customerName: string;
-  usdAmount: number;
+  companyName: string;
+  address: string;
+  services: Service[];
   btcAddress: string;
 }
 
@@ -29,6 +44,8 @@ const Invoice = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [invoiceError, setInvoiceError] = useState<string | null>(null);
+  const [showAddressWarning, setShowAddressWarning] = useState(false);
+  const [addressWarningAcknowledged, setAddressWarningAcknowledged] = useState(false);
 
   // Fetch invoice data
   useEffect(() => {
@@ -41,7 +58,7 @@ const Invoice = () => {
           return;
         }
 
-        const foundInvoice = invoices.find((inv) => inv.id === invoiceId);
+        const foundInvoice = invoices.find((inv) => inv.id.toUpperCase() === invoiceId?.toUpperCase());
 
         if (!foundInvoice) {
           setInvoiceError(`Invoice ${invoiceId} not found`);
@@ -52,6 +69,10 @@ const Invoice = () => {
         setInvoiceError("Error loading invoice data");
       }
     };
+
+    // Clear the email sent flag to allow resending confirmation email on page reload
+    const emailKey = `payment_email_sent_${invoiceId?.toLowerCase()}`;
+    sessionStorage.removeItem(emailKey);
 
     fetchInvoice();
   }, [invoiceId]);
@@ -78,13 +99,18 @@ const Invoice = () => {
         return;
       }
 
-      const btcAmount = invoice.usdAmount / btcPrice;
+      const usdAmount = calculateInvoiceTotal(invoice.services);
+      const btcAmount = usdAmount / btcPrice;
 
       setPayment({
         btcPrice,
         btcAmount,
         lockedAt: new Date().toISOString(),
       });
+
+      // Show address warning dialog
+      setAddressWarningAcknowledged(false);
+      setShowAddressWarning(true);
     } catch (err) {
       setError(
         err instanceof Error
@@ -94,6 +120,15 @@ const Invoice = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleAddressWarningConfirm = () => {
+    setShowAddressWarning(false);
+    setAddressWarningAcknowledged(true);
+  };
+
+  const calculateInvoiceTotal = (services: Service[]): number => {
+    return services.reduce((total, service) => total + (service.quantity * service.unitValue), 0);
   };
 
   const handlePaymentMade = () => {
@@ -137,6 +172,20 @@ const Invoice = () => {
   return (
     <>
       <SecretsWarning />
+
+      {/* Address Warning Dialog */}
+      <AlertDialog open={showAddressWarning} onOpenChange={setShowAddressWarning}>
+        <AlertDialogContent className="border-2 border-red-100">
+          <AlertDialogTitle className="text-boneWhite">⚠️ Important Security Notice</AlertDialogTitle>
+          <AlertDialogDescription className="text-base text-boneWhite">
+            BEFORE SENDING, PLEASE CHECK TO ENSURE THAT THE ADDRESS DISPLAYED AFTER SCANNING MATCHES THE ONE SHOWN ON THE SCREEN.
+          </AlertDialogDescription>
+          <AlertDialogAction onClick={handleAddressWarningConfirm}>
+            OK
+          </AlertDialogAction>
+        </AlertDialogContent>
+      </AlertDialog>
+
       <div className="min-h-screen bg-bgPrimary text-boneWhite py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
         {/* Invoice Container */}
@@ -185,20 +234,76 @@ const Invoice = () => {
               Bill To
             </p>
             <p className="text-body-lg text-boneWhite font-medium">
+              {invoice.companyName}
+            </p>
+            <p className="text-body-lg text-textBody">
               {invoice.customerName}
+            </p>
+            <p className="text-body-lg text-textBody mt-2">
+              {invoice.address}
             </p>
           </div>
 
-          {/* Amount Section */}
+          {/* Services Section */}
           <div className="mb-12 pb-8 border-b border-stroke">
-            <p className="text-body-sm-semiBold text-primary-100 mb-4 uppercase tracking-wider">
-              Amount Due
+            <p className="text-body-sm-semiBold text-primary-100 mb-6 uppercase tracking-wider">
+              Services
             </p>
-            <p className="text-h3 text-primary-100 font-kanit">
-              ${invoice.usdAmount.toFixed(2)}
-            </p>
-            <p className="text-textBody text-body-lg-medium mt-2">USD</p>
+            <div className="bg-bgPrimary rounded-lg overflow-hidden border border-stroke">
+              <table className="w-full text-body-sm">
+                <thead>
+                  <tr className="bg-bgSecondary border-b border-stroke">
+                    <th className="text-left px-6 py-4 text-textBody uppercase tracking-wider font-semibold">
+                      Description
+                    </th>
+                    <th className="text-right px-6 py-4 text-textBody uppercase tracking-wider font-semibold">
+                      Quantity
+                    </th>
+                    <th className="text-right px-6 py-4 text-textBody uppercase tracking-wider font-semibold">
+                      Unit Value
+                    </th>
+                    <th className="text-right px-6 py-4 text-textBody uppercase tracking-wider font-semibold">
+                      Total
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {invoice.services && invoice.services.map((service, index) => (
+                    <tr
+                      key={index}
+                      className={`border-b border-stroke last:border-b-0 ${
+                        index % 2 === 0 ? "bg-bgPrimary" : "bg-bgSecondary/30"
+                      }`}
+                    >
+                      <td className="px-6 py-4 text-boneWhite">
+                        {service.description}
+                      </td>
+                      <td className="px-6 py-4 text-right text-boneWhite">
+                        {service.quantity}
+                      </td>
+                      <td className="px-6 py-4 text-right text-boneWhite">
+                        ${service.unitValue.toFixed(2)}
+                      </td>
+                      <td className="px-6 py-4 text-right text-primary-100 font-semibold">
+                        ${(service.quantity * service.unitValue).toFixed(2)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="bg-bgSecondary px-6 py-4 border-t border-stroke flex justify-end">
+                <div className="text-right">
+                  <p className="text-textBody text-body-xs mb-2 uppercase tracking-wider">
+                    Total
+                  </p>
+                  <p className="text-h4 text-primary-100 font-kanit">
+                    ${calculateInvoiceTotal(invoice.services).toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
+
 
           {/* Payment Section */}
           <div className="mb-12 pb-8 border-b border-stroke">
@@ -233,7 +338,7 @@ const Invoice = () => {
                   </div>
                 )}
               </div>
-            ) : (
+            ) : addressWarningAcknowledged && (
               <div className="space-y-8">
                 {/* Payment Details */}
                 <div className="grid grid-cols-2 gap-8 bg-bgPrimary rounded-lg p-6">
@@ -277,6 +382,13 @@ const Invoice = () => {
                     <code className="text-primary-60 text-body-xs-medium break-all mt-2 block">
                       {invoice.btcAddress}
                     </code>
+                  </p>
+                </div>
+
+                {/* Security Warning */}
+                <div className="bg-yellow-10 border border-red-100 rounded-lg p-6">
+                  <p className="text-boneWhite text-body-sm font-semibold">
+                    ⚠️ IMPORTANT: BEFORE SENDING, PLEASE CHECK TO ENSURE THAT THE ADDRESS DISPLAYED AFTER SCANNING MATCHES THE ONE SHOWN ON THE SCREEN.
                   </p>
                 </div>
 

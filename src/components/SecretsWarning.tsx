@@ -11,7 +11,7 @@ export const SecretsWarning = () => {
   }
 
   return (
-    <div className="w-full bg-red-100 border-b-2 border-red-40 p-4">
+    <div className="w-full bg-red-100 border-b-2 border-red-40 p-4 sticky top-0 z-50">
       <div className="max-w-4xl mx-auto flex items-start gap-4">
         <AlertCircle className="text-carbonBlack flex-shrink-0 mt-1" size={20} />
         <div className="flex-1">

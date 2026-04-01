@@ -27,6 +27,11 @@ const config = {
         "primary-40": "var(--primary-40)",
         "primary-30": "var(--primary-30)",
         "primary-10": "var(--primary-10)",
+        "red-100": "var(--red-100)",
+        "red-60": "var(--red-60)",
+        "red-40": "var(--red-40)",
+        "red-30": "var(--red-30)",
+        "red-10": "var(--red-10)",
       },
       fontFamily: {
         kanit: ["Kanit", ...fontFamily.sans],

@@ -1,46 +1,39 @@
 # pod21 - Podcast Production Service
 
-## Project info
+A professional podcast production service website with an integrated Bitcoin invoice and payment system.
 
-A professional podcast production service website for businesses and individuals looking to create high-quality podcasts.
+## Quick Start
 
-## Technologies used
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-- Framer Motion
-
-## How to run the project locally
-
-Follow these steps very carefully:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd pod21
-
-# Step 3: Install the necessary dependencies.
+```bash
+# Install dependencies
 npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
-```
 
-## How to build for production
-
-```sh
+# Build for production
 npm run build
 ```
 
-## How to preview the production build locally
+## Features
 
-```sh
-npm run preview
-```
+- **Invoice Management** — Create and manage invoices with itemized services
+- **Bitcoin Payments** — Accept payments in BTC with live price locking
+- **Email Confirmations** — Automated confirmation emails via EmailJS
+- **Responsive Design** — Built with React, TypeScript, and Tailwind CSS
+
+## Tech Stack
+
+- **Vite** — Fast build tool
+- **React + TypeScript** — Type-safe components
+- **shadcn/ui** — Component library
+- **Tailwind CSS** — Styling
+- **Framer Motion** — Animations
+- **React Router** — Client-side routing
+- **EmailJS** — Email notifications
+- **QR Code** — Bitcoin payment QR codes
+- **Coinbase API** — Live BTC prices
+
+## Documentation
+
+- **[Invoice & Payments Guide](./docs/payments/README_PAYMENTS.md)** — Setup, configuration, and deployment for the Bitcoin payment system
