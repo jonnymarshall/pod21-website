@@ -27,7 +27,7 @@ const reset = '\x1b[0m';
 
 try {
   // Read unencrypted invoices
-  const unencryptedPath = path.join(__dirname, 'unencrypted-invoices.json');
+  const unencryptedPath = path.join(__dirname, '..', 'secrets', 'unencrypted-invoices.json');
   if (!fs.existsSync(unencryptedPath)) {
     throw new Error(`unencrypted-invoices.json not found at ${unencryptedPath}`);
   }
