@@ -83,11 +83,11 @@ Encrypted invoice (data is hidden, requires passphrase):
 
 ### Managing Invoices (Single Source of Truth)
 
-The `scripts/unencrypted-invoices.json` file is your source of truth. It contains all invoice data with passphrases for encryption. Run one command to sync everything:
+The `secrets/unencrypted-invoices.json` file is your source of truth. It contains all invoice data with passphrases for encryption (and is gitignored for security). Run one command to sync everything:
 
 **Standard workflow:**
 
-1. Edit `scripts/unencrypted-invoices.json` with your invoices (array format):
+1. Edit `secrets/unencrypted-invoices.json` with your invoices (array format):
    ```json
    [
      {
@@ -303,10 +303,10 @@ The app loads data in this order:
 ### "Invalid Passphrase" Error
 - Verify you're entering the exact passphrase used when generating the encrypted data
 - Passphrases are case-sensitive
-- If you forget the passphrase, regenerate the invoice with `encrypt-invoice.js` or `generate-encrypted-invoice.js`
+- If you forget the passphrase, edit `secrets/unencrypted-invoices.json` and run `node scripts/sync-invoices.js` again
 
 ### Sync Script Errors
-- Ensure `scripts/unencrypted-invoices.json` exists and is valid JSON
+- Ensure `secrets/unencrypted-invoices.json` exists and is valid JSON
 - Check that all required fields are present in each invoice (id, invoiceDate, dueWithin, companyName, passphrase, customerName, address, btcAddress, services)
 - Try: `node scripts/sync-invoices.js` to see detailed error messages
 
