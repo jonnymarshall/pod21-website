@@ -19,6 +19,8 @@ interface Service {
 
 interface InvoiceData {
   id: string;
+  invoiceDate: string;
+  dueWithin: number;
   customerName: string;
   companyName: string;
   address: string;

@@ -16,9 +16,13 @@ In development, these load from `secrets/`. In production, they're stored as Ver
 ### invoices.json
 See [`secrets/invoices.json.example`](../../secrets/invoices.json.example) for structure and fields.
 
-**Notes:**
-- Invoice total is calculated automatically: `sum(quantity × unitValue)`
-- Only invoices with `"paid": false` are deployed to production
+**Key fields:**
+- `invoiceDate` — Invoice date in YYYY-MM-DD format
+- `dueWithin` — Number of days until payment is due
+- `services` — Array of line items (auto-calculates total from quantity × unitValue)
+- `paid` — Only invoices with `false` are deployed to production
+
+**Due Date Calculation:** Due date = `invoiceDate` + `dueWithin` days. Displays automatically on invoice page. If overdue, a red warning appears.
 
 ### company-info.json
 See [`secrets/company-info.json.example`](../../secrets/company-info.json.example) for structure and fields.
@@ -54,7 +58,9 @@ When you add new invoices or mark some as paid:
    git push origin main
    ```
 
-**Tip:** Mark invoices as `"paid": true` to exclude them from production.
+**Tips:**
+- Mark invoices as `"paid": true` to exclude them from production
+- When updating `invoiceDate` or `dueWithin`, re-run `generate-env-secrets.js` to push changes to Vercel
 
 ### Updating Company Info
 
@@ -78,8 +84,10 @@ The app loads data in this order:
 ### Invoice Workflow
 
 1. **Invoice Page** (`/pay/:invoiceId`)
-   - Displays invoice details with itemized services
-   - Shows Bitcoin payment option
+   - Displays invoice date and calculated due date
+   - Shows red overdue warning if invoice is past the due date
+   - Lists itemized services with automatic total calculation
+   - Bitcoin payment option available
    - User clicks "Generate Payment" to lock in BTC price
 
 2. **Security Warning**
@@ -133,3 +141,14 @@ The app loads data in this order:
 - Verify EmailJS credentials in `src/pages/InvoiceConfirmation.tsx`
 - Check browser console for errors
 - Ensure first payment attempt triggers the email (same session prevents duplicates)
+
+### Invoice Date or Due Date Not Showing
+- Invoice date must be in `YYYY-MM-DD` format (e.g., `2026-04-01`)
+- Both `invoiceDate` and `dueWithin` must be present in the JSON
+- After editing `secrets/invoices.json`, run `node scripts/generate-env-secrets.js` and update Vercel
+- Run `vercel env pull` to sync changes locally
+
+### Overdue Warning Not Appearing
+- Ensure `invoiceDate` and `dueWithin` are set correctly
+- Check browser date/time settings (overdue flag compares against current date)
+- Verify the calculated due date is actually in the past
