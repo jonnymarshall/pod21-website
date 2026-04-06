@@ -8,7 +8,8 @@ export interface OrganizationSchema {
   "@type": string;
   name: string;
   url: string;
-  logo: string;
+  logo: string | { "@type": string; url: string };
+  image: string;
   description: string;
   sameAs: string[];
   contactPoint?: {
@@ -70,7 +71,11 @@ export const generateOrganizationSchema = (
     "@type": "Organization",
     name: "pod21",
     url: baseUrl,
-    logo: `${baseUrl}/assets/logo.png`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${baseUrl}/og-image.png`,
+    },
+    image: `${baseUrl}/og-image.png`,
     description:
       "Professional podcast production services including editing, hosting, promotion and more.",
     sameAs: [
