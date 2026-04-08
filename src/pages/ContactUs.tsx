@@ -33,7 +33,7 @@ import FAQ from "@/components/FAQ";
 import { useLocation } from "react-router-dom";
 import emailjs from "@emailjs/browser"; // Import EmailJS
 import SEO from "@/components/SEO";
-import { generateBreadcrumbSchema } from "@/lib/schemaMarkup";
+import { generateBreadcrumbSchema, generateOrganizationSchema } from "@/lib/schemaMarkup";
 
 // Updated form schema to make phone and source optional
 const formSchema = z.object({
@@ -149,6 +149,7 @@ const ContactUs = () => {
   }, []);
 
   const baseUrl = "https://pod21.xyz";
+  const organizationSchema = generateOrganizationSchema(baseUrl);
   const breadcrumbSchema = generateBreadcrumbSchema(
     [
       { name: "Home", url: "/" },
@@ -157,17 +158,20 @@ const ContactUs = () => {
     baseUrl
   );
 
+  const contactSchemaMarkup = [organizationSchema, breadcrumbSchema];
+  const contactUrl = `${baseUrl}/contact`;
+
   return (
     <>
       <SEO
-        title="Contact pod21 - Get Your Podcast Production Started"
-        description="Have questions about podcast production? Contact pod21 today for a free consultation. We're here to help take your podcast to the next level."
+        title="Contact pod21 - Podcast Production Services"
+        description="Ready to launch your business podcast? Contact pod21 for a free consultation on podcast production, hosting, and distribution services."
         image="/og-image.png"
-        imageAlt="Contact pod21"
+        imageAlt="Contact pod21 podcast production"
         type="website"
         keywords="contact pod21, podcast production contact, podcast help, podcast services inquiry"
-        canonicalUrl={`${baseUrl}/contact`}
-        schemaMarkup={breadcrumbSchema}
+        canonicalUrl={contactUrl}
+        schemaMarkup={contactSchemaMarkup}
       />
       <Navbar />
       <section className="bg-bgPrimary">
