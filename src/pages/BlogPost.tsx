@@ -118,7 +118,31 @@ const BlogPost = () => {
   // Define rich text rendering options
   const renderOptions = {
     renderMark: {},
-    renderNode: {},
+    renderNode: {
+      "embedded-asset-block": (node: any) => {
+        try {
+          const { url, fileName } = node.data.target.fields.file;
+          const title = node.data.target.fields.title || fileName;
+          return (
+            <img
+              src={`https:${url}`}
+              alt={title}
+              className="max-w-full h-auto rounded-lg my-6 object-contain"
+            />
+          );
+        } catch (e) {
+          console.error("Error rendering embedded asset:", e);
+          return null;
+        }
+      },
+      "embedded-entry-inline": (node: any) => {
+        try {
+          return <span>{node.data.target.fields.title}</span>;
+        } catch (e) {
+          return null;
+        }
+      },
+    },
   };
 
   // Render the content properly
