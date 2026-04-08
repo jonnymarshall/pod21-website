@@ -119,6 +119,19 @@ const BlogPost = () => {
   const renderOptions = {
     renderMark: {},
     renderNode: {
+      hyperlink: (node: any, children: any) => {
+        const url = node.data.uri;
+        return (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-100 hover:text-primary-200 underline"
+          >
+            {children}
+          </a>
+        );
+      },
       "embedded-asset-block": (node: any) => {
         try {
           const { url, fileName } = node.data.target.fields.file;
