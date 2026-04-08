@@ -34,8 +34,12 @@ const SEO = ({
   const currentUrl =
     url || (typeof window !== "undefined" ? window.location.href : baseUrl);
 
-  // Use provided canonical URL or current URL
-  const canonical = canonicalUrl || currentUrl;
+  // Use provided canonical URL or current URL, normalize trailing slashes
+  let canonical = canonicalUrl || currentUrl;
+  // Remove trailing slash except for root path
+  if (canonical !== baseUrl && canonical.endsWith("/")) {
+    canonical = canonical.slice(0, -1);
+  }
 
   // Ensure image URL is absolute; use default og-image if missing or placeholder
   const defaultImage = `${baseUrl}/og-image.png`;

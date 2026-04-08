@@ -9,6 +9,7 @@ Disallow: /admin/
 Disallow: /.git/
 Disallow: /.github/
 Disallow: /node_modules/
+Disallow: /pay/
 
 # Google-specific
 User-agent: Googlebot
