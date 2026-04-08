@@ -36,12 +36,12 @@ const AboutUs = () => {
   return (
     <div className="min-h-screen bg-podcast-black text-white">
       <SEO
-        title="About pod21 - Professional Podcast Production"
-        description="Learn about pod21's mission to provide professional podcast production services. We help podcasters take their shows to the next level with editing, hosting, and promotion."
+        title="About pod21 - B2B Podcast Production Agency"
+        description="Learn how pod21 helps businesses launch and grow their podcasts. Our team specializes in podcast production, editing, and distribution."
         image="/about_pod21.png"
-        imageAlt="About pod21"
+        imageAlt="About pod21 podcast production agency"
         type="website"
-        keywords="about pod21, podcast production company, podcast services, podcast editing company"
+        keywords="podcast production agency, B2B podcast services, professional podcast creators, podcast production company, podcast management"
         canonicalUrl={`${baseUrl}/about`}
         schemaMarkup={schemaMarkup}
       />

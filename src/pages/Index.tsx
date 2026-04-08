@@ -14,7 +14,7 @@ import { generateOrganizationSchema, generateBreadcrumbSchema } from "@/lib/sche
 
 const Index = () => {
   const baseUrl = "https://pod21.xyz";
-  
+
   const organizationSchema = generateOrganizationSchema(baseUrl);
   const breadcrumbSchema = generateBreadcrumbSchema(
     [{ name: "Home", url: "/" }],
@@ -26,12 +26,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-podcast-black text-white">
       <SEO
-        title="pod21 - Professional Podcast Production Services"
-        description="Professional podcast production services including editing, hosting, promotion and more. Take your podcast to the next level with pod21."
+        title="Podcast Production Services for B2B Creators - pod21"
+        description="Professional podcast production services for businesses. We handle editing, hosting, promotion, and distribution. Launch your brand podcast today."
         image="/og-image.png"
-        imageAlt="pod21 - Professional Podcast Production"
+        imageAlt="pod21 - Professional Podcast Production Services"
         type="website"
-        keywords="podcast production, podcast editing, podcast hosting, podcast promotion, professional podcast services"
+        keywords="podcast production services, B2B podcast production, professional podcast editing, podcast hosting for business, podcast promotion agency"
         schemaMarkup={schemaMarkup}
       />
       <Navbar />

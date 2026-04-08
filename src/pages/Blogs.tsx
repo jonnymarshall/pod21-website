@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/pagination";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
-import { generateBreadcrumbSchema } from "@/lib/schemaMarkup";
+import { generateBreadcrumbSchema, generateOrganizationSchema } from "@/lib/schemaMarkup";
 
 const Blogs = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,6 +54,7 @@ const Blogs = () => {
   };
 
   const baseUrl = "https://pod21.xyz";
+  const organizationSchema = generateOrganizationSchema(baseUrl);
   const breadcrumbSchema = generateBreadcrumbSchema(
     [
       { name: "Home", url: "/" },
@@ -62,17 +63,19 @@ const Blogs = () => {
     baseUrl
   );
 
+  const blogSchemaMarkup = [organizationSchema, breadcrumbSchema];
+
   return (
     <>
       <SEO
-        title="Podcast Blog & Production Tips - pod21"
-        description="Read the latest articles about podcast production, tips, and industry insights from pod21. Learn how to improve your podcast with expert advice."
+        title="Podcast Production Blog - Tips for B2B Creators - pod21"
+        description="Expert articles on podcast production, editing, hosting, and distribution. Learn best practices for launching your business podcast."
         image="/og-image.png"
-        imageAlt="pod21 Blog"
+        imageAlt="pod21 podcast production blog"
         type="website"
-        keywords="podcast blog, podcast tips, podcast production guide, podcast editing tips, podcast hosting guide"
+        keywords="podcast production blog, podcast editing guide, B2B podcast strategy, podcast hosting tips, podcast distribution"
         canonicalUrl={`${baseUrl}/blog`}
-        schemaMarkup={breadcrumbSchema}
+        schemaMarkup={blogSchemaMarkup}
       />
       <Navbar />
 

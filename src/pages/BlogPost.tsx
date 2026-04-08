@@ -228,7 +228,7 @@ const BlogPost = () => {
         >
           {/* Back to blog link */}
           <Link
-            to="/blogs"
+            to="/blog"
             className="inline-flex flex-row items-center mb-[28px] gap-3 transition-colors cursor-pointer"
           >
             <div className="bg-bgSecondary p-2 rounded-lg border border-stroke">
