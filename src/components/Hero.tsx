@@ -33,7 +33,7 @@ const Hero = () => {
     <section id="hero" className="">
       <div
         className={cn(
-          "relative md:py-[221px] py-[115px] flex items-center text-left overflow-hidden max-w-[1440px] mx-auto ",
+          "relative pt-20 md:pt-24 md:pb-[197px] pb-[95px] flex items-center text-left overflow-hidden max-w-[1440px] mx-auto ",
           "px-side-spacing-mobile md:px-side-spacing-tablet "
         )}
       >
