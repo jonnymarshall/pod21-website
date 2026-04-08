@@ -94,13 +94,12 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed border-[1px] border-stroke top-[20px] right-0 left-0 rounded-2xl z-50 transition-all duration-300 bg-bgPrimary max-w-[1360px] ",
-        "mx-side-spacing-mobile md:mx-side-spacing-tablet lg:mx-side-spacing xl:mx-auto"
+        "fixed border-b-[1px] border-stroke top-0 right-0 left-0 w-full z-50 transition-all duration-300 bg-bgPrimary"
       )}
     >
       <div
         className={cn(
-          "mx-auto px-6 py-[19px] flex justify-between items-center gap-x-6",
+          "mx-auto max-w-[1360px] px-6 py-[19px] flex justify-between items-center gap-x-6",
           "md:px-8"
         )}
       >
