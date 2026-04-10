@@ -72,28 +72,28 @@ try {
     const existing = encrypted.find(inv => inv.id === invoice.id);
     const paid = invoice.paid === true ? true : false;
 
+    // Always encrypt (handles new invoices and updates to existing data)
+    const { passphrase, customerName, address, btcAddress, services, id, invoiceDate, dueWithin, companyName } = invoice;
+    const toEncrypt = { customerName, address, btcAddress, services };
+    const jsonString = JSON.stringify(toEncrypt);
+    const encryptedData = CryptoJS.AES.encrypt(jsonString, passphrase).toString();
+
     if (existing) {
-      // Update paid status
-      existing.paid = paid;
-      newEncrypted.push(existing);
+      // Track as update
       updated.push(invoice.id);
     } else {
-      // Encrypt it
-      const { passphrase, customerName, address, btcAddress, services, id, invoiceDate, dueWithin, companyName } = invoice;
-      const toEncrypt = { customerName, address, btcAddress, services };
-      const jsonString = JSON.stringify(toEncrypt);
-      const encryptedData = CryptoJS.AES.encrypt(jsonString, passphrase).toString();
-
-      newEncrypted.push({
-        id,
-        invoiceDate,
-        dueWithin,
-        companyName,
-        encryptedData,
-        paid
-      });
+      // Track as new
       added.push(id);
     }
+
+    newEncrypted.push({
+      id,
+      invoiceDate,
+      dueWithin,
+      companyName,
+      encryptedData,
+      paid
+    });
   }
 
   // Write encrypted invoices
