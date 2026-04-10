@@ -51,7 +51,9 @@ try {
   if (fs.existsSync(encryptedPath)) {
     const content = fs.readFileSync(encryptedPath, 'utf-8');
     if (content.trim()) {
-      encrypted = JSON.parse(content);
+      const parsed = JSON.parse(content);
+      // Handle both old array format and new object format with metadata
+      encrypted = Array.isArray(parsed) ? parsed : parsed.invoices || [];
     }
   }
 
@@ -98,6 +100,11 @@ try {
 
   // Write encrypted invoices
   fs.writeFileSync(encryptedPath, JSON.stringify(newEncrypted, null, 2) + '\n');
+
+  // Update sync timestamp file to trigger git changes
+  const syncTimestampPath = path.join(__dirname, '..', '.invoice-sync');
+  const now = new Date().toISOString();
+  fs.writeFileSync(syncTimestampPath, now);
 
   console.log(`\n${cyan}${bold}✅ Invoices synced!${reset}\n`);
   if (added.length > 0) {
