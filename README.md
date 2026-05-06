@@ -37,3 +37,5 @@ npm run build
 ## Documentation
 
 - **[Invoice & Payments Guide](./docs/payments/README_PAYMENTS.md)** — Setup, configuration, and deployment for the Bitcoin payment system
+
+---
