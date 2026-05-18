@@ -17,6 +17,7 @@ import CryptoJS from 'crypto-js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -126,11 +127,20 @@ try {
   console.log(`${bold}${yellow}VITE_INVOICES_JSON Value:${reset}`);
   console.log(`${bold}${invoicesJsonValue}${reset}`);
 
+  let branchName = 'main';
+  try {
+    branchName = execSync('git rev-parse --abbrev-ref HEAD', { cwd: path.join(__dirname, '..') }).toString().trim();
+  } catch {
+    // Fall back to 'main' if git isn't available
+  }
+
   console.log(`\n${cyan}${bold}📋 Next steps:${reset}\n`);
   console.log(`${cyan}1. Copy the VITE_INVOICES_JSON value above${reset}`);
   console.log(`${cyan}2. Run:${reset} ${bold}vercel env update VITE_INVOICES_JSON${reset}`);
   console.log(`${cyan}3. Run:${reset} ${bold}vercel env pull${reset}`);
-  console.log(`${cyan}4. Run:${reset} ${bold}git push origin main${reset}\n`);
+  console.log(`${cyan}4. Run:${reset} ${bold}git add secrets/encrypted-invoices.json .invoice-sync${reset}`);
+  console.log(`${cyan}5. Run:${reset} ${bold}git commit -m "invoicing statuses updated"${reset}`);
+  console.log(`${cyan}6. Run:${reset} ${bold}git push origin ${branchName}${reset}\n`);
 } catch (error) {
   console.error(`\n${yellow}❌ ${error.message}${reset}\n`);
   process.exit(1);
