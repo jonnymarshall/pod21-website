@@ -138,7 +138,7 @@ try {
   console.log(`${cyan}1. Copy the VITE_INVOICES_JSON value above${reset}`);
   console.log(`${cyan}2. Run:${reset} ${bold}vercel env update VITE_INVOICES_JSON${reset}`);
   console.log(`${cyan}3. Run:${reset} ${bold}vercel env pull${reset}`);
-  console.log(`${cyan}4. Run:${reset} ${bold}git add secrets/encrypted-invoices.json .invoice-sync${reset}`);
+  console.log(`${cyan}4. Run:${reset} ${bold}git add .invoice-sync${reset}`);
   console.log(`${cyan}5. Run:${reset} ${bold}git commit -m "invoicing statuses updated"${reset}`);
   console.log(`${cyan}6. Run:${reset} ${bold}git push origin ${branchName}${reset}\n`);
 } catch (error) {
