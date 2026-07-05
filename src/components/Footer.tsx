@@ -9,62 +9,55 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-bgPrimary">
+    <footer id="footer" className="border-t border-stroke bg-bgPrimary">
       <div
         className={cn(
-          "py-side-spacing max-w-[1440px] mx-auto",
-          "px-side-spacing-mobile md:px-side-spacing-tablet  "
+          "mx-auto max-w-[1440px] py-side-spacing",
+          "px-side-spacing-mobile md:px-side-spacing-tablet"
         )}
       >
-        <div className="grid md:grid-cols-3 gap-12 ">
-          <div>
-            <Link to="/" className="cursor-pointer">
-              <LogoSVG width={72} height={28} color="#bbf298" />
+        <div className="grid gap-12 md:grid-cols-3">
+          <div id="footer--brand">
+            <Link to="/" className="cursor-pointer" aria-label="pod21 home">
+              <LogoSVG width={72} height={28} color="#f3efeb" />
             </Link>
-            <p className="text-body-sm text-textBody mt-4">
-              Copyright 2025 All rights reserved
+            <p className="readout mt-6 leading-relaxed text-[#5c5a57]">
+              EST. 2025 <span className="slash-sep">{"//"}</span> USA
             </p>
           </div>
 
-          <div>
-            <p className="text-body-sm-medium text-textBody mb-8">
-              Quick Links
-            </p>
-            <ul className="space-y-8">
+          <div id="footer--quick-links">
+            <p className="eyebrow mb-8">Index</p>
+            <ul className="space-y-6">
               <li>
                 <Link
                   to="/about"
-                  className="text-body-lg text-boneWhite hover:text-primary-100 transition-colors"
+                  className="nav-link !text-[13px]"
                   onClick={() => window.scrollTo(0, 0)}
                 >
-                  About
+                  <span className="slash-sep">{"// "}</span>About
                 </Link>
               </li>
               <li>
                 <Link
                   to="/blog"
-                  className="text-body-lg text-boneWhite hover:text-primary-100 transition-colors"
+                  className="nav-link !text-[13px]"
                   onClick={() => window.scrollTo(0, 0)}
                 >
-                  Blog
+                  <span className="slash-sep">{"// "}</span>Blog
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/contact"
-                  className="text-body-lg text-boneWhite hover:text-primary-100 transition-colors"
-                >
-                  Contact
+                <Link to="/contact" className="nav-link !text-[13px]">
+                  <span className="slash-sep">{"// "}</span>Contact
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div>
-            <p className="text-body-sm-medium text-textBody mb-8">
-              Social Links
-            </p>
-            <ul className="space-y-8">
+          <div id="footer--social-links">
+            <p className="eyebrow mb-8">Signal</p>
+            <ul className="space-y-6">
               <li>
                 <a href="https://x.com/pod21hq" className="footer-social-links">
                   <div className="footer-social-links-icon">
@@ -82,7 +75,12 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#features" className="footer-social-links">
+                <a
+                  href="https://www.linkedin.com/company/111912003/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-social-links"
+                >
                   <div className="footer-social-links-icon">
                     <LinkedInSVG height={24} width={24} />
                   </div>
@@ -91,6 +89,23 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* Baseline strip */}
+        <div
+          id="footer--baseline"
+          className="mt-14 flex flex-wrap items-center justify-between gap-3 border-t border-stroke pt-6"
+        >
+          <p className="readout text-[10px] text-[#5c5a57]">
+            © {new Date().getFullYear()} POD21{" "}
+            <span className="slash-sep">{"//"}</span> ALL RIGHTS RESERVED
+          </p>
+          <p className="readout text-[10px] text-[#5c5a57]">
+            UK <span className="slash-sep">{"//"}</span> MEXICO{" "}
+            <span className="slash-sep">{"//"}</span> USA{" "}
+            <span className="slash-sep">{"//"}</span>{" "}
+            <span className="text-primary-100">EVERYWHERE SIGNAL TRAVELS</span>
+          </p>
         </div>
       </div>
     </footer>

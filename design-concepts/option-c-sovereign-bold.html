@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pod21 · Option C · The Manifesto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- STYLE:START -->
+<style data-concept="shared">
+  .f-serif { font-family: "Fraunces", ui-serif, Georgia, serif; font-optical-sizing: auto; }
+  .f-grot  { font-family: "Archivo", ui-sans-serif, system-ui, sans-serif; }
+  .f-mono  { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", monospace; }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+  .reveal { animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .d-1 { animation-delay: 0.08s; } .d-2 { animation-delay: 0.2s; } .d-3 { animation-delay: 0.34s; }
+  .d-4 { animation-delay: 0.5s; }  .d-5 { animation-delay: 0.68s; } .d-6 { animation-delay: 0.88s; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; }
+    .marquee-track { animation: none !important; }
+  }
+</style>
+<style data-concept="c">
+  .cc-root { background: #0a0a0c; color: #f3efeb; }
+  .cc-display {
+    font-weight: 850;
+    font-stretch: 64%;
+    letter-spacing: 0.005em;
+    line-height: 0.88;
+    font-size: clamp(3.4rem, 9.6vw, 9.5rem);
+    text-transform: uppercase;
+  }
+  .cc-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px #bf103d;
+  }
+  .cc-rail { border-right: 1px solid rgba(243, 239, 235, 0.14); }
+  .cc-rail-link { transition: color 0.3s ease, background 0.3s ease; }
+  .cc-rail-link:hover, .cc-rail-link[aria-current="true"] { color: #f3efeb; }
+  .cc-rail-link[aria-current="true"] .cc-rail-num { color: #bf103d; }
+  .cc-ticker { background: #bf103d; overflow: hidden; }
+  .cc-ticker .marquee-track { display: flex; width: max-content; animation: cc-scroll 26s linear infinite; }
+  @keyframes cc-scroll { to { transform: translateX(-50%); } }
+  .cc-commission {
+    border: 1px solid #f3efeb;
+    transition: background 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cc-commission:hover { background: #f3efeb; color: #0a0a0c; }
+  .cc-timecode { writing-mode: vertical-rl; font-variant-numeric: tabular-nums; letter-spacing: 0.3em; }
+</style>
+<!-- STYLE:END -->
+</head>
+<body class="cc-root antialiased">
+
+<!-- ARTIFACT:SECTION -->
+<section id="concept-c" class="cc-root relative flex min-h-screen">
+
+  <!-- Index rail: navigation as a table of contents, in reading order -->
+  <nav id="concept-c--rail" class="cc-rail reveal hidden w-56 shrink-0 flex-col justify-between px-7 py-9 lg:flex">
+    <a id="concept-c--rail--wordmark" href="#" class="f-grot text-[17px] font-extrabold tracking-[0.18em]">POD21</a>
+    <ol id="concept-c--rail--index" class="f-mono flex flex-col gap-5 text-[11px] tracking-[0.16em] text-[#5c5a57]">
+      <li><a class="cc-rail-link proxy-id--concept-c--rail--index-link flex gap-4" href="#" aria-current="true"><span class="cc-rail-num">01</span>MANIFESTO</a></li>
+      <li><a class="cc-rail-link proxy-id--concept-c--rail--index-link flex gap-4" href="#"><span class="cc-rail-num">02</span>SELECTED WORK</a></li>
+      <li><a class="cc-rail-link proxy-id--concept-c--rail--index-link flex gap-4" href="#"><span class="cc-rail-num">03</span>CAPABILITIES</a></li>
+      <li><a class="cc-rail-link proxy-id--concept-c--rail--index-link flex gap-4" href="#"><span class="cc-rail-num">04</span>THE STUDIO</a></li>
+      <li><a class="cc-rail-link proxy-id--concept-c--rail--index-link flex gap-4" href="#"><span class="cc-rail-num">05</span>COMMISSION</a></li>
+    </ol>
+    <p id="concept-c--rail--location" class="f-mono text-[10px] leading-relaxed tracking-[0.16em] text-[#5c5a57]">
+      LONDON<br />+ EVERYWHERE SIGNAL TRAVELS
+    </p>
+  </nav>
+
+  <div class="relative flex min-w-0 flex-1 flex-col">
+    <!-- Compact top bar for small screens -->
+    <nav id="concept-c--mobile-bar" class="flex items-center justify-between px-6 py-6 lg:hidden">
+      <a href="#" class="f-grot text-[15px] font-extrabold tracking-[0.18em]">POD21</a>
+      <a href="#" class="f-mono text-[11px] tracking-[0.2em] text-[#aeaeae]">INDEX</a>
+    </nav>
+
+    <!-- The declaration -->
+    <header id="concept-c--hero" class="flex flex-1 flex-col justify-center px-6 py-14 lg:px-16">
+      <p id="concept-c--hero--kicker" class="f-mono reveal d-1 text-[11px] tracking-[0.3em] text-[#aeaeae]">
+        01 · THE POD21 POSITION
+      </p>
+      <h1 id="concept-c--hero--headline" class="f-grot cc-display reveal d-2 mt-8">
+        We don't<br />
+        make content.<br />
+        <span class="cc-outline">We produce</span><br />
+        culture.
+      </h1>
+      <div class="mt-14 flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
+        <p id="concept-c--hero--statement" class="f-grot reveal d-3 max-w-[40ch] text-[16px] leading-[1.65] text-[#aeaeae]">
+          A production house with a single standard: work that outlives the
+          feed. If that sounds severe, it is. Severity is why our clients win.
+        </p>
+        <a id="concept-c--hero--commission-cta" href="#" class="cc-commission f-grot reveal d-4 inline-block shrink-0 px-10 py-5 text-[14px] font-bold uppercase tracking-[0.22em]">
+          Commission Pod21
+        </a>
+      </div>
+    </header>
+
+    <!-- The oath, on repeat -->
+    <div id="concept-c--ticker" class="cc-ticker reveal d-5 py-3" aria-hidden="true">
+      <div class="marquee-track f-grot text-[13px] font-bold uppercase tracking-[0.3em] text-[#0a0a0c]">
+        <span class="shrink-0 pr-8">Sovereign audio · Uncompromised vision · Zero template thinking · Pod21 ·&nbsp;</span>
+        <span class="shrink-0 pr-8">Sovereign audio · Uncompromised vision · Zero template thinking · Pod21 ·&nbsp;</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timecode spine on the far edge -->
+  <p id="concept-c--timecode" class="cc-timecode f-mono reveal d-6 absolute right-5 top-1/2 hidden -translate-y-1/2 text-[10px] text-[#5c5a57] xl:block">
+    TC 00:21:00:00 · MANIFESTO
+  </p>
+</section>
+<!-- /ARTIFACT:SECTION -->
+
+</body>
+</html>

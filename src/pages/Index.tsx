@@ -1,5 +1,6 @@
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
+import IndexRail from "@/components/IndexRail";
 import Hero from "@/components/Hero";
 import Platform from "@/components/Platform";
 import WhyPodcast from "@/components/WhyPodcast";
@@ -34,17 +35,20 @@ const Index = () => {
         keywords="podcast production services, B2B podcast production, professional podcast editing, podcast hosting for business, podcast promotion agency"
         schemaMarkup={schemaMarkup}
       />
-      <Navbar />
-      <Hero />
-      <Platform />
-      <WhyPodcast />
-      <WhyUs />
-      <Services />
-      <Process />
-      <Testimonials />
-      <FAQ />
-      <Contact />
-      <Footer />
+      <Navbar withRail />
+      <IndexRail />
+      <div className="xl:pl-60">
+        <Hero />
+        <Platform />
+        <WhyPodcast />
+        <WhyUs />
+        <Services />
+        <Process />
+        <Testimonials />
+        <FAQ />
+        <Contact indexLabel="09" />
+        <Footer />
+      </div>
     </div>
   );
 };
