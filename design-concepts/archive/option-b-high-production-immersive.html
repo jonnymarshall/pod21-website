@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pod21 · Option B · The Studio Floor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- STYLE:START -->
+<style data-concept="shared">
+  .f-serif { font-family: "Fraunces", ui-serif, Georgia, serif; font-optical-sizing: auto; }
+  .f-grot  { font-family: "Archivo", ui-sans-serif, system-ui, sans-serif; }
+  .f-mono  { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", monospace; }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+  .reveal { animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .d-1 { animation-delay: 0.08s; } .d-2 { animation-delay: 0.2s; } .d-3 { animation-delay: 0.34s; }
+  .d-4 { animation-delay: 0.5s; }  .d-5 { animation-delay: 0.68s; } .d-6 { animation-delay: 0.88s; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; }
+    .marquee-track { animation: none !important; }
+  }
+</style>
+<style data-concept="b">
+  .cb-root { background: #0b0c0f; color: #f3efeb; }
+  .cb-headline {
+    font-size: clamp(2.4rem, 4.5vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    font-weight: 640;
+    font-stretch: 118%;
+    text-wrap: balance;
+  }
+  .cb-glass {
+    background: rgba(11, 12, 15, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(243, 239, 235, 0.08);
+  }
+  .cb-tile {
+    position: relative; overflow: hidden; border-radius: 2px;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cb-tile:hover { transform: translateY(-6px); }
+  .cb-tile::before {
+    content: ""; position: absolute; inset: 0; opacity: 0.5; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  }
+  .cb-tile-frame { position: absolute; inset: 0; border: 1px solid rgba(243, 239, 235, 0.1); }
+  .cb-play {
+    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 9999px;
+    border: 1px solid rgba(243, 239, 235, 0.4); backdrop-filter: blur(6px);
+    transition: background 0.4s ease, border-color 0.4s ease;
+  }
+  .cb-tile:hover .cb-play { background: #bbf298; border-color: #bbf298; }
+  .cb-tile:hover .cb-play svg { fill: #0b0c0f; }
+  .cb-live-dot { animation: cb-pulse 2s ease-in-out infinite; }
+  @keyframes cb-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+  .cb-marquee { border-top: 1px solid rgba(243, 239, 235, 0.08); overflow: hidden; }
+  .cb-marquee .marquee-track { display: flex; width: max-content; animation: cb-scroll 36s linear infinite; }
+  @keyframes cb-scroll { to { transform: translateX(-50%); } }
+  .cb-stat-num { font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+</style>
+<!-- STYLE:END -->
+</head>
+<body class="cb-root antialiased">
+
+<!-- ARTIFACT:SECTION -->
+<section id="concept-b" class="cb-root relative flex min-h-screen flex-col">
+
+  <!-- Slim glass nav that stays with you as the reel scrolls -->
+  <nav id="concept-b--nav" class="cb-glass reveal sticky top-0 z-20 flex items-center justify-between px-6 py-4 sm:px-10">
+    <a id="concept-b--nav--wordmark" href="#" class="f-grot text-[15px] font-bold tracking-[0.2em]">POD21</a>
+    <div id="concept-b--nav--links" class="f-grot hidden items-center gap-8 text-[13px] font-medium text-[#aeaeae] md:flex">
+      <a class="transition-colors duration-300 hover:text-[#f3efeb]" href="#">Work</a>
+      <a class="transition-colors duration-300 hover:text-[#f3efeb]" href="#">Capabilities</a>
+      <a class="transition-colors duration-300 hover:text-[#f3efeb]" href="#">Studios</a>
+      <a class="transition-colors duration-300 hover:text-[#f3efeb]" href="#">About</a>
+    </div>
+    <a id="concept-b--nav--cta" href="#" class="f-grot rounded-sm bg-[#f3efeb] px-5 py-2 text-[13px] font-semibold text-[#0b0c0f] transition-colors duration-300 hover:bg-[#bbf298]">
+      Book a session
+    </a>
+  </nav>
+
+  <div class="grid flex-1 items-center gap-14 px-6 py-16 sm:px-10 lg:grid-cols-[minmax(0,42fr)_minmax(0,58fr)] lg:gap-10 lg:py-12">
+
+    <!-- Left: claim + proof -->
+    <header id="concept-b--hero" class="max-w-xl">
+      <p id="concept-b--hero--status" class="f-mono reveal d-1 flex items-center gap-2.5 text-[11px] tracking-[0.28em] text-[#bbf298]">
+        <span class="cb-live-dot inline-block h-1.5 w-1.5 rounded-full bg-[#bbf298]"></span>
+        38 SHOWS IN PRODUCTION
+      </p>
+      <h1 id="concept-b--hero--headline" class="f-grot cb-headline reveal d-2 mt-7">
+        Broadcast-grade production. On your schedule.
+      </h1>
+      <p id="concept-b--hero--subhead" class="f-grot reveal d-3 mt-7 max-w-[44ch] text-[16px] leading-[1.7] text-[#aeaeae]">
+        Pod21 runs your show like a network runs primetime: dedicated producers,
+        engineered rooms, and a post pipeline measured in hours, not weeks.
+      </p>
+      <dl id="concept-b--hero--stats" class="reveal d-4 mt-12 grid grid-cols-3 gap-8 border-t border-[#f3efeb]/10 pt-8">
+        <div class="proxy-id--concept-b--hero--stats--item">
+          <dt class="f-mono text-[10px] tracking-[0.22em] text-[#5c5a57]">EPISODES SHIPPED</dt>
+          <dd class="f-grot cb-stat-num mt-2 text-[30px] font-semibold">1,412</dd>
+        </div>
+        <div class="proxy-id--concept-b--hero--stats--item">
+          <dt class="f-mono text-[10px] tracking-[0.22em] text-[#5c5a57]">POST TURNAROUND</dt>
+          <dd class="f-grot cb-stat-num mt-2 text-[30px] font-semibold">48h</dd>
+        </div>
+        <div class="proxy-id--concept-b--hero--stats--item">
+          <dt class="f-mono text-[10px] tracking-[0.22em] text-[#5c5a57]">STUDIOS</dt>
+          <dd class="f-grot cb-stat-num mt-2 text-[30px] font-semibold">4</dd>
+        </div>
+      </dl>
+    </header>
+
+    <!-- Right: the reel wall. Tiles stand in for autoplaying clip loops. -->
+    <div id="concept-b--reel-grid" class="reveal d-3 grid grid-cols-2 gap-3 lg:grid-cols-3">
+      <a href="#" class="cb-tile proxy-id--concept-b--reel-grid--tile col-span-2 row-span-2 aspect-[4/3] bg-gradient-to-br from-[#26313d] via-[#141a21] to-[#0b0c0f] lg:aspect-auto">
+        <span class="cb-tile-frame"></span>
+        <span class="absolute left-4 top-4 f-mono text-[10px] tracking-[0.2em] text-[#f3efeb]/70">THE MARGIN CALL · EP 141</span>
+        <span class="cb-play absolute bottom-4 left-4"><svg width="12" height="12" viewBox="0 0 12 12" fill="#f3efeb"><path d="M2 1l9 5-9 5z"/></svg></span>
+        <span class="absolute bottom-5 right-4 f-mono text-[10px] text-[#f3efeb]/60">41:07</span>
+      </a>
+      <a href="#" class="cb-tile proxy-id--concept-b--reel-grid--tile aspect-square bg-gradient-to-br from-[#3d2630] via-[#1d1218] to-[#0b0c0f]">
+        <span class="cb-tile-frame"></span>
+        <span class="absolute left-3 top-3 f-mono text-[9px] tracking-[0.18em] text-[#f3efeb]/70">ASTER ROUNDS</span>
+        <span class="absolute bottom-4 right-3 f-mono text-[10px] text-[#f3efeb]/60">28:44</span>
+      </a>
+      <a href="#" class="cb-tile proxy-id--concept-b--reel-grid--tile aspect-square bg-gradient-to-br from-[#2e3d26] via-[#161d12] to-[#0b0c0f]">
+        <span class="cb-tile-frame"></span>
+        <span class="absolute left-3 top-3 f-mono text-[9px] tracking-[0.18em] text-[#f3efeb]/70">FIELD NOTES</span>
+        <span class="absolute bottom-4 right-3 f-mono text-[10px] text-[#f3efeb]/60">17:02</span>
+      </a>
+      <a href="#" class="cb-tile proxy-id--concept-b--reel-grid--tile aspect-square bg-gradient-to-br from-[#3d3a26] via-[#1d1b12] to-[#0b0c0f]">
+        <span class="cb-tile-frame"></span>
+        <span class="absolute left-3 top-3 f-mono text-[9px] tracking-[0.18em] text-[#f3efeb]/70">HALCYON DRIVE</span>
+        <span class="absolute bottom-4 right-3 f-mono text-[10px] text-[#f3efeb]/60">33:19</span>
+      </a>
+      <a href="#" class="cb-tile proxy-id--concept-b--reel-grid--tile col-span-2 aspect-[2/1] bg-gradient-to-br from-[#26343d] via-[#121a1d] to-[#0b0c0f]">
+        <span class="cb-tile-frame"></span>
+        <span class="absolute left-4 top-4 f-mono text-[10px] tracking-[0.2em] text-[#f3efeb]/70">NORTH &amp; CO · BRAND FILM</span>
+        <span class="cb-play absolute bottom-4 left-4"><svg width="12" height="12" viewBox="0 0 12 12" fill="#f3efeb"><path d="M2 1l9 5-9 5z"/></svg></span>
+        <span class="absolute bottom-5 right-4 f-mono text-[10px] text-[#f3efeb]/60">02:58</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Capabilities ticker: the floor never stops moving -->
+  <footer id="concept-b--capabilities-ticker" class="cb-marquee reveal d-5 py-4" aria-label="Capabilities">
+    <div class="marquee-track f-mono text-[11px] tracking-[0.28em] text-[#5c5a57]">
+      <span class="flex shrink-0 items-center gap-10 pr-10">
+        <span>MULTI-CAM VIDEO</span><span>·</span><span>DOLBY-MASTERED AUDIO</span><span>·</span><span>SHOWRUNNING</span><span>·</span><span>MOTION &amp; BRAND</span><span>·</span><span>LIVE EVENTS</span><span>·</span><span>DISTRIBUTION STRATEGY</span><span>·</span>
+      </span>
+      <span class="flex shrink-0 items-center gap-10 pr-10" aria-hidden="true">
+        <span>MULTI-CAM VIDEO</span><span>·</span><span>DOLBY-MASTERED AUDIO</span><span>·</span><span>SHOWRUNNING</span><span>·</span><span>MOTION &amp; BRAND</span><span>·</span><span>LIVE EVENTS</span><span>·</span><span>DISTRIBUTION STRATEGY</span><span>·</span>
+      </span>
+    </div>
+  </footer>
+</section>
+<!-- /ARTIFACT:SECTION -->
+
+</body>
+</html>

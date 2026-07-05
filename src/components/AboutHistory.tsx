@@ -73,9 +73,8 @@ const AboutHistory = () => {
           animate="visible"
         >
           <motion.div ref={textRef} className="" variants={itemVariants}>
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mt-5">
+            <div className="mx-auto mt-5 max-w-4xl">
               <motion.div
-                className="col-span-1 xl:col-span-2"
                 variants={fadeInUpVariants}
                 initial="hidden"
                 animate={isTextInView ? "visible" : "hidden"}
@@ -97,14 +96,8 @@ const AboutHistory = () => {
                   Staying Free Podcast - a podcast where I discuss ideas and
                   philosophy around freedom, spirituality, money, holistic
                   health, psychedelics, and everything in-between.
-                  <motion.div
-                    className="xl:hidden block my-8 "
-                    variants={imageVariants}
-                    initial="hidden"
-                    animate={isImageInView ? "visible" : "hidden"}
-                  >
-                    <img src="/history.png" alt="About History" className="" />
-                  </motion.div>
+                  <br />
+                  <br />
                   If you're reading this, then the desire to have a podcast is
                   probably as obvious to you as it was to me. The idea that I
                   could do what I love - talking about things that inspire me -
@@ -129,15 +122,6 @@ const AboutHistory = () => {
                   running a professional podcast. For someone without that
                   background? The barriers often feel insurmountable.
                 </p>
-              </motion.div>
-              <motion.div
-                ref={imageRef}
-                className="w-full col-span-1 xl:flex hidden items-center justify-center"
-                variants={imageVariants}
-                initial="hidden"
-                animate={isImageInView ? "visible" : "hidden"}
-              >
-                <img src="/history.png" alt="About History" className="" />
               </motion.div>
             </div>
           </motion.div>

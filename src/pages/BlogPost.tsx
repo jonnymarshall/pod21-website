@@ -103,7 +103,7 @@ const BlogPost = () => {
               removed.
             </p>
             <Link to="/blogs" className="inline-block">
-              <button className="bg-primary-100 text-carbonBlack rounded-full px-6 py-3 flex items-center gap-2">
+              <button className="bg-red-100 text-boneWhite font-kanit font-bold uppercase tracking-[0.12em] rounded-full px-6 py-3 flex items-center gap-2 hover:bg-red-60 transition-colors">
                 <ArrowLeftSVG size={16} />
                 Back to Blog
               </button>

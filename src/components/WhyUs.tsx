@@ -161,7 +161,7 @@ const StatCard = ({
 
   return (
     <div
-      className="rounded-xl bg-bgPrimary p-6"
+      className="proxy-id--why-us--stat-card rounded-[4px] border border-stroke bg-bgSecondary p-6"
       style={{
         transitionDelay: `${index * 100}ms`,
         opacity: isInView ? 1 : 0,
@@ -169,7 +169,7 @@ const StatCard = ({
         transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
       }}
     >
-      <p className="text-body-sm text-textBody">{stat.label}</p>
+      <p className="readout uppercase text-[#5c5a57]">{stat.label}</p>
       <h3 className="text-h3 text-boneWhite mt-8">{renderStatValue()}</h3>
     </div>
   );
@@ -208,31 +208,13 @@ const WhyUs = () => {
   ];
 
   return (
-    <section id="why" className="bg-bgSecondary">
+    <section id="why" className="border-t border-stroke bg-bgPrimary">
       <div
         className={cn(
           "relative py-side-spacing  overflow-hidden scroll-mt-[120px] max-w-[1440px] mx-auto",
           "px-side-spacing-mobile md:px-side-spacing-tablet "
         )}
       >
-        {/* Background diagonal stripes - top left */}
-        <div className="absolute -top-[90px] -left-[60px] w-[224px] h-[300px] opacity-20">
-          <img
-            src="/straight-lines.png"
-            alt="Background pattern"
-            className="w-full h-full object-contain"
-          />
-        </div>
-
-        {/* Background diagonal stripes - bottom right */}
-        <div className="absolute -bottom-[90px] -right-[60px] w-[224px] h-[300px] opacity-20">
-          <img
-            src="/straight-lines.png"
-            alt="Background pattern"
-            className="w-full h-full object-contain"
-          />
-        </div>
-
         <div className="mx-auto relative z-10">
           {/* Heading */}
           <div
@@ -244,6 +226,9 @@ const WhyUs = () => {
                 : "opacity-0 translate-y-10"
             )}
           >
+            <p id="why--eyebrow" className="eyebrow mb-6">
+              04 <span className="slash-sep">{"//"}</span> Why pod21
+            </p>
             <h2 className="text-h2">
               Why <span className="text-primary-100">pod21?</span>
             </h2>
@@ -291,7 +276,7 @@ const WhyUs = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="flex flex-row items-center bg-bgPrimary items-start rounded-xl p-6 gap-4"
+                className="proxy-id--why-us--feature-card flex flex-row items-center border border-stroke bg-bgSecondary items-start rounded-[4px] p-6 gap-4"
                 style={{
                   transitionDelay: `${index * 150}ms`,
                   opacity: isFeaturesInView ? 1 : 0,
@@ -301,7 +286,7 @@ const WhyUs = () => {
                   transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
                 }}
               >
-                <div className="rounded-full bg-bgSecondary p-[20px]">
+                <div className="rounded-full border border-stroke bg-bgPrimary p-[20px]">
                   {feature.icon}
                 </div>
                 <div className="flex flex-col">

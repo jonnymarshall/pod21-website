@@ -36,6 +36,7 @@ const config = {
       fontFamily: {
         kanit: ["Kanit", ...fontFamily.sans],
         roboto: ["Roboto", ...fontFamily.sans],
+        mono: ["Roboto Mono", ...fontFamily.mono],
       },
       spacing: {
         "side-spacing": "80px",

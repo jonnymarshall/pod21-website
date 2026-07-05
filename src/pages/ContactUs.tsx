@@ -174,7 +174,7 @@ const ContactUs = () => {
         schemaMarkup={contactSchemaMarkup}
       />
       <Navbar />
-      <section className="bg-bgPrimary">
+      <section className="bg-grid bg-bgPrimary">
         <div
           className={cn(
             " pb-side-spacing pt-[218px] max-w-[1440px] mx-auto overflow-hidden",
@@ -188,6 +188,9 @@ const ContactUs = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
               >
+                <p id="contact-us--eyebrow" className="eyebrow mb-6">
+                  Open a channel
+                </p>
                 <h1 className="font-kanit font-bold text-boneWhite !text-h1 lg:text-banner">
                   Let's <span className="text-primary-100">talk.</span>
                 </h1>
@@ -214,18 +217,6 @@ const ContactUs = () => {
                     <ArrowRightSVG width={14} height={10} />
                   </RotatingIcon>
                 </Button>
-                <div
-                  className={cn(
-                    "absolute -left-[100px] -bottom-9 w-[720px] h-[620px]",
-                    "hidden lg:block"
-                  )}
-                >
-                  <img
-                    src="/tilt-arrow-lines.png"
-                    alt="Background pattern"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
               </motion.div>
             </div>
             <motion.div
@@ -234,12 +225,15 @@ const ContactUs = () => {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.5 }}
               className={cn(
-                "bg-bgSecondary rounded-xl border border-none p-8",
+                "bg-bgSecondary rounded-[4px] border border-stroke p-8",
                 "!bg-opacity-100" // Force 100% opacity on all screen sizes
               )}
               style={{ backgroundColor: "var(--bg-secondary)" }} // Adding a direct style for more specificity
             >
-              <h4 className="text-h4 text-boneWhite">Drop us a message</h4>
+              <h4 className="text-h4 text-boneWhite">
+                <span className="slash-sep text-primary-100">{"// "}</span>Drop
+                us a message
+              </h4>
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}

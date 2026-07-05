@@ -1,8 +1,8 @@
 const WhyPodBornCard = () => {
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 border border-textBody rounded-lg p-6 md:p-8">
-        <div className="col-span-1 lg:col-span-2 flex flex-col justify-center">
+      <div className="gap-4 border border-stroke rounded-[4px] p-6 md:p-8 bg-bgSecondary">
+        <div className="flex flex-col justify-center">
           <h2 className="text-h3">
             That’s when <span className="text-primary-100">pod21</span> was
             born.
@@ -20,13 +20,6 @@ const WhyPodBornCard = () => {
             What good is a lifestyle influencer with a podcast with no time to
             spend with their family?
           </p>
-        </div>
-        <div className="col-span-1 lg:col-span-1">
-          <img
-            src="/that's_why_pod21_born.png"
-            alt="About History"
-            className=""
-          />
         </div>
       </div>
     </>

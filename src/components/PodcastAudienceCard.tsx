@@ -53,18 +53,11 @@ const PodcastAudienceCard = ({
 
   return (
     <div className="flex flex-col h-full">
-      {/* Card Image */}
-      <div className={cn("relative w-full overflow-hidden rounded-lg mb-6", imageHeight)}>
-        <img
-          src={imageSrc}
-          alt={`${title} podcast`}
-          className="podcast-card-image object-cover" // Added object-cover to ensure full coverage
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-      </div>
-
       {/* Card Content */}
-      <h4 className="text-h4 text-boneWhite mb-4">{title}</h4>
+      <h4 className="text-h4 text-boneWhite mb-4">
+        <span className="slash-sep text-primary-100">{"// "}</span>
+        {title}
+      </h4>
 
       <div className="flex-1 mb-3">
         {features.map((feature, index) => (

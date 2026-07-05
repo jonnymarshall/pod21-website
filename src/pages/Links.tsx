@@ -72,27 +72,16 @@ const Links = () => {
         }
       `}</style>
 
-      <div
-        className="min-h-screen flex flex-col items-center justify-center"
-        style={{
-          backgroundImage: "url('/links-bg-pattern.jpg')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "900px",
-        }}
-      >
+      <div className="bg-grid min-h-screen flex flex-col items-center justify-center bg-[#0e0e10]">
         <div className="w-full max-w-[400px] flex flex-col items-center px-5 py-16">
 
           {/* Profile */}
-          <div className="flex flex-col items-center mb-10 text-center">
-            <div className="w-20 h-20 rounded-full overflow-hidden bg-[#1a1a1a] mb-5 flex items-center justify-center border-2 border-white/10">
-              <img
-                src="https://ugc.production.linktr.ee/100e80b1-45e3-4915-8d7a-4ecd88934736_4JWZDLRC-400x400.jpeg"
-                alt="pod21"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <h1 className="text-white font-kanit text-[18px] font-bold mb-3">pod21</h1>
-            <p className="text-white/70 font-roboto text-[13px] leading-snug max-w-[260px]">
+          <div id="links--profile" className="flex flex-col items-center mb-10 text-center">
+            <h1 className="text-[#f3efeb] font-kanit text-[22px] font-bold mb-2 uppercase tracking-[0.14em]">pod21</h1>
+            <p className="font-mono text-[10px] tracking-[0.2em] text-[#5c5a57] mb-4">
+              FULL-SERVICE PODCAST <span className="opacity-50">{"//"}</span> CONTENT PRODUCTION
+            </p>
+            <p className="text-[#f3efeb]/70 font-roboto text-[13px] leading-snug max-w-[260px]">
               We are a team of podcast production experts ready to bring your show to life.
             </p>
           </div>
@@ -121,26 +110,11 @@ const Links = () => {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`w-full rounded-2xl overflow-hidden bg-transparent hover:bg-white/[0.04] border border-white/25 transition-colors duration-200${link.shake ? " shake-button" : ""}`}
+                className={`proxy-id--links--link-button w-full rounded-full overflow-hidden bg-transparent hover:border-[#bbf298] border border-[#f3efeb]/25 transition-colors duration-200${link.shake ? " shake-button" : ""}`}
               >
-                {link.image ? (
-                  <div>
-                    <div className="w-full aspect-[16/9] overflow-hidden">
-                      <img
-                        src={link.image}
-                        alt={link.title}
-                        className="w-full h-full object-cover object-center"
-                      />
-                    </div>
-                    <div className="flex items-center justify-center px-4 py-5">
-                      <span className="text-[#bbf298] font-roboto text-[13px] font-normal text-center">{link.title}</span>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-center px-4 py-[22px]">
-                    <span className="text-[#bbf298] font-roboto text-[13px] font-normal text-center">{link.title}</span>
-                  </div>
-                )}
+                <div className="flex items-center justify-center px-4 py-[20px]">
+                  <span className="text-[#f3efeb] font-kanit text-[13px] font-bold uppercase tracking-[0.14em] text-center">{link.title}</span>
+                </div>
               </a>
             ))}
           </div>

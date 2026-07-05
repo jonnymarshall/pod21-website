@@ -1,14 +1,7 @@
 const MotivationalCard = () => {
   return (
     <>
-      <div className="relative gap-4 border border-stroke rounded-lg p-6 md:p-8 bg-bgSecondary overflow-hidden">
-        <div className="absolute -bottom-[90px] -right-[60px] w-[224px] h-[300px] opacity-20 ">
-          <img
-            src="/straight-lines.png"
-            alt="Background pattern"
-            className="w-full h-full object-contain"
-          />
-        </div>
+      <div className="relative gap-4 border border-stroke rounded-[4px] p-6 md:p-8 bg-bgSecondary overflow-hidden">
         <div className="">
           <h2 className="text-h3 italic">
             "Rather than giving up, I turned my frustration into{" "}

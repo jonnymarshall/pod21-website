@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pod21 · Brand Option 2 · The Signal Grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700;800&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- STYLE:START -->
+<style data-concept="shared-brand">
+  .f-kanit  { font-family: "Kanit", system-ui, sans-serif; }
+  .f-roboto { font-family: "Roboto", system-ui, sans-serif; }
+  .f-rmono  { font-family: "Roboto Mono", ui-monospace, monospace; }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+  .reveal { animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .d-1 { animation-delay: 0.08s; } .d-2 { animation-delay: 0.2s; } .d-3 { animation-delay: 0.34s; }
+  .d-4 { animation-delay: 0.5s; }  .d-5 { animation-delay: 0.68s; } .d-6 { animation-delay: 0.88s; }
+  .slash-sep::before { content: "//"; opacity: 0.5; margin: 0 0.6em; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; }
+    .marquee-track { animation: none !important; }
+  }
+</style>
+<style data-concept="b2">
+  .bb-root {
+    background: #0e0e10; color: #f3efeb;
+    background-image:
+      linear-gradient(rgba(243, 239, 235, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(243, 239, 235, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+  .bb-display {
+    font-weight: 800;
+    letter-spacing: -0.005em;
+    line-height: 0.94;
+    font-size: clamp(2.9rem, 7.4vw, 7.25rem);
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .bb-display .bb-green { color: #bbf298; }
+  .bb-panel { border: 1px solid rgba(243, 239, 235, 0.12); background: rgba(14, 14, 16, 0.72); }
+  .bb-key {
+    border: 1px solid rgba(243, 239, 235, 0.25);
+    box-shadow: inset 0 -2px 0 rgba(243, 239, 235, 0.14);
+    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .bb-key:hover { background: #bbf298; border-color: #bbf298; color: #0e0e10; box-shadow: inset 0 -2px 0 rgba(14, 14, 16, 0.35); }
+  .bb-key:active { box-shadow: inset 0 1px 0 rgba(14, 14, 16, 0.3); transform: translateY(1px); }
+  .bb-rec-dot { animation: bb-blink 1.4s steps(2, start) infinite; }
+  @keyframes bb-blink { 50% { opacity: 0.15; } }
+  .bb-readout { font-variant-numeric: tabular-nums; }
+  .bb-meter-track { background: rgba(243, 239, 235, 0.1); }
+  .bb-meter-fill { background: linear-gradient(90deg, #4c6b3c, #bbf298); }
+  @media (prefers-reduced-motion: reduce) { .bb-rec-dot { animation: none; } }
+</style>
+<!-- STYLE:END -->
+</head>
+<body class="bb-root antialiased">
+
+<!-- ARTIFACT:SECTION -->
+<section id="brand-2" class="bb-root relative flex min-h-screen flex-col">
+
+  <!-- Console header: diamond mark plus session readouts -->
+  <nav id="brand-2--console-bar" class="reveal flex flex-wrap items-center justify-between gap-4 border-b border-[#f3efeb]/10 px-6 py-5 sm:px-10">
+    <a id="brand-2--console-bar--wordmark" href="#" class="flex items-center gap-3" aria-label="Pod 21 home">
+      <svg viewBox="0 0 290.73 321.74" fill="currentColor" class="h-7 w-7 text-[#bbf298]" role="img" aria-label="pod 21 icon"><path d="m290.73,157.59l-39.39,39.39-19.69,19.71-105.07,105.05-39.39-39.39v-122.62c0-8.63-7.73-15.33-16.25-13.89-.06.02-.12.02-.16.04-4.04.72-7.87,2.78-10.81,6.18-5.96,6.9-5.96,17.31,0,24.2,2.94,3.4,6.78,5.46,10.81,6.18v55.94c-17.97-.8-35.7-8.07-49.37-21.81-28.88-29-28.48-77.13.84-105.67,29.06-28.28,75.57-28.04,104.33.72.06.06.1.12.16.16,8.39,8.43,12.97,19.93,12.97,31.8v86.24l72.23-72.23-65.66-65.66-13.13,13.13-39.41-39.41v-26.26L133.15,0l157.57,157.59Z"></path></svg>
+      <span class="f-kanit text-[16px] font-bold uppercase tracking-[0.14em]">Pod 21</span>
+    </a>
+    <div id="brand-2--console-bar--readouts" class="f-rmono bb-readout hidden items-center gap-7 text-[11px] tracking-[0.1em] text-[#5c5a57] md:flex">
+      <span>SESSION 2026.07.04</span><span class="opacity-40">//</span>
+      <span>STUDIO A · 24bit / 96kHz</span><span class="opacity-40">//</span>
+      <span class="flex items-center gap-2 text-[#bbf298]"><span class="bb-rec-dot inline-block h-2 w-2 rounded-full bg-[#bf103d]"></span>REC</span>
+    </div>
+    <a id="brand-2--console-bar--contact-link" href="#" class="f-rmono text-[11px] tracking-[0.16em] text-[#aeaeae] underline decoration-[#bbf298]/50 underline-offset-4 transition-colors duration-300 hover:text-[#bbf298]">
+      OPEN A CHANNEL
+    </a>
+  </nav>
+
+  <div class="flex flex-1 flex-col justify-center px-6 py-16 sm:px-10">
+    <header id="brand-2--hero" class="mx-auto w-full max-w-6xl">
+      <p id="brand-2--hero--annotation" class="f-rmono reveal d-1 text-[11px] tracking-[0.24em] text-[#5c5a57]">
+        [CH 01 / VOX] <span class="opacity-40">//</span> FULL-SERVICE PODCAST + CONTENT PRODUCTION
+      </p>
+      <h1 id="brand-2--hero--headline" class="f-kanit bb-display reveal d-2 mt-7 max-w-[16ch]">
+        Every syllable <span class="bb-green">on the grid.</span>
+      </h1>
+      <p id="brand-2--hero--subhead" class="f-roboto reveal d-3 mt-7 max-w-[52ch] text-[16px] leading-[1.75] text-[#f3efeb]/70">
+        Pod21 runs production like mission control: engineered rooms, versioned
+        edits, loudness-true masters, and a delivery schedule your team can set
+        a watch by.
+      </p>
+      <div id="brand-2--hero--actions" class="reveal d-4 mt-11 flex flex-wrap items-center gap-4">
+        <a id="brand-2--hero--cta-primary" href="#" class="bb-key f-kanit rounded-[4px] px-8 py-4 text-[13px] font-bold uppercase tracking-[0.2em]">
+          Start transmission
+        </a>
+        <a id="brand-2--hero--cta-specs" href="#" class="f-rmono px-4 py-4 text-[12px] tracking-[0.2em] text-[#5c5a57] transition-colors duration-300 hover:text-[#f3efeb]">
+          READ THE SPEC SHEET →
+        </a>
+      </div>
+    </header>
+
+    <!-- Live signal panel -->
+    <div id="brand-2--signal-panel" class="bb-panel reveal d-5 mx-auto mt-14 w-full max-w-6xl rounded-[4px] p-5">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[#f3efeb]/10 pb-4">
+        <p class="f-rmono text-[10px] tracking-[0.22em] text-[#5c5a57]">MASTER BUS <span class="opacity-40">//</span> LIVE</p>
+        <p class="f-rmono bb-readout text-[10px] tracking-[0.22em] text-[#bbf298]">-14.0 LUFS · TRUE PEAK -1.2dB</p>
+      </div>
+      <canvas id="brand-2--signal-panel--waveform" class="mt-4 h-24 w-full" height="96" aria-hidden="true"></canvas>
+      <div id="brand-2--signal-panel--meters" class="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 md:grid-cols-4">
+        <div class="proxy-id--brand-2--signal-panel--meter">
+          <p class="f-rmono mb-1.5 text-[9px] tracking-[0.2em] text-[#5c5a57]">DIALOGUE</p>
+          <div class="bb-meter-track h-1"><div class="bb-meter-fill h-1 w-[86%]"></div></div>
+        </div>
+        <div class="proxy-id--brand-2--signal-panel--meter">
+          <p class="f-rmono mb-1.5 text-[9px] tracking-[0.2em] text-[#5c5a57]">MUSIC</p>
+          <div class="bb-meter-track h-1"><div class="bb-meter-fill h-1 w-[54%]"></div></div>
+        </div>
+        <div class="proxy-id--brand-2--signal-panel--meter">
+          <p class="f-rmono mb-1.5 text-[9px] tracking-[0.2em] text-[#5c5a57]">ROOM</p>
+          <div class="bb-meter-track h-1"><div class="bb-meter-fill h-1 w-[31%]"></div></div>
+        </div>
+        <div class="proxy-id--brand-2--signal-panel--meter">
+          <p class="f-rmono mb-1.5 text-[9px] tracking-[0.2em] text-[#5c5a57]">MASTER</p>
+          <div class="bb-meter-track h-1"><div class="bb-meter-fill h-1 w-[78%]"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /ARTIFACT:SECTION -->
+
+<!-- ARTIFACT:SCRIPT -->
+<script>
+(function () {
+  var canvas = document.getElementById("brand-2--signal-panel--waveform");
+  if (!canvas) return;
+  var ctx = canvas.getContext("2d");
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var t = 0;
+  function draw() {
+    var w = (canvas.width = canvas.offsetWidth * (window.devicePixelRatio || 1));
+    var h = (canvas.height = 96 * (window.devicePixelRatio || 1));
+    ctx.clearRect(0, 0, w, h);
+    var mid = h / 2;
+    var bars = 160;
+    var step = w / bars;
+    for (var i = 0; i < bars; i++) {
+      var env = Math.sin((i / bars) * Math.PI);
+      var a = Math.sin(i * 0.31 + t) * Math.sin(i * 0.083 + t * 0.6) * env;
+      var amp = Math.max(2, Math.abs(a) * mid * 0.9);
+      ctx.fillStyle = i % 8 === 0 ? "#bbf298" : "rgba(243,239,235,0.35)";
+      ctx.fillRect(i * step, mid - amp, Math.max(1, step * 0.45), amp * 2);
+    }
+    t += 0.045;
+    if (!reduced) requestAnimationFrame(draw);
+  }
+  draw();
+  document.addEventListener("pod21:show", function () { draw(); });
+})();
+</script>
+<!-- /ARTIFACT:SCRIPT -->
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pod21 · Brand Option 6 · The Session</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700;800&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- STYLE:START -->
+<style data-concept="shared-brand">
+  .f-kanit  { font-family: "Kanit", system-ui, sans-serif; }
+  .f-roboto { font-family: "Roboto", system-ui, sans-serif; }
+  .f-rmono  { font-family: "Roboto Mono", ui-monospace, monospace; }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+  .reveal { animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .d-1 { animation-delay: 0.08s; } .d-2 { animation-delay: 0.2s; } .d-3 { animation-delay: 0.34s; }
+  .d-4 { animation-delay: 0.5s; }  .d-5 { animation-delay: 0.68s; } .d-6 { animation-delay: 0.88s; }
+  .slash-sep::before { content: "//"; opacity: 0.5; margin: 0 0.6em; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; }
+    .marquee-track { animation: none !important; }
+  }
+</style>
+<style data-concept="b6">
+  .b6-root {
+    background: #0e0e10; color: #f3efeb;
+    background-image:
+      linear-gradient(rgba(243, 239, 235, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(243, 239, 235, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+  .b6-display {
+    font-weight: 800;
+    letter-spacing: -0.005em;
+    line-height: 0.94;
+    font-size: clamp(3rem, 7.8vw, 7.75rem);
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .b6-display .b6-outline { color: transparent; -webkit-text-stroke: 1.5px #bf103d; }
+  .b6-cta-solid {
+    background: #bf103d; border-radius: 4px;
+    transition: background 0.3s ease, transform 0.15s ease;
+  }
+  .b6-cta-solid:hover { background: #a50d34; }
+  .b6-cta-solid:active { transform: scale(0.98); }
+  .b6-cta-ghost {
+    border: 1px solid rgba(243, 239, 235, 0.25); border-radius: 4px;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  .b6-cta-ghost:hover { border-color: #f3efeb; color: #f3efeb; }
+  .b6-rec-dot { animation: b6-blink 1.4s steps(2, start) infinite; }
+  @keyframes b6-blink { 50% { opacity: 0.15; } }
+  .b6-readout { font-variant-numeric: tabular-nums; }
+  .b6-console-link { transition: color 0.3s ease; }
+  .b6-console-link:hover { color: #f3efeb; }
+  .b6-bone { background: #f3efeb; color: #212121; }
+  .b6-bone-muted { color: rgba(33, 33, 33, 0.62); }
+  .b6-chapter { border-color: rgba(33, 33, 33, 0.14); transition: background 0.3s ease; }
+  .b6-chapter:hover { background: #fbf9f6; }
+  .b6-chapter-num { color: #bf103d; }
+  @media (prefers-reduced-motion: reduce) { .b6-rec-dot { animation: none; } }
+</style>
+<!-- STYLE:END -->
+</head>
+<body class="b6-root antialiased">
+
+<!-- ARTIFACT:SECTION -->
+<section id="brand-6" class="b6-root flex min-h-screen flex-col">
+
+  <!-- Console bar: mark top left, session data center, mono nav right -->
+  <nav id="brand-6--console-bar" class="reveal flex flex-wrap items-center justify-between gap-4 border-b border-[#f3efeb]/10 px-6 py-5 sm:px-10">
+    <a id="brand-6--console-bar--wordmark" href="#" class="flex items-center gap-3" aria-label="Pod 21 home">
+      <svg viewBox="0 0 290.73 321.74" fill="currentColor" class="h-7 w-7 text-[#bbf298]" role="img" aria-label="pod 21 icon"><path d="m290.73,157.59l-39.39,39.39-19.69,19.71-105.07,105.05-39.39-39.39v-122.62c0-8.63-7.73-15.33-16.25-13.89-.06.02-.12.02-.16.04-4.04.72-7.87,2.78-10.81,6.18-5.96,6.9-5.96,17.31,0,24.2,2.94,3.4,6.78,5.46,10.81,6.18v55.94c-17.97-.8-35.7-8.07-49.37-21.81-28.88-29-28.48-77.13.84-105.67,29.06-28.28,75.57-28.04,104.33.72.06.06.1.12.16.16,8.39,8.43,12.97,19.93,12.97,31.8v86.24l72.23-72.23-65.66-65.66-13.13,13.13-39.41-39.41v-26.26L133.15,0l157.57,157.59Z"></path></svg>
+      <span class="f-kanit text-[16px] font-bold uppercase tracking-[0.14em]">Pod 21</span>
+    </a>
+    <div id="brand-6--console-bar--readouts" class="f-rmono b6-readout hidden items-center gap-7 text-[11px] tracking-[0.1em] text-[#5c5a57] lg:flex">
+      <span>SESSION 2026.07.04</span><span class="opacity-40">//</span>
+      <span>STUDIO A · 24bit / 96kHz</span><span class="opacity-40">//</span>
+      <span class="flex items-center gap-2 text-[#bbf298]"><span class="b6-rec-dot inline-block h-2 w-2 rounded-full bg-[#bf103d]"></span>REC</span>
+    </div>
+    <div id="brand-6--console-bar--links" class="f-rmono flex items-center gap-2 text-[11px] tracking-[0.16em] text-[#aeaeae]">
+      <a class="b6-console-link" href="#">WORK</a><span class="opacity-40">//</span>
+      <a class="b6-console-link" href="#">STUDIO</a><span class="opacity-40">//</span>
+      <a class="b6-console-link" href="#">CONTACT</a>
+    </div>
+  </nav>
+
+  <!-- The manifesto, centered and unaccompanied -->
+  <header id="brand-6--hero" class="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-16 text-center">
+    <p id="brand-6--hero--eyebrow" class="f-kanit reveal d-1 text-[12px] font-medium uppercase tracking-[0.26em] text-[#bbf298]">
+      A full-service production house
+    </p>
+    <h1 id="brand-6--hero--headline" class="f-kanit b6-display reveal d-2 mt-8">
+      We don't make content.<br /><span class="b6-outline">We produce</span> culture.
+    </h1>
+    <p id="brand-6--hero--subhead" class="f-roboto reveal d-3 mt-8 max-w-[48ch] text-[16px] leading-[1.75] text-[#f3efeb]/70">
+      A production house with a single standard: work that outlives the feed.
+      If that sounds severe, it is. Severity is why our clients win.
+    </p>
+    <div id="brand-6--hero--actions" class="reveal d-4 mt-11 flex flex-wrap items-center justify-center gap-4">
+      <a id="brand-6--hero--cta-primary" href="#" class="b6-cta-solid f-kanit px-8 py-4 text-[13px] font-bold uppercase tracking-[0.16em] text-[#f3efeb]">
+        Commission Pod21
+      </a>
+      <a id="brand-6--hero--cta-reel" href="#" class="b6-cta-ghost f-kanit px-8 py-4 text-[13px] font-bold uppercase tracking-[0.16em] text-[#f3efeb]/80">
+        Watch the reel <span class="opacity-50">//</span> 2:14
+      </a>
+    </div>
+  </header>
+
+  <!-- Bone act: how a commission runs, in order -->
+  <footer id="brand-6--process" class="b6-bone reveal d-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <article id="brand-6--process--development" class="b6-chapter border-t px-7 py-9 sm:border-r">
+        <p class="f-kanit text-[13px] font-medium uppercase tracking-[0.14em]"><span class="b6-chapter-num">01 //</span> Development</p>
+        <p class="f-roboto b6-bone-muted mt-3 text-[14px] leading-[1.7]">The idea, interrogated. Format, voice, and a season arc worth committing to.</p>
+      </article>
+      <article id="brand-6--process--production" class="b6-chapter border-t px-7 py-9 lg:border-r">
+        <p class="f-kanit text-[13px] font-medium uppercase tracking-[0.14em]"><span class="b6-chapter-num">02 //</span> Production</p>
+        <p class="f-roboto b6-bone-muted mt-3 text-[14px] leading-[1.7]">Engineered rooms and unhurried direction. Takes that sound like the third hour of a good dinner.</p>
+      </article>
+      <article id="brand-6--process--post" class="b6-chapter border-t px-7 py-9 sm:border-r">
+        <p class="f-kanit text-[13px] font-medium uppercase tracking-[0.14em]"><span class="b6-chapter-num">03 //</span> Post</p>
+        <p class="f-roboto b6-bone-muted mt-3 text-[14px] leading-[1.7]">Edit, score, grade, master. The invisible work that makes it feel inevitable.</p>
+      </article>
+      <article id="brand-6--process--distribution" class="b6-chapter border-t px-7 py-9">
+        <p class="f-kanit text-[13px] font-medium uppercase tracking-[0.14em]"><span class="b6-chapter-num">04 //</span> Distribution</p>
+        <p class="f-roboto b6-bone-muted mt-3 text-[14px] leading-[1.7]">Placed, promoted, and measured. A show is finished when it is heard.</p>
+      </article>
+    </div>
+  </footer>
+</section>
+<!-- /ARTIFACT:SECTION -->
+
+</body>
+</html>
