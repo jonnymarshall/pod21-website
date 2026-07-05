@@ -79,16 +79,11 @@ const Testimonials = () => {
   ];
 
   return (
-    <section id="testimonials" className={cn("relative bg-bgPrimary ", "")}>
+    <section
+      id="testimonials"
+      className="relative border-t border-stroke bg-bgPrimary"
+    >
       <div className="relative max-w-[1440px] mx-auto overflow-hidden px-side-spacing-mobile md:px-side-spacing-tablet  py-side-spacing  scroll-mt-[120px] ">
-        {/* Background diagonal stripes - bottom right */}
-        <div className="absolute -bottom-[90px] -right-[56px] w-[440px] h-[330px] opacity-20">
-          <img
-            src="/arrow-lines.png"
-            alt="Background pattern"
-            className="w-full h-full object-contain"
-          />
-        </div>
         <div className="relative z-10">
           <div
             ref={titleRef}
@@ -99,6 +94,9 @@ const Testimonials = () => {
                 : "opacity-0 translate-y-10"
             )}
           >
+            <p id="testimonials--eyebrow" className="eyebrow mb-6">
+              07 <span className="slash-sep">{"//"}</span> Client spotlight
+            </p>
             <h2 className="text-h2">
               Real podcasts, real{" "}
               <span className="text-primary-100">results</span>
@@ -147,15 +145,17 @@ const Testimonials = () => {
                       transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
                     }}
                   >
-                    <div className="w-40 h-40 rounded-full overflow-hidden">
+                    <div className="w-40 h-40 rounded-full overflow-hidden border border-stroke">
                       <img
                         src={testimonial.avatar}
                         alt={testimonial.name}
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <p className="text-body-lg-medium mt-6">{testimonial.name}</p>
-                    <p className="text-base text-textBody mt-2">
+                    <p className="mt-6 font-kanit text-[16px] font-medium uppercase tracking-[0.1em] text-boneWhite">
+                      {testimonial.name}
+                    </p>
+                    <p className="readout mt-2 uppercase text-[#5c5a57]">
                       {testimonial.title}
                     </p>
                     <blockquote className="text-body-lg italic mt-8 leading-relaxed">

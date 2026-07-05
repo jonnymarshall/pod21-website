@@ -82,10 +82,24 @@ const Blogs = () => {
       <section className="bg-bgPrimary">
         <div
           className={cn(
-            "relative pb-side-spacing pt-[218px] max-w-[1440px] mx-auto overflow-hidden",
+            "relative pb-side-spacing pt-[160px] max-w-[1440px] mx-auto overflow-hidden",
             "px-side-spacing-mobile md:px-side-spacing-tablet "
           )}
         >
+          {/* Page header */}
+          <div id="blogs--header" className="mb-16 text-center">
+            <p id="blogs--header--eyebrow" className="eyebrow">
+              The journal
+            </p>
+            <h1
+              id="blogs--header--headline"
+              className="mt-6 font-kanit font-bold text-h1 text-boneWhite"
+            >
+              Notes from the{" "}
+              <span className="text-primary-100">control room.</span>
+            </h1>
+          </div>
+
           {/* Featured Blog Post */}
           {isError ? (
             <div className="text-center py-10">
@@ -101,7 +115,7 @@ const Blogs = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-[120px]">
                 <div
                   className={cn(
-                    "relative w-full rounded-lg overflow-hidden",
+                    "relative w-full rounded-[4px] border border-stroke overflow-hidden",
                     "h-[240px] md:h-[340px]"
                   )}
                 >

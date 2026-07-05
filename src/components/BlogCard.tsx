@@ -38,14 +38,14 @@ const BlogCard = ({
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
       className={cn(
-        "group h-full cursor-pointer flex flex-col  rounded-xl p-4 overflow-hidden",
-        "hover:border hover:border-textBody hover:bg-bgSecondary",
+        "group h-full cursor-pointer flex flex-col rounded-[4px] border border-stroke bg-bgSecondary p-4 overflow-hidden",
+        "transition-colors hover:border-primary-100/50",
         className
       )}
     >
       <div
         className={cn(
-          "relative w-full rounded-lg overflow-hidden",
+          "relative w-full rounded-[4px] overflow-hidden",
           "h-[180px] md:h-[140px]"
         )}
       >

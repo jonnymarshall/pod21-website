@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pod21 · Option D · The Control Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- STYLE:START -->
+<style data-concept="shared">
+  .f-serif { font-family: "Fraunces", ui-serif, Georgia, serif; font-optical-sizing: auto; }
+  .f-grot  { font-family: "Archivo", ui-sans-serif, system-ui, sans-serif; }
+  .f-mono  { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", monospace; }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+  .reveal { animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .d-1 { animation-delay: 0.08s; } .d-2 { animation-delay: 0.2s; } .d-3 { animation-delay: 0.34s; }
+  .d-4 { animation-delay: 0.5s; }  .d-5 { animation-delay: 0.68s; } .d-6 { animation-delay: 0.88s; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; }
+    .marquee-track { animation: none !important; }
+  }
+</style>
+<style data-concept="d">
+  .cd-root {
+    background: #08090b; color: #f3efeb;
+    background-image:
+      linear-gradient(rgba(243, 239, 235, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(243, 239, 235, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+  .cd-headline {
+    font-size: clamp(2.9rem, 6.2vw, 6.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    font-weight: 560;
+    text-wrap: balance;
+  }
+  .cd-headline .cd-caret { color: #bbf298; }
+  .cd-panel { border: 1px solid rgba(243, 239, 235, 0.12); background: rgba(11, 12, 15, 0.6); }
+  .cd-key {
+    border: 1px solid rgba(243, 239, 235, 0.25);
+    box-shadow: inset 0 -2px 0 rgba(243, 239, 235, 0.14);
+    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .cd-key:hover { background: #bbf298; border-color: #bbf298; color: #08090b; box-shadow: inset 0 -2px 0 rgba(8, 9, 11, 0.35); }
+  .cd-key:active { box-shadow: inset 0 1px 0 rgba(8, 9, 11, 0.3); transform: translateY(1px); }
+  .cd-rec-dot { animation: cd-blink 1.4s steps(2, start) infinite; }
+  @keyframes cd-blink { 50% { opacity: 0.15; } }
+  .cd-readout { font-variant-numeric: tabular-nums; }
+  .cd-meter-track { background: rgba(243, 239, 235, 0.1); }
+  .cd-meter-fill { background: linear-gradient(90deg, #4c6b3c, #bbf298); }
+  @media (prefers-reduced-motion: reduce) { .cd-rec-dot { animation: none; } }
+</style>
+<!-- STYLE:END -->
+</head>
+<body class="cd-root antialiased">
+
+<!-- ARTIFACT:SECTION -->
+<section id="concept-d" class="cd-root relative flex min-h-screen flex-col">
+
+  <!-- Console header: wordmark and session readouts -->
+  <nav id="concept-d--console-bar" class="reveal flex flex-wrap items-center justify-between gap-4 border-b border-[#f3efeb]/10 px-6 py-5 sm:px-10">
+    <a id="concept-d--console-bar--wordmark" href="#" class="f-mono text-[15px] font-medium tracking-[0.3em]">POD_21</a>
+    <div id="concept-d--console-bar--readouts" class="f-mono cd-readout hidden items-center gap-8 text-[11px] tracking-[0.14em] text-[#5c5a57] md:flex">
+      <span>SESSION 2026.07.04</span>
+      <span>STUDIO A · 24bit / 96kHz</span>
+      <span class="flex items-center gap-2 text-[#bbf298]"><span class="cd-rec-dot inline-block h-2 w-2 rounded-full bg-[#bf103d]"></span>REC</span>
+    </div>
+    <a id="concept-d--console-bar--contact-link" href="#" class="f-mono text-[11px] tracking-[0.2em] text-[#aeaeae] underline decoration-[#bbf298]/50 underline-offset-4 transition-colors duration-300 hover:text-[#bbf298]">
+      OPEN A CHANNEL
+    </a>
+  </nav>
+
+  <div class="flex flex-1 flex-col justify-center px-6 py-16 sm:px-10">
+    <header id="concept-d--hero" class="mx-auto w-full max-w-6xl">
+      <p id="concept-d--hero--annotation" class="f-mono reveal d-1 text-[11px] tracking-[0.3em] text-[#5c5a57]">
+        [CH 01 / VOX] FULL-SERVICE PODCAST + CONTENT PRODUCTION
+      </p>
+      <h1 id="concept-d--hero--headline" class="f-grot cd-headline reveal d-2 mt-8 max-w-[16ch]">
+        Precision is the product<span class="cd-caret">_</span>
+      </h1>
+      <p id="concept-d--hero--subhead" class="f-mono reveal d-3 mt-8 max-w-[58ch] text-[13px] leading-[1.9] text-[#aeaeae]">
+        Every frame graded. Every syllable on the grid. Pod21 runs production
+        like mission control: engineered rooms, versioned edits, loudness-true
+        masters, and a delivery schedule your team can set a watch by.
+      </p>
+      <div id="concept-d--hero--actions" class="reveal d-4 mt-12 flex flex-wrap items-center gap-4">
+        <a id="concept-d--hero--cta-primary" href="#" class="cd-key f-mono rounded-[3px] px-8 py-4 text-[12px] font-medium tracking-[0.24em]">
+          START TRANSMISSION
+        </a>
+        <a id="concept-d--hero--cta-specs" href="#" class="f-mono px-4 py-4 text-[12px] tracking-[0.24em] text-[#5c5a57] transition-colors duration-300 hover:text-[#f3efeb]">
+          READ THE SPEC SHEET →
+        </a>
+      </div>
+    </header>
+
+    <!-- Live signal panel: real waveform, real meters -->
+    <div id="concept-d--signal-panel" class="cd-panel reveal d-5 mx-auto mt-16 w-full max-w-6xl rounded-[3px] p-5">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[#f3efeb]/10 pb-4">
+        <p class="f-mono text-[10px] tracking-[0.26em] text-[#5c5a57]">MASTER BUS · LIVE</p>
+        <p class="f-mono cd-readout text-[10px] tracking-[0.26em] text-[#bbf298]">-14.0 LUFS · TRUE PEAK -1.2dB</p>
+      </div>
+      <canvas id="concept-d--signal-panel--waveform" class="mt-4 h-24 w-full" height="96" aria-hidden="true"></canvas>
+      <div id="concept-d--signal-panel--meters" class="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 md:grid-cols-4">
+        <div class="proxy-id--concept-d--signal-panel--meter">
+          <p class="f-mono mb-1.5 text-[9px] tracking-[0.22em] text-[#5c5a57]">DIALOGUE</p>
+          <div class="cd-meter-track h-1"><div class="cd-meter-fill h-1 w-[86%]"></div></div>
+        </div>
+        <div class="proxy-id--concept-d--signal-panel--meter">
+          <p class="f-mono mb-1.5 text-[9px] tracking-[0.22em] text-[#5c5a57]">MUSIC</p>
+          <div class="cd-meter-track h-1"><div class="cd-meter-fill h-1 w-[54%]"></div></div>
+        </div>
+        <div class="proxy-id--concept-d--signal-panel--meter">
+          <p class="f-mono mb-1.5 text-[9px] tracking-[0.22em] text-[#5c5a57]">ROOM</p>
+          <div class="cd-meter-track h-1"><div class="cd-meter-fill h-1 w-[31%]"></div></div>
+        </div>
+        <div class="proxy-id--concept-d--signal-panel--meter">
+          <p class="f-mono mb-1.5 text-[9px] tracking-[0.22em] text-[#5c5a57]">MASTER</p>
+          <div class="cd-meter-track h-1"><div class="cd-meter-fill h-1 w-[78%]"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /ARTIFACT:SECTION -->
+
+<!-- ARTIFACT:SCRIPT -->
+<script>
+(function () {
+  var canvas = document.getElementById("concept-d--signal-panel--waveform");
+  if (!canvas) return;
+  var ctx = canvas.getContext("2d");
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var t = 0;
+  function draw() {
+    var w = (canvas.width = canvas.offsetWidth * (window.devicePixelRatio || 1));
+    var h = (canvas.height = 96 * (window.devicePixelRatio || 1));
+    ctx.clearRect(0, 0, w, h);
+    var mid = h / 2;
+    var bars = 160;
+    var step = w / bars;
+    for (var i = 0; i < bars; i++) {
+      var env = Math.sin((i / bars) * Math.PI);
+      var a = Math.sin(i * 0.31 + t) * Math.sin(i * 0.083 + t * 0.6) * env;
+      var amp = Math.max(2, Math.abs(a) * mid * 0.9);
+      ctx.fillStyle = i % 8 === 0 ? "#bbf298" : "rgba(243,239,235,0.35)";
+      ctx.fillRect(i * step, mid - amp, Math.max(1, step * 0.45), amp * 2);
+    }
+    t += 0.045;
+    if (!reduced) requestAnimationFrame(draw);
+  }
+  draw();
+  document.addEventListener("pod21:show", function () { draw(); });
+})();
+</script>
+<!-- /ARTIFACT:SCRIPT -->
+
+</body>
+</html>

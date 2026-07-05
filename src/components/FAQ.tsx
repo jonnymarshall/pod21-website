@@ -67,7 +67,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="bg-bgSecondary">
+    <section id="faq" className="border-t border-stroke bg-bgPrimary">
       <div
         className={cn(
           "py-side-spacing scroll-mt-[120px]  relative max-w-[1440px] mx-auto",
@@ -83,6 +83,9 @@ const FAQ = () => {
               : "opacity-0 translate-y-10"
           )}
         >
+          <p id="faq--eyebrow" className="eyebrow mb-6">
+            08 <span className="slash-sep">{"//"}</span> FAQ
+          </p>
           <h2 className="text-h2 text-boneWhite">
             Frequently asked <span className="text-primary-100">questions</span>
           </h2>
@@ -100,13 +103,10 @@ const FAQ = () => {
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="border-0 bg-bgPrimary p-6 rounded-lg overflow-hidden"
+              className="border border-stroke bg-bgSecondary p-6 rounded-[4px] overflow-hidden"
             >
               <AccordionTrigger
-                className={cn(
-                  "text-left hover:no-underline",
-                  "data-[state=open]:bg-bgPrimary"
-                )}
+                className="text-left hover:no-underline"
               >
                 <span className="text-body-lg-medium text-boneWhite">
                   {faq.question}

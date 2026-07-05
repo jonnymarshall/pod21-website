@@ -198,7 +198,11 @@ const WhyPodcast = () => {
   ];
 
   return (
-    <section id="why-podcast" ref={ref} className="bg-bgPrimary">
+    <section
+      id="why-podcast"
+      ref={ref}
+      className="border-t border-stroke bg-bgPrimary"
+    >
       <div
         className={cn(
           "py-side-spacing bg-bgPrimary scroll-mt-[120px] max-w-[1440px] mx-auto",
@@ -212,6 +216,9 @@ const WhyPodcast = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-[60px]"
         >
+          <p id="why-podcast--eyebrow" className="eyebrow mb-6">
+            03 <span className="slash-sep">{"//"}</span> Why podcast
+          </p>
           <h2 className="text-h2 font-bold">
             Why start a <span className="text-primary-100">podcast</span>?
           </h2>
@@ -233,7 +240,7 @@ const WhyPodcast = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 + index * 0.2 }}
-              className="bg-bgSecondary rounded-xl p-6 cursor-pointer h-full"
+              className="h-full cursor-pointer rounded-[4px] border border-stroke bg-bgSecondary p-6"
             >
               <PodcastAudienceCard
                 title={card.title}
@@ -253,7 +260,7 @@ const WhyPodcast = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.7 + index * 0.2 }}
-              className="bg-bgSecondary rounded-xl p-6 cursor-pointer h-full"
+              className="h-full cursor-pointer rounded-[4px] border border-stroke bg-bgSecondary p-6"
             >
               <PodcastAudienceCard
                 title={card.title}
