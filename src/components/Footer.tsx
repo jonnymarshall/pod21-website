@@ -75,7 +75,12 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#features" className="footer-social-links">
+                <a
+                  href="https://www.linkedin.com/company/111912003/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-social-links"
+                >
                   <div className="footer-social-links-icon">
                     <LinkedInSVG height={24} width={24} />
                   </div>
