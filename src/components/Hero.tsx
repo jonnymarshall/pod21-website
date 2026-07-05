@@ -1,4 +1,5 @@
 import { Button } from "./ui/button";
+import { PhoneSVG } from "@/assets/icons";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -83,6 +84,7 @@ const Hero = () => {
             size="md"
             onClick={() => navigate("/contact")}
           >
+            <PhoneSVG width={18} height={18} className="mr-1" />
             Start transmission
           </Button>
           <Button
@@ -91,7 +93,7 @@ const Hero = () => {
             size="md"
             onClick={scrollToServices}
           >
-            Read the spec sheet
+            What we do
           </Button>
         </motion.div>
       </div>
@@ -106,7 +108,7 @@ const Hero = () => {
         custom={0.68}
       >
         <p className="readout text-[10px] text-[#5c5a57]">
-          EST. 2021 <span className="slash-sep">{"//"}</span> PRODUCTION HOUSE
+          EST. 2025 <span className="slash-sep">{"//"}</span> USA
         </p>
         <p className="readout text-[10px] text-[#5c5a57]">
           500+ EPISODES SHIPPED <span className="slash-sep">{"//"}</span>{" "}

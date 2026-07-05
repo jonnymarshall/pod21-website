@@ -1,14 +1,7 @@
-import { Button, RotatingIcon } from "./ui/button";
-import {
-  ThumbUpSVG,
-  HandShakeSVG,
-  AnalyticsSVG,
-  ArrowRightSVG,
-} from "@/assets/icons";
+import { ThumbUpSVG, HandShakeSVG, AnalyticsSVG } from "@/assets/icons";
 import { useInView } from "@/hooks/useInView";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 // Counter animation hook
 const useCounter = (
@@ -176,11 +169,9 @@ const StatCard = ({
 };
 
 const WhyUs = () => {
-  const navigate = useNavigate();
   const [titleRef, isTitleInView] = useInView({ threshold: 0.2 });
   const [statsRef, isStatsInView] = useInView({ threshold: 0.2 });
   const [featuresRef, isFeaturesInView] = useInView({ threshold: 0.2 });
-  const [ctaRef, isCtaInView] = useInView({ threshold: 0.2 });
 
   const stats = [
     { label: "Fast Turnaround Time", value: "48" },
@@ -301,31 +292,6 @@ const WhyUs = () => {
             ))}
           </div>
 
-          {/* Call to action */}
-          <div
-            ref={ctaRef}
-            className={cn(
-              "text-center transition-all duration-1000 delay-200",
-              isCtaInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            )}
-          >
-            <p className="text-body-sm-medium text-textBody mt-[60px] mb-4">
-              Not convinced yet?
-            </p>
-
-            <Button
-              variant="default"
-              size="md"
-              onClick={() => navigate("/contact")}
-            >
-              Tell us why on a free call
-              <RotatingIcon>
-                <ArrowRightSVG width={14} height={10} />
-              </RotatingIcon>
-            </Button>
-          </div>
         </div>
       </div>
     </section>
