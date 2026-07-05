@@ -6,11 +6,11 @@
 @layer base {
   :root {
     --bone-white: #f3efeb;
-    --carbon-black: #1d1d1d;
-    --text-body: #aeaeae;
-    --bg-primary: #0b0c0f;
-    --bg-secondary: #101116;
-    --stroke: #1d1d1d;
+    --carbon-black: #212121;
+    --text-body: rgba(243, 239, 235, 0.7);
+    --bg-primary: #0e0e10;
+    --bg-secondary: #17171a;
+    --stroke: rgba(243, 239, 235, 0.14);
 
     --primary-100: #bbf298;
     --primary-60: #d6f7c1;
@@ -19,16 +19,10 @@
     --primary-10: #f8fef5;
 
     --red-100: #bf103d;
-    --red-60: #d9708b;
+    --red-60: #a50d34;
     --red-40: #e59fb1;
     --red-30: #ecb7c5;
     --red-10: #f9e7ec;
-
-    --blue-100: #120551;
-    --blue-60: #716997;
-    --blue-40: #a09bb9;
-    --blue-30: #b8b4cb;
-    --blue-10: #e7e6ee;
   }
 }
 
@@ -58,8 +52,41 @@
 }
 
 @layer components {
+  /* Engineering grid ground, from the Command Center direction */
+  .bg-grid {
+    background-image: linear-gradient(rgba(243, 239, 235, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(243, 239, 235, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  /* Kanit small-caps kicker, green by default */
+  .eyebrow {
+    @apply font-kanit font-medium uppercase tracking-[0.26em] text-[12px] text-primary-100;
+  }
+
+  /* Roboto Mono console readout text */
+  .readout {
+    @apply font-mono text-[11px] tracking-[0.14em] text-textBody;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* The brand's // separator, muted */
+  .slash-sep {
+    @apply opacity-50;
+  }
+
+  @keyframes rec-blink {
+    50% { opacity: 0.15; }
+  }
+  .rec-dot {
+    animation: rec-blink 1.4s steps(2, start) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rec-dot { animation: none; }
+  }
+
   .nav-link {
-    @apply text-boneWhite text-body-sm transition-colors whitespace-nowrap hover:text-primary-100;
+    @apply font-mono text-[11px] tracking-[0.14em] uppercase text-textBody transition-colors whitespace-nowrap hover:text-boneWhite;
   }
   .footer-social-links {
     @apply flex items-center text-body-lg text-boneWhite hover:text-primary-100 transition-colors;

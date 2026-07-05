@@ -4,7 +4,12 @@ import { cn } from "@/lib/utils";
 import { ArrowRightSVG } from "@/assets/icons";
 import { Link } from "react-router-dom";
 
-const Contact = () => {
+interface ContactProps {
+  // Homepage passes its section number so the eyebrow matches the index rail
+  indexLabel?: string;
+}
+
+const Contact = ({ indexLabel }: ContactProps) => {
   const [containerRef, isInView] = useInView({
     threshold: 0.2,
     triggerOnce: true,
@@ -13,21 +18,8 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className={cn(
-        "py-side-spacing bg-bgPrimary relative overflow-hidden scroll-mt-[120px] "
-        // "px-side-spacing-mobile md:px-side-spacing-tablet lg:px-side-spacing"
-      )}
+      className="bg-grid relative overflow-hidden border-t border-stroke bg-bgPrimary py-side-spacing scroll-mt-[120px]"
     >
-      {/* Background pattern */}
-      <div className="absolute inset-0">
-        <img
-          src="/pattern.png"
-          alt="Background pattern"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-90"></div>
-      </div>
-
       <div
         ref={containerRef}
         className={cn(
@@ -43,6 +35,14 @@ const Contact = () => {
           )}
         >
           <div className="max-w-[820px]">
+            <p id="contact--eyebrow" className="eyebrow mb-6">
+              {indexLabel && (
+                <>
+                  {indexLabel} <span className="slash-sep">{"//"}</span>{" "}
+                </>
+              )}
+              Commission
+            </p>
             <h2 className="text-h2 text-boneWhite lg:text-banner">
               Let's <span className="text-primary-100">work</span> together
             </h2>

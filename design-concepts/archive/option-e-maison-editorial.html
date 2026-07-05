@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pod21 · Option E · The Maison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- STYLE:START -->
+<style data-concept="shared">
+  .f-serif { font-family: "Fraunces", ui-serif, Georgia, serif; font-optical-sizing: auto; }
+  .f-grot  { font-family: "Archivo", ui-sans-serif, system-ui, sans-serif; }
+  .f-mono  { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", monospace; }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+  .reveal { animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .d-1 { animation-delay: 0.08s; } .d-2 { animation-delay: 0.2s; } .d-3 { animation-delay: 0.34s; }
+  .d-4 { animation-delay: 0.5s; }  .d-5 { animation-delay: 0.68s; } .d-6 { animation-delay: 0.88s; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; }
+    .marquee-track { animation: none !important; }
+  }
+</style>
+<style data-concept="e">
+  .ce-root { background: #12100e; color: #f3efeb; }
+  .ce-headline {
+    font-size: clamp(2.9rem, 6.4vw, 6.75rem);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    font-weight: 360;
+    font-variation-settings: "opsz" 144;
+    text-wrap: balance;
+  }
+  .ce-headline em { font-style: italic; font-weight: 400; }
+  .ce-hairline { background: rgba(243, 239, 235, 0.16); }
+  @keyframes ce-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .ce-draw { transform-origin: center; animation: ce-draw 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both; }
+  .ce-chapter { transition: opacity 0.4s ease; }
+  .ce-chapters:hover .ce-chapter:not(:hover) { opacity: 0.45; }
+  .ce-cta {
+    border: 1px solid rgba(243, 239, 235, 0.35); border-radius: 9999px;
+    transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+  }
+  .ce-cta:hover { background: #f3efeb; color: #12100e; border-color: #f3efeb; }
+  @media (prefers-reduced-motion: reduce) { .ce-draw { animation: none; } }
+</style>
+<!-- STYLE:END -->
+</head>
+<body class="ce-root antialiased">
+
+<!-- ARTIFACT:SECTION -->
+<section id="concept-e" class="ce-root flex min-h-screen flex-col">
+
+  <!-- Nav set like a title page: symmetric, serene -->
+  <nav id="concept-e--nav" class="reveal grid grid-cols-2 items-baseline px-6 pt-10 sm:grid-cols-3 sm:px-12">
+    <p id="concept-e--nav--est" class="f-mono hidden text-[10px] tracking-[0.3em] text-[#8a857f] sm:block">EST. 2021</p>
+    <a id="concept-e--nav--wordmark" href="#" class="f-serif text-left text-[22px] tracking-[0.3em] sm:text-center">POD21</a>
+    <a id="concept-e--nav--enquiries-link" href="#" class="f-mono text-right text-[10px] tracking-[0.3em] text-[#8a857f] transition-colors duration-300 hover:text-[#f3efeb]">ENQUIRIES</a>
+  </nav>
+
+  <!-- Centered address to the reader -->
+  <header id="concept-e--hero" class="mx-auto flex max-w-4xl flex-1 flex-col items-center justify-center px-6 py-20 text-center">
+    <p id="concept-e--hero--eyebrow" class="f-mono reveal d-1 text-[10px] tracking-[0.42em] text-[#8a857f]">
+      A PRODUCTION HOUSE FOR THE SPOKEN WORD
+    </p>
+    <div class="ce-hairline ce-draw mt-9 h-px w-16"></div>
+    <h1 id="concept-e--hero--headline" class="f-serif ce-headline reveal d-2 mt-9">
+      A house for voices<br />that <em>carry</em>
+    </h1>
+    <p id="concept-e--hero--subhead" class="f-grot reveal d-3 mt-9 max-w-[46ch] text-[15px] leading-[1.8] text-[#aeaeae]">
+      Pod21 takes a small number of commissions each season and produces them
+      completely: from the first line of the treatment to the final master.
+    </p>
+    <a id="concept-e--hero--cta" href="#" class="ce-cta f-mono reveal d-4 mt-12 inline-block px-9 py-3.5 text-[11px] tracking-[0.3em]">
+      REQUEST THE PRIVATE REEL
+    </a>
+  </header>
+
+  <!-- The four movements of a commission, in the order they happen -->
+  <footer id="concept-e--chapters" class="ce-chapters reveal d-5 border-t border-[#f3efeb]/15 px-6 sm:px-12">
+    <div class="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-[#f3efeb]/15 sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x">
+      <article id="concept-e--chapters--development" class="ce-chapter px-2 py-8 lg:px-8">
+        <p class="f-serif text-[13px] italic text-[#8a857f]">I. Development</p>
+        <p class="f-grot mt-3 text-[13px] leading-[1.7] text-[#aeaeae]">The idea, interrogated. Format, voice, and a season arc worth committing to.</p>
+      </article>
+      <article id="concept-e--chapters--production" class="ce-chapter px-2 py-8 lg:px-8">
+        <p class="f-serif text-[13px] italic text-[#8a857f]">II. Production</p>
+        <p class="f-grot mt-3 text-[13px] leading-[1.7] text-[#aeaeae]">Engineered rooms, unhurried direction, and takes that sound like the third hour of a good dinner.</p>
+      </article>
+      <article id="concept-e--chapters--post" class="ce-chapter px-2 py-8 lg:px-8">
+        <p class="f-serif text-[13px] italic text-[#8a857f]">III. Post</p>
+        <p class="f-grot mt-3 text-[13px] leading-[1.7] text-[#aeaeae]">Edit, score, grade, master. The invisible work that makes it feel inevitable.</p>
+      </article>
+      <article id="concept-e--chapters--distribution" class="ce-chapter px-2 py-8 lg:px-8">
+        <p class="f-serif text-[13px] italic text-[#8a857f]">IV. Distribution</p>
+        <p class="f-grot mt-3 text-[13px] leading-[1.7] text-[#aeaeae]">Placed, promoted, and measured. A show is finished when it is heard.</p>
+      </article>
+    </div>
+  </footer>
+</section>
+<!-- /ARTIFACT:SECTION -->
+
+</body>
+</html>

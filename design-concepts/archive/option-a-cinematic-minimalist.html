@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pod21 · Option A · The Quiet Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- STYLE:START -->
+<style data-concept="shared">
+  .f-serif { font-family: "Fraunces", ui-serif, Georgia, serif; font-optical-sizing: auto; }
+  .f-grot  { font-family: "Archivo", ui-sans-serif, system-ui, sans-serif; }
+  .f-mono  { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", monospace; }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+  .reveal { animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .d-1 { animation-delay: 0.08s; } .d-2 { animation-delay: 0.2s; } .d-3 { animation-delay: 0.34s; }
+  .d-4 { animation-delay: 0.5s; }  .d-5 { animation-delay: 0.68s; } .d-6 { animation-delay: 0.88s; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; }
+    .marquee-track { animation: none !important; }
+  }
+</style>
+<style data-concept="a">
+  .ca-root { background: #0a0a0c; color: #f3efeb; }
+  .ca-headline {
+    font-size: clamp(3.4rem, 8.6vw, 8.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    font-weight: 320;
+    font-variation-settings: "opsz" 144;
+    text-wrap: balance;
+  }
+  .ca-headline em { font-style: italic; font-weight: 380; }
+  .ca-headline .ca-period { color: #bf103d; }
+  .ca-link {
+    position: relative; display: inline-block; padding-bottom: 6px;
+  }
+  .ca-link::after {
+    content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%;
+    background: currentColor; transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ca-link:hover::after { transform: scaleX(0.24); }
+  .ca-scene {
+    writing-mode: vertical-rl; letter-spacing: 0.32em;
+  }
+  .ca-hairline { background: rgba(243, 239, 235, 0.14); }
+</style>
+<!-- STYLE:END -->
+</head>
+<body class="ca-root antialiased">
+
+<!-- ARTIFACT:SECTION -->
+<section id="concept-a" class="ca-root relative flex min-h-screen flex-col overflow-hidden">
+
+  <!-- Top bar: name left, sparse nav right, one hairline below -->
+  <nav id="concept-a--nav" class="reveal flex items-baseline justify-between px-6 pt-8 sm:px-12 lg:px-20">
+    <a id="concept-a--nav--wordmark" href="#" class="f-grot text-[15px] font-semibold tracking-[0.22em] text-[#f3efeb]">POD21</a>
+    <div id="concept-a--nav--links" class="f-mono hidden items-baseline gap-10 text-[11px] tracking-[0.18em] text-[#aeaeae] sm:flex">
+      <a class="transition-colors duration-300 hover:text-[#f3efeb]" href="#">WORK</a>
+      <a class="transition-colors duration-300 hover:text-[#f3efeb]" href="#">STUDIO</a>
+      <a class="transition-colors duration-300 hover:text-[#f3efeb]" href="#">JOURNAL</a>
+      <a id="concept-a--nav--contact-link" class="text-[#f3efeb]" href="#">CONTACT</a>
+    </div>
+  </nav>
+  <div class="ca-hairline reveal d-1 mx-6 mt-8 h-px sm:mx-12 lg:mx-20"></div>
+
+  <!-- Hero statement: one thought, enormous air around it -->
+  <div id="concept-a--hero" class="flex flex-1 flex-col justify-center px-6 py-24 sm:px-12 lg:px-20 lg:py-32">
+    <p id="concept-a--hero--eyebrow" class="f-mono reveal d-2 text-[11px] tracking-[0.34em] text-[#aeaeae]">
+      A FULL-SERVICE PRODUCTION HOUSE
+    </p>
+    <h1 id="concept-a--hero--headline" class="f-serif ca-headline reveal d-3 mt-10 max-w-[13ch]">
+      We make the shows people <em>cancel plans</em> for<span class="ca-period">.</span>
+    </h1>
+    <div class="mt-16 flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
+      <p id="concept-a--hero--subhead" class="f-grot reveal d-4 max-w-[38ch] text-[17px] leading-[1.7] text-[#aeaeae]">
+        Podcast and content production for brands with something to say,
+        and the discipline to say it properly. Development, studio, post,
+        distribution. One house, no seams.
+      </p>
+      <div id="concept-a--hero--actions" class="reveal d-5 flex items-baseline gap-12">
+        <a id="concept-a--hero--cta-primary" href="#" class="ca-link f-grot text-[15px] font-medium tracking-[0.04em] text-[#f3efeb]">
+          Start a production
+        </a>
+        <a id="concept-a--hero--cta-reel" href="#" class="ca-link f-mono text-[12px] tracking-[0.14em] text-[#aeaeae] transition-colors duration-300 hover:text-[#f3efeb]">
+          WATCH THE REEL · 2:14
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Film-credit client strip -->
+  <footer id="concept-a--credits" class="reveal d-6 px-6 pb-10 sm:px-12 lg:px-20">
+    <div class="ca-hairline mb-8 h-px"></div>
+    <div class="flex flex-col gap-4 md:flex-row md:items-baseline md:justify-between">
+      <p id="concept-a--credits--label" class="f-mono text-[10px] tracking-[0.34em] text-[#5c5a57]">IN PRODUCTION WITH</p>
+      <p id="concept-a--credits--names" class="f-serif text-[14px] tracking-[0.02em] text-[#aeaeae]">
+        Meridian Capital&ensp;·&ensp;Aster Health&ensp;·&ensp;The Longform Review&ensp;·&ensp;Halcyon Motors&ensp;·&ensp;North &amp; Co.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scene marker, set like a film slate on the right edge -->
+  <p id="concept-a--scene-marker" class="ca-scene f-mono reveal d-6 absolute right-6 top-1/2 hidden -translate-y-1/2 text-[10px] text-[#5c5a57] lg:block">
+    SCENE 01 · HERO
+  </p>
+</section>
+<!-- /ARTIFACT:SECTION -->
+
+</body>
+</html>

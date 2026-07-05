@@ -1,14 +1,11 @@
-import { Button, RotatingIcon } from "./ui/button";
 import { ArrowRightSVG, ArrowLeftSVG } from "@/assets/icons";
 import { useInView } from "@/hooks/useInView";
 import { cn } from "@/lib/utils";
-import { Link } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 
 const Testimonials = () => {
   const [titleRef, isTitleInView] = useInView({ threshold: 0.2 });
   const [testimonialsRef, isTestimonialsInView] = useInView({ threshold: 0.2 });
-  const [ctaRef, isCtaInView] = useInView({ threshold: 0.2 });
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -79,16 +76,11 @@ const Testimonials = () => {
   ];
 
   return (
-    <section id="testimonials" className={cn("relative bg-bgPrimary ", "")}>
+    <section
+      id="testimonials"
+      className="relative border-t border-stroke bg-bgPrimary"
+    >
       <div className="relative max-w-[1440px] mx-auto overflow-hidden px-side-spacing-mobile md:px-side-spacing-tablet  py-side-spacing  scroll-mt-[120px] ">
-        {/* Background diagonal stripes - bottom right */}
-        <div className="absolute -bottom-[90px] -right-[56px] w-[440px] h-[330px] opacity-20">
-          <img
-            src="/arrow-lines.png"
-            alt="Background pattern"
-            className="w-full h-full object-contain"
-          />
-        </div>
         <div className="relative z-10">
           <div
             ref={titleRef}
@@ -99,6 +91,9 @@ const Testimonials = () => {
                 : "opacity-0 translate-y-10"
             )}
           >
+            <p id="testimonials--eyebrow" className="eyebrow mb-6">
+              07 <span className="slash-sep">{"//"}</span> Client spotlight
+            </p>
             <h2 className="text-h2">
               Real podcasts, real{" "}
               <span className="text-primary-100">results</span>
@@ -124,13 +119,6 @@ const Testimonials = () => {
               ref={scrollContainerRef}
               className="overflow-x-auto overflow-y-hidden scrollbar-hide -mx-side-spacing-mobile md:-mx-side-spacing-tablet scroll-smooth snap-x snap-mandatory"
               onScroll={checkScrollButtons}
-              onWheel={(e) => {
-                // Enable horizontal scrolling with vertical mouse wheel
-                if (e.deltaY !== 0 && scrollContainerRef.current) {
-                  e.preventDefault();
-                  scrollContainerRef.current.scrollLeft += e.deltaY;
-                }
-              }}
               style={{ scrollBehavior: "smooth" }}
             >
               <div className="flex gap-8 px-side-spacing-mobile md:px-side-spacing-tablet pb-4">
@@ -147,15 +135,17 @@ const Testimonials = () => {
                       transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
                     }}
                   >
-                    <div className="w-40 h-40 rounded-full overflow-hidden">
+                    <div className="w-20 h-20 rounded-full overflow-hidden border border-stroke">
                       <img
                         src={testimonial.avatar}
                         alt={testimonial.name}
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <p className="text-body-lg-medium mt-6">{testimonial.name}</p>
-                    <p className="text-base text-textBody mt-2">
+                    <p className="mt-6 font-kanit text-[16px] font-medium uppercase tracking-[0.1em] text-boneWhite">
+                      {testimonial.name}
+                    </p>
+                    <p className="readout mt-2 uppercase text-[#5c5a57]">
                       {testimonial.title}
                     </p>
                     <blockquote className="text-body-lg italic mt-8 leading-relaxed">
@@ -198,28 +188,6 @@ const Testimonials = () => {
             </div>
           </div>
 
-          {/* Call to action */}
-          <div
-            ref={ctaRef}
-            className={cn(
-              "text-center transition-all duration-1000 delay-200 mt-[60px]",
-              isCtaInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            )}
-          >
-            <p className="text-base text-textBody mb-4">
-              Want to launch, scale, or streamline your podcast?
-            </p>
-            <Link to="/contact">
-              <Button variant="default" size="md">
-                Get in touch
-                <RotatingIcon>
-                  <ArrowRightSVG width={14} height={10} />
-                </RotatingIcon>
-              </Button>
-            </Link>
-          </div>
         </div>
       </div>
     </section>

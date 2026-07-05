@@ -1,10 +1,7 @@
-import { Button, RotatingIcon } from "./ui/button";
-import { ArrowRightSVG } from "@/assets/icons";
 import { Card } from "@/components/ui/card";
 import { useInView } from "@/hooks/useInView";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 
 // Import our custom icons
 import {
@@ -22,7 +19,6 @@ import {
 const Services = () => {
   const [titleRef, isTitleInView] = useInView({ threshold: 0.2 });
   const [servicesRef, isServicesInView] = useInView({ threshold: 0.1 });
-  const [ctaRef, isCtaInView] = useInView({ threshold: 0.2 });
 
   const services = [
     {
@@ -83,33 +79,29 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="bg-bgPrimary">
+    <section id="services" className="border-t border-stroke bg-bgPrimary">
       <div
         className={cn(
           "relative  py-side-spacing overflow-hidden scroll-mt-[120px] max-w-[1440px] mx-auto",
           "px-side-spacing-mobile md:px-side-spacing-tablet "
         )}
       >
-        {/* Red zigzag background at the bottom */}
-        <div className="absolute -bottom-10 -right-14 w-[478px] h-[246px] overflow-hidden">
-          <img
-            src="/curley-lines.png"
-            alt="Background pattern"
-            className="w-full h-auto object-contain"
-          />
-        </div>
-
-        <h2
+        <div
           ref={titleRef}
           className={cn(
-            "text-h2 text-center font-bold font-kanit transition-all duration-1000",
+            "text-center transition-all duration-1000",
             isTitleInView
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-10"
           )}
         >
-          Our <span className="text-primary-100">Services</span>
-        </h2>
+          <p id="services--eyebrow" className="eyebrow mb-6">
+            05 <span className="slash-sep">{"//"}</span> What we do
+          </p>
+          <h2 className="text-h2 text-center font-bold font-kanit">
+            Our <span className="text-primary-100">Services</span>
+          </h2>
+        </div>
 
         <div
           ref={servicesRef}
@@ -119,8 +111,8 @@ const Services = () => {
             <div key={index}>
               <Card
                 className={cn(
-                  "bg-bgSecondary p-6 flex items-center justify-between gap-[20px] rounded-xl group h-full",
-                  "border-transparent hover:border-textBody hover:bg-bgPrimary"
+                  "bg-bgSecondary p-6 flex items-center justify-between gap-[20px] rounded-[4px] group h-full",
+                  "border border-stroke hover:border-primary-100/50"
                 )}
                 style={{
                   transitionDelay: `${index * 50}ms`,
@@ -140,7 +132,7 @@ const Services = () => {
                   </p>
                 </div>
                 <motion.div
-                  className="bg-bgPrimary group-hover:bg-bgSecondary p-6 rounded-full flex-shrink-0"
+                  className="border border-stroke bg-bgPrimary p-6 rounded-full flex-shrink-0"
                   whileHover={{
                     rotate: 5,
                   }}
@@ -156,28 +148,6 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Call to action */}
-        <div
-          ref={ctaRef}
-          className={cn(
-            "text-center transition-all duration-1000 delay-200",
-            isCtaInView
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          )}
-        >
-          <p className="text-base text-textBody mt-[60px] mb-4">
-            Want to launch or level up your podcast?
-          </p>
-          <Link to="/contact">
-            <Button variant="default" size="md">
-              Let's talk
-              <RotatingIcon>
-                <ArrowRightSVG width={14} height={10} />
-              </RotatingIcon>
-            </Button>
-          </Link>
-        </div>
       </div>
     </section>
   );

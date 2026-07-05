@@ -1,99 +1,120 @@
-import { useEffect, useState } from "react";
-import { ArrowRightSVG } from "@/assets/icons";
-import { Button, RotatingIcon } from "./ui/button";
+import { Button } from "./ui/button";
+import { PhoneSVG } from "@/assets/icons";
 import { cn } from "@/lib/utils";
-import AnimatedWordCycle from "./ui/AnimatedWordCycle";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const rise = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay },
+  }),
+};
 
 const Hero = () => {
   const navigate = useNavigate();
-  const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
-  const wordsList = [
-    "brand",
-    "startup",
-    "business",
-    "vision",
-    "mission",
-    "message",
-    "story",
-    "idea",
-    "passion",
-    "project",
-    "product",
-    "journey",
-    "community",
-  ];
+  const scrollToServices = () => {
+    const element = document.querySelector("#services");
+    if (element) {
+      const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   return (
-    <section id="hero" className="">
+    <section id="hero" className="bg-grid flex min-h-screen flex-col">
       <div
         className={cn(
-          "relative pt-20 md:pt-24 md:pb-[197px] pb-[95px] flex items-center text-left overflow-hidden max-w-[1440px] mx-auto ",
-          "px-side-spacing-mobile md:px-side-spacing-tablet "
+          "mx-auto flex w-full max-w-4xl flex-1 flex-col items-center justify-center px-6 pb-16 pt-32 text-center"
         )}
       >
-        {/* Background image */}
-        <div className="absolute inset-0 z-0 before:content-[''] before:absolute before:inset-0 before:bg-black/50">
-          <img
-            src="/hero-bg.png"
-            alt="Podcast studio background"
-            className="hidden sm:block h-full w-full object-cover object-center"
-            loading="eager"
-          />
-          <img
-            src="/hero-bg-mobile.png"
-            alt="Podcast studio background for mobile"
-            className="block sm:hidden h-full w-full object-cover object-center"
-            loading="eager"
-          />
-        </div>
+        <motion.p
+          id="hero--eyebrow"
+          className="eyebrow"
+          variants={rise}
+          initial="hidden"
+          animate="visible"
+          custom={0.08}
+        >
+          Full-service podcast <span className="slash-sep">{"//"}</span> content
+          production
+        </motion.p>
 
-        <div className="relative z-10 text-start max-w-2xl">
-          <div className="mb-6">
-            <div className="flex flex-wrap justify-start">
-              <h1 className="font-kanit font-bold text-[40px] text-h1 lg:text-banner text-boneWhite">
-                A podcast
-                <br />
-                for your{" "}
-                <span>
-                  <AnimatedWordCycle
-                    words={wordsList}
-                    interval={3000}
-                    className="font-kanit font-bold text-[40px] text-h1 lg:text-banner text-primary-100"
-                  />
-                </span>
-              </h1>
-            </div>
-          </div>
+        <motion.h1
+          id="hero--headline"
+          className="mt-8 font-kanit text-[44px] font-bold leading-[1.02] tracking-[-0.015em] text-boneWhite md:text-[64px] lg:text-[88px]"
+          style={{ textWrap: "balance" }}
+          variants={rise}
+          initial="hidden"
+          animate="visible"
+          custom={0.2}
+        >
+          Production under
+          <br />
+          <span className="text-primary-100">total control.</span>
+        </motion.h1>
 
-          <p className="text-sm md:text-base text-textBody mt-[18px]">
-            We are a team of podcast production experts ready to bring your show
-            to life.
-          </p>
+        <motion.p
+          id="hero--subhead"
+          className="mt-8 max-w-[52ch] text-base leading-[1.75] text-textBody"
+          variants={rise}
+          initial="hidden"
+          animate="visible"
+          custom={0.34}
+        >
+          Engineered rooms, versioned edits, loudness-true masters, and a
+          delivery schedule your team can set a watch by. Pod21 runs your show
+          like mission control.
+        </motion.p>
 
-          <p className="text-sm md:text-base mt-12 text-textBody mb-4">
-            Sound like what you're looking for?
-          </p>
-
-          <div>
-            <Button
-              variant="default"
-              size="md"
-              onClick={() => navigate("/contact")}
-            >
-              Book a free call
-              <RotatingIcon>
-                <ArrowRightSVG width={14} height={10} />
-              </RotatingIcon>
-            </Button>
-          </div>
-        </div>
+        <motion.div
+          id="hero--actions"
+          className="mt-11 flex flex-wrap items-center justify-center gap-4"
+          variants={rise}
+          initial="hidden"
+          animate="visible"
+          custom={0.5}
+        >
+          <Button
+            id="hero--cta-primary"
+            variant="default"
+            size="md"
+            onClick={() => navigate("/contact")}
+          >
+            <PhoneSVG width={18} height={18} className="mr-1" />
+            Start transmission
+          </Button>
+          <Button
+            id="hero--cta-services"
+            variant="outline"
+            size="md"
+            onClick={scrollToServices}
+          >
+            What we do
+          </Button>
+        </motion.div>
       </div>
+
+      {/* Grounding line */}
+      <motion.div
+        id="hero--baseline"
+        className="flex flex-wrap items-center justify-between gap-3 border-t border-stroke px-6 py-5 sm:px-10"
+        variants={rise}
+        initial="hidden"
+        animate="visible"
+        custom={0.68}
+      >
+        <p className="readout text-[10px] text-[#5c5a57]">
+          EST. 2025 <span className="slash-sep">{"//"}</span> USA
+        </p>
+        <p className="readout text-[10px] text-[#5c5a57]">
+          500+ EPISODES SHIPPED <span className="slash-sep">{"//"}</span>{" "}
+          <span className="text-primary-100">ACCEPTING COMMISSIONS</span>
+        </p>
+      </motion.div>
     </section>
   );
 };
