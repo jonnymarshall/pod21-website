@@ -1,5 +1,17 @@
 # Command Center Redesign — Change Log
 
+## Refinements round 1 (branch `redesign/command-center-refinements`)
+
+- Buttons (global): text switched from uppercase to sentence case per brand guidelines (Kanit Medium); phone icon restored on contact-intent buttons (navbar, hero primary, contact page).
+- Navbar CTA: "Open a channel" → **"Let's talk"** (desktop + mobile drawer).
+- Hero: ghost button "Read the spec sheet" → **"What we do"**; baseline "EST. 2021 // PRODUCTION HOUSE" → **"EST. 2025 // USA"** (also in footer).
+- Services eyebrow: "05 // THE SPEC SHEET" → **"05 // WHAT WE DO"**.
+- How We Work: restored the previous build's alternating timeline (center dashed line, dots, steps animating in one by one) while keeping the new green mono "01 //" numbers and all-caps Kanit step titles.
+- Clients: testimonial avatars halved (160px → 80px) so the carousel arrows sit in view; removed the wheel-hijack scroll handler that spammed console errors.
+- CTA cleanup: removed the mid-page CTA blocks from Why pod21 ("Not convinced yet?"), Services ("Want to launch or level up your podcast?"), Process ("Ready to make it happen?"), and Clients ("Want to launch, scale, or streamline your podcast?"). CTAs now live only in the navbar, hero, and Commission section.
+- SESSION date in the navbar was already dynamic (computed on page load), so no change was needed.
+
+
 Branch: `redesign/command-center`. Nothing is merged to `main`; to discard the whole redesign, simply delete this branch. Every change below lives in a single commit so `git revert` also works file-by-file.
 
 Design source: the approved "Command Center II" concept (`design-concepts/brand-8-command-center-2.html`).

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { LogoSVG } from "@/assets/icons";
+import { LogoSVG, PhoneSVG } from "@/assets/icons";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -141,7 +141,8 @@ const Navbar = ({ withRail = false }: NavbarProps) => {
           className={cn(!isMobile ? "block" : "hidden")}
         >
           <Button size="sm" variant="default">
-            Open a channel
+            <PhoneSVG width={18} height={18} className="mr-1" />
+            Let's talk
           </Button>
         </Link>
 
@@ -204,7 +205,8 @@ const Navbar = ({ withRail = false }: NavbarProps) => {
                 className="mt-3 block"
               >
                 <Button size="sm" variant="default">
-                  Open a channel
+                  <PhoneSVG width={18} height={18} className="mr-1" />
+                  Let's talk
                 </Button>
               </Link>
             </div>

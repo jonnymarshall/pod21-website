@@ -22,8 +22,7 @@ const Footer = () => {
               <LogoSVG width={72} height={28} color="#f3efeb" />
             </Link>
             <p className="readout mt-6 leading-relaxed text-[#5c5a57]">
-              EST. 2021 <span className="slash-sep">{"//"}</span> PRODUCTION
-              HOUSE
+              EST. 2025 <span className="slash-sep">{"//"}</span> USA
             </p>
           </div>
 

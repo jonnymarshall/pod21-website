@@ -1,10 +1,7 @@
-import { Button, RotatingIcon } from "./ui/button";
-import { ArrowRightSVG } from "@/assets/icons";
 import { Card } from "@/components/ui/card";
 import { useInView } from "@/hooks/useInView";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 
 // Import our custom icons
 import {
@@ -22,7 +19,6 @@ import {
 const Services = () => {
   const [titleRef, isTitleInView] = useInView({ threshold: 0.2 });
   const [servicesRef, isServicesInView] = useInView({ threshold: 0.1 });
-  const [ctaRef, isCtaInView] = useInView({ threshold: 0.2 });
 
   const services = [
     {
@@ -100,7 +96,7 @@ const Services = () => {
           )}
         >
           <p id="services--eyebrow" className="eyebrow mb-6">
-            05 <span className="slash-sep">{"//"}</span> The spec sheet
+            05 <span className="slash-sep">{"//"}</span> What we do
           </p>
           <h2 className="text-h2 text-center font-bold font-kanit">
             Our <span className="text-primary-100">Services</span>
@@ -152,28 +148,6 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Call to action */}
-        <div
-          ref={ctaRef}
-          className={cn(
-            "text-center transition-all duration-1000 delay-200",
-            isCtaInView
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          )}
-        >
-          <p className="text-base text-textBody mt-[60px] mb-4">
-            Want to launch or level up your podcast?
-          </p>
-          <Link to="/contact">
-            <Button variant="default" size="md">
-              Let's talk
-              <RotatingIcon>
-                <ArrowRightSVG width={14} height={10} />
-              </RotatingIcon>
-            </Button>
-          </Link>
-        </div>
       </div>
     </section>
   );
