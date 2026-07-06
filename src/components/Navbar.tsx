@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { LogoSVG, PhoneSVG } from "@/assets/icons";
@@ -42,26 +42,61 @@ const Navbar = ({ withRail = false }: NavbarProps) => {
     { href: "/blog", label: "Blog", isPage: true },
   ];
 
+  // Safety net: vaul locks body scroll (position: fixed) while the drawer is
+  // open. If a previous page navigated away mid-close, that lock can be left
+  // behind, leaving the new page "stuck" at the top until a refresh. Clear any
+  // leftover lock when this navbar mounts on a fresh page.
+  useEffect(() => {
+    const { body } = document;
+    if (body.style.position === "fixed") {
+      body.style.removeProperty("position");
+      body.style.removeProperty("top");
+      body.style.removeProperty("left");
+      body.style.removeProperty("right");
+      body.style.removeProperty("width");
+      body.style.removeProperty("overflow");
+    }
+  }, []);
+
   const handleMobileMenuClose = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const handleNavLinkClick = (href: string) => {
-    if (href.startsWith("#")) {
-      const scrollToTarget = () => {
-        const element = document.querySelector(href);
-        if (element) {
-          const y =
-            element.getBoundingClientRect().top + window.pageYOffset - 100;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }
-      };
-      if (location.pathname !== "/") {
-        navigate("/");
-        setTimeout(scrollToTarget, 100);
-      } else {
-        scrollToTarget();
+  // Run an action only after the drawer has finished closing and vaul has
+  // released its body scroll-lock. Navigating or scrolling while the drawer is
+  // still animating closed leaves the body locked (the "page won't scroll" bug)
+  // and clobbers any scrollTo we attempt.
+  const runAfterDrawerClose = (action: () => void) => {
+    setIsMobileMenuOpen(false);
+    window.setTimeout(action, 320);
+  };
+
+  const scrollToHash = (href: string) => {
+    // The target section may not be mounted yet right after a route change, so
+    // poll a few frames until it appears before scrolling.
+    let attempts = 0;
+    const tryScroll = () => {
+      const element = document.querySelector(href);
+      if (element) {
+        const y =
+          element.getBoundingClientRect().top + window.pageYOffset - 100;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      } else if (attempts < 20) {
+        attempts += 1;
+        requestAnimationFrame(tryScroll);
       }
+    };
+    tryScroll();
+  };
+
+  const handleNavLinkClick = (href: string) => {
+    if (!href.startsWith("#")) return;
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Wait for the homepage route to mount before scrolling to the section.
+      setTimeout(() => scrollToHash(href), 250);
+    } else {
+      scrollToHash(href);
     }
   };
 
@@ -147,7 +182,11 @@ const Navbar = ({ withRail = false }: NavbarProps) => {
         </Link>
 
         {/* Mobile menu */}
-        <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+        <Drawer
+          open={isMobileMenuOpen}
+          onOpenChange={setIsMobileMenuOpen}
+          shouldScaleBackground={false}
+        >
           <DrawerTrigger asChild className={isMobile ? "block" : "hidden"}>
             <Button
               variant="ghost"
@@ -180,7 +219,10 @@ const Navbar = ({ withRail = false }: NavbarProps) => {
                     key={index}
                     to={link.href}
                     className="proxy-id--navbar--mobile-drawer--link w-full py-3 mb-3 text-center font-mono text-[13px] uppercase tracking-[0.14em] text-boneWhite"
-                    onClick={handleMobileMenuClose}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      runAfterDrawerClose(() => navigate(link.href));
+                    }}
                   >
                     {link.label}
                   </Link>
@@ -191,8 +233,7 @@ const Navbar = ({ withRail = false }: NavbarProps) => {
                     className="proxy-id--navbar--mobile-drawer--link w-full py-3 mb-3 text-center font-mono text-[13px] uppercase tracking-[0.14em] text-boneWhite"
                     onClick={(e) => {
                       e.preventDefault();
-                      handleMobileMenuClose();
-                      handleNavLinkClick(link.href);
+                      runAfterDrawerClose(() => handleNavLinkClick(link.href));
                     }}
                   >
                     {link.label}
@@ -201,7 +242,10 @@ const Navbar = ({ withRail = false }: NavbarProps) => {
               )}
               <Link
                 to="/contact"
-                onClick={handleMobileMenuClose}
+                onClick={(e) => {
+                  e.preventDefault();
+                  runAfterDrawerClose(() => navigate("/contact"));
+                }}
                 className="mt-3 block"
               >
                 <Button size="sm" variant="default">
