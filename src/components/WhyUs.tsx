@@ -173,11 +173,24 @@ const WhyUs = () => {
   const [statsRef, isStatsInView] = useInView({ threshold: 0.2 });
   const [featuresRef, isFeaturesInView] = useInView({ threshold: 0.2 });
 
+  // Years in industry counted from day zero (June 1st 2022), so this stays
+  // current without manual updates.
+  const yearsInIndustry = (() => {
+    const start = new Date(2022, 5, 1); // Month is 0-indexed: 5 = June
+    const now = new Date();
+    let years = now.getFullYear() - start.getFullYear();
+    const monthDelta = now.getMonth() - start.getMonth();
+    if (monthDelta < 0 || (monthDelta === 0 && now.getDate() < start.getDate())) {
+      years -= 1;
+    }
+    return years;
+  })();
+
   const stats = [
     { label: "Fast Turnaround Time", value: "48" },
-    { label: "Years in Industry", value: "3+" },
-    { label: "Total Episodes", value: "500+" },
-    { label: "Total Plays", value: "2m+" },
+    { label: "Years in Industry", value: `${yearsInIndustry}+` },
+    { label: "Total Episodes", value: "1000+" },
+    { label: "Total Plays", value: "3m+" },
   ];
 
   const features = [

@@ -56,10 +56,14 @@ const Contact = ({ indexLabel }: ContactProps) => {
             </p>
           </div>
 
-          <Link to="/contact">
-            <Button variant="default" size="md" className={cn("!p-[34px]")}>
+          <Link to="/contact" className="self-center lg:self-auto">
+            <Button
+              variant="default"
+              size="md"
+              className={cn("!p-5 md:!p-[34px]")}
+            >
               <RotatingIcon>
-                <ArrowRightSVG className="!h-[30px] !w-[30px]" />
+                <ArrowRightSVG className="!h-5 !w-5 md:!h-[30px] md:!w-[30px]" />
               </RotatingIcon>
             </Button>
           </Link>

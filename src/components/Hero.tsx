@@ -111,7 +111,7 @@ const Hero = () => {
           EST. 2025 <span className="slash-sep">{"//"}</span> USA
         </p>
         <p className="readout text-[10px] text-[#5c5a57]">
-          500+ EPISODES SHIPPED <span className="slash-sep">{"//"}</span>{" "}
+          1000+ EPISODES SHIPPED <span className="slash-sep">{"//"}</span>{" "}
           <span className="text-primary-100">ACCEPTING COMMISSIONS</span>
         </p>
       </motion.div>
