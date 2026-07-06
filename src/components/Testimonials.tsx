@@ -13,8 +13,13 @@ const Testimonials = () => {
   const checkScrollButtons = () => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+      // Ignore the carousel's leading/trailing side padding so the first card
+      // reads as "at the start" (left disabled) and the last as "at the end"
+      // (right disabled), on both the centred mobile and start-aligned desktop
+      // layouts.
+      const edgeTolerance = 48;
+      setCanScrollLeft(scrollLeft > edgeTolerance);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - edgeTolerance);
     }
   };
 
@@ -31,11 +36,24 @@ const Testimonials = () => {
     }
   }, []);
 
+  // Measure the actual width of one card (plus the flex gap) so each tap
+  // advances exactly one testimonial on both mobile (one-up) and desktop
+  // (two-up). Using clientWidth/2 previously under-scrolled on mobile, so it
+  // took several taps to move a single card into view.
+  const getScrollStep = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return 0;
+    const card = container.querySelector<HTMLElement>(
+      "[data-testimonial-card]"
+    );
+    const gap = 32; // gap-8
+    return card ? card.offsetWidth + gap : container.clientWidth;
+  };
+
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      const cardWidth = scrollContainerRef.current.clientWidth / 2;
       scrollContainerRef.current.scrollBy({
-        left: -cardWidth,
+        left: -getScrollStep(),
         behavior: "smooth",
       });
     }
@@ -43,9 +61,8 @@ const Testimonials = () => {
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      const cardWidth = scrollContainerRef.current.clientWidth / 2;
       scrollContainerRef.current.scrollBy({
-        left: cardWidth,
+        left: getScrollStep(),
         behavior: "smooth",
       });
     }
@@ -115,17 +132,25 @@ const Testimonials = () => {
                 : "opacity-0 translate-y-10"
             )}
           >
+            {/* Two deliberate choices here:
+                - scroll-behavior stays default (auto): a CSS "smooth" fought the
+                  scroll-snap and stalled our programmatic scrolls partway, so we
+                  drive the smooth animation from JS instead.
+                - snap-proximity (not mandatory): mandatory re-snapped the
+                  carousel to a stale position whenever the page scrolled
+                  vertically. Proximity still snaps swipes cleanly without that
+                  cross-axis interference. */}
             <div
               ref={scrollContainerRef}
-              className="overflow-x-auto overflow-y-hidden scrollbar-hide -mx-side-spacing-mobile md:-mx-side-spacing-tablet scroll-smooth snap-x snap-mandatory"
+              className="overflow-x-auto overflow-y-hidden scrollbar-hide -mx-side-spacing-mobile md:-mx-side-spacing-tablet snap-x snap-proximity"
               onScroll={checkScrollButtons}
-              style={{ scrollBehavior: "smooth" }}
             >
               <div className="flex gap-8 px-side-spacing-mobile md:px-side-spacing-tablet pb-4">
                 {testimonials.map((testimonial, index) => (
                   <div
                     key={index}
-                    className="flex flex-col items-center text-center p-6 flex-shrink-0 w-full md:w-[calc(50%-16px)] snap-start"
+                    data-testimonial-card
+                    className="flex flex-col items-center text-center p-6 flex-shrink-0 w-full md:w-[calc(50%-16px)] snap-center md:snap-start"
                     style={{
                       transitionDelay: `${index * 200}ms`,
                       opacity: isTestimonialsInView ? 1 : 0,
@@ -156,13 +181,15 @@ const Testimonials = () => {
               </div>
             </div>
 
-            {/* Navigation Buttons - Positioned at bottom to avoid overlapping text */}
-            <div className="flex justify-center items-center gap-4 -mt-6">
+            {/* Navigation Buttons - kept clear of the scroll area so the whole
+                button stays tappable on touch devices */}
+            <div className="flex justify-center items-center gap-4 mt-4">
               <button
+                type="button"
                 onClick={scrollLeft}
                 disabled={!canScrollLeft}
                 className={cn(
-                  "w-10 h-10 md:w-12 md:h-12 rounded-full bg-bgPrimary border border-stroke flex items-center justify-center hover:bg-bgSecondary transition-all shadow-lg",
+                  "w-11 h-11 md:w-12 md:h-12 rounded-full bg-bgPrimary border border-stroke flex items-center justify-center hover:bg-bgSecondary transition-all shadow-lg [&_svg]:pointer-events-none",
                   canScrollLeft
                     ? "opacity-100 cursor-pointer"
                     : "opacity-40 cursor-not-allowed"
@@ -173,10 +200,11 @@ const Testimonials = () => {
               </button>
 
               <button
+                type="button"
                 onClick={scrollRight}
                 disabled={!canScrollRight}
                 className={cn(
-                  "w-10 h-10 md:w-12 md:h-12 rounded-full bg-bgPrimary border border-stroke flex items-center justify-center hover:bg-bgSecondary transition-all shadow-lg",
+                  "w-11 h-11 md:w-12 md:h-12 rounded-full bg-bgPrimary border border-stroke flex items-center justify-center hover:bg-bgSecondary transition-all shadow-lg [&_svg]:pointer-events-none",
                   canScrollRight
                     ? "opacity-100 cursor-pointer"
                     : "opacity-40 cursor-not-allowed"
