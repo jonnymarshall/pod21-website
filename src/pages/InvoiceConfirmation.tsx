@@ -43,7 +43,6 @@ interface CompanyInfo {
     zip: string;
   };
   taxId: string;
-  supportEmail: string;
 }
 
 const InvoiceConfirmation = () => {
@@ -413,11 +412,6 @@ const InvoiceConfirmation = () => {
             <p className="text-textBody text-body-xs mt-4">
               This is a payment registration receipt. Final confirmation will be sent once funds are verified.
             </p>
-            {companyInfo && (
-              <p className="text-textBody text-body-xs mt-4">
-                For support, contact: {companyInfo.supportEmail}
-              </p>
-            )}
           </div>
         </div>
         </div>
