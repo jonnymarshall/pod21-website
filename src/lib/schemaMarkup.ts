@@ -179,6 +179,50 @@ export const generateWebPageSchema = (
 };
 
 /**
+ * Generate JobPosting Schema (used by Google Jobs)
+ */
+export const generateJobPostingSchema = (
+  job: {
+    title: string;
+    description: string;
+    datePosted: string;
+    validThrough?: string;
+    employmentType?: string;
+    /** Country applicants must be located in, for remote roles. */
+    applicantCountry?: string;
+    url: string;
+  },
+  baseUrl: string = "https://pod21.xyz"
+): Record<string, unknown> => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: job.title,
+    description: job.description,
+    datePosted: job.datePosted,
+    ...(job.validThrough ? { validThrough: job.validThrough } : {}),
+    employmentType: job.employmentType || "CONTRACTOR",
+    hiringOrganization: {
+      "@type": "Organization",
+      name: "Pod21",
+      sameAs: baseUrl,
+      logo: `${baseUrl}/assets/logo.png`,
+    },
+    jobLocationType: "TELECOMMUTE",
+    ...(job.applicantCountry
+      ? {
+          applicantLocationRequirements: {
+            "@type": "Country",
+            name: job.applicantCountry,
+          },
+        }
+      : {}),
+    directApply: true,
+    url: job.url.startsWith("http") ? job.url : `${baseUrl}${job.url}`,
+  };
+};
+
+/**
  * Generate LocalBusiness Schema (if applicable)
  */
 export const generateLocalBusinessSchema = (

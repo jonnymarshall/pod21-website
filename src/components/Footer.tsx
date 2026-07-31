@@ -48,6 +48,15 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link
+                  to="/jobs"
+                  className="nav-link !text-[13px]"
+                  onClick={() => window.scrollTo(0, 0)}
+                >
+                  <span className="slash-sep">{"// "}</span>Jobs
+                </Link>
+              </li>
+              <li>
                 <Link to="/contact" className="nav-link !text-[13px]">
                   <span className="slash-sep">{"// "}</span>Contact
                 </Link>

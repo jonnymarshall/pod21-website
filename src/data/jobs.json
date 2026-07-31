@@ -1,0 +1,171 @@
+[
+  {
+    "slug": "video-editor",
+    "title": "Video Editor",
+    "status": "open",
+    "datePosted": "2026-07-31",
+    "validThrough": "2026-10-31",
+    "summary": "Own our weekly post-production pipeline: longform Bitcoin podcast edits, social highlight clips and research-heavy shortform YouTube videos.",
+    "facts": [
+      { "label": "Location", "value": "Remote (based in Mexico)" },
+      { "label": "Type", "value": "Half-time freelance / project-based independent contractor" },
+      { "label": "Core stack", "value": "Adobe Premiere Pro (After Effects / Remotion / Hyperframes are a plus)" }
+    ],
+    "sections": [
+      {
+        "heading": "About Pod21 & the role",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pod21 LLC is a US-based media production company producing video podcasts and high-production shortform edits centered on Bitcoin and freedom technology."
+          },
+          {
+            "type": "paragraph",
+            "text": "We are looking for a remote Video Editor based in Mexico to manage our weekly post-production pipeline. You will take pre-mastered audio, raw video recordings, and structured brand assets to deliver sharp longform podcast episodes, social highlight clips, and research-heavy shortform YouTube videos that effectively communicate complex technical and monetary concepts."
+          }
+        ]
+      },
+      {
+        "heading": "Core weekly deliverables & rates",
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "All work is project-based and paid per completed deliverable. Partial or full payment in bitcoin is available on request."
+          }
+        ],
+        "subsections": [
+          {
+            "heading": "Longform podcast package",
+            "tag": "$1,750 MXN",
+            "blocks": [
+              {
+                "type": "definitions",
+                "items": [
+                  {
+                    "term": "Scope",
+                    "description": "1x full video podcast edit + 2x social highlight clips (estimated ~8 total hours)."
+                  },
+                  {
+                    "term": "Execution",
+                    "description": "Assemble multi-cam video edit and perform basic audio leveling (recordings arrive AI-pre-mastered)."
+                  },
+                  {
+                    "term": "Curating hooks",
+                    "description": "Review the raw recording to curate 6 to 8 candidate selects/hooks for team review, from which 2 final clips will be approved and cut."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "heading": "Shortform narrative edit (8 to 15m)",
+            "tag": "$5,250 MXN",
+            "blocks": [
+              {
+                "type": "definitions",
+                "items": [
+                  {
+                    "term": "Scope",
+                    "description": "1x YouTube-optimized narrative video (estimated ~24 total hours)."
+                  },
+                  {
+                    "term": "Execution",
+                    "description": "Craft a dynamic, high-pacing edit incorporating curated found footage, creative asset research (sourcing relevant news clips, charts, and archival footage), slick transitions, and kinetic text/graphic highlights."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Qualifications & skill set",
+        "subsections": [
+          {
+            "heading": "Required",
+            "blocks": [
+              {
+                "type": "definitions",
+                "items": [
+                  {
+                    "term": "NLE expertise",
+                    "description": "Advanced proficiency in Adobe Premiere Pro."
+                  },
+                  {
+                    "term": "Creative research & storytelling",
+                    "description": "Ability to independently source relevant found footage, archive clips, and visual assets that elevate complex narrative topics."
+                  },
+                  {
+                    "term": "Basic motion graphics",
+                    "description": "Title animations, text highlighting, and lower-third graphics (within Premiere, After Effects, or another suitable software)."
+                  },
+                  {
+                    "term": "Language & communication",
+                    "description": "Fluency in English (written and spoken) for clear asynchronous collaboration."
+                  },
+                  {
+                    "term": "Reliability",
+                    "description": "Strong deadline discipline and an editing rig capable of smooth 1080p editing."
+                  },
+                  {
+                    "term": "Interest in bitcoin and open source",
+                    "description": "A foundational understanding of (or willingness to learn about) bitcoin and open-source technology."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "heading": "Desired (bonus points)",
+            "blocks": [
+              {
+                "type": "list",
+                "items": [
+                  "Familiarity with Adobe After Effects, Remotion, or Hyperframes.",
+                  "Basic image editing skills (Photoshop / Illustrator)."
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Workflow & logistics",
+        "blocks": [
+          {
+            "type": "definitions",
+            "items": [
+              {
+                "term": "100% remote",
+                "description": "Work your own hours as long as key delivery dates are met."
+              },
+              {
+                "term": "Brand assets provided",
+                "description": "You will receive a brand kit (lower thirds, intro/outro stingers, fonts, color palettes)."
+              },
+              {
+                "term": "Cloud storage",
+                "description": "Assets managed via shared cloud storage (you will be onboarded upon hire)."
+              },
+              {
+                "term": "Trial period",
+                "description": "You will begin immediately on live production projects; the first few deliverables serve as an open-ended trial for long-term contracting."
+              },
+              {
+                "term": "Tax status",
+                "description": "Contractor must be registered with SAT (RESICO preferred) and capable of issuing valid invoices (CFDI / international invoice) to a US entity."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "howToApply": {
+      "intro": "Get in touch through our contact form and include:",
+      "items": [
+        "A link to your portfolio / showreel, highlighting YouTube-style narrative editing, found-footage integration, and dynamic text graphics.",
+        "A short note briefly confirming your experience with Premiere Pro, your general availability, and your interest or familiarity with Bitcoin and freedom technology."
+      ]
+    }
+  }
+]

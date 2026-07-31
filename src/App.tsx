@@ -11,6 +11,8 @@ import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
 import AboutUs from "./pages/AboutUs";
 import Links from "./pages/Links";
+import Jobs from "./pages/Jobs";
+import JobPost from "./pages/JobPost";
 import Invoice from "./pages/Invoice";
 import InvoiceConfirmation from "./pages/InvoiceConfirmation";
 
@@ -29,6 +31,8 @@ const App = () => (
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/blog" element={<Blogs />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/jobs" element={<Jobs />} />
+            <Route path="/jobs/:slug" element={<JobPost />} />
             <Route path="/links" element={<Links />} />
             <Route path="/pay/:invoiceId" element={<Invoice />} />
             <Route path="/pay/:invoiceId/payment-registered" element={<InvoiceConfirmation />} />
