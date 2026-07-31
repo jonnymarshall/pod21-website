@@ -9,7 +9,7 @@ interface SEOProps {
   url?: string;
   keywords?: string;
   canonicalUrl?: string;
-  schemaMarkup?: Record<string, unknown> | Record<string, unknown>[];
+  schemaMarkup?: object | object[];
   noindex?: boolean;
   nofollow?: boolean;
 }
