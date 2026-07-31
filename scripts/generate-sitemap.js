@@ -62,7 +62,24 @@ async function generateSitemap() {
         lastmod: now,
         priority: "0.8",
       },
+      {
+        loc: `${BASE_URL}/jobs`,
+        lastmod: now,
+        priority: "0.6",
+      },
     ];
+
+    // Job listings (read from the same JSON the site renders)
+    const jobs = JSON.parse(
+      fs.readFileSync(path.join(process.cwd(), "src", "data", "jobs.json"), "utf8")
+    );
+    const jobPages = jobs
+      .filter((job) => job.status === "open")
+      .map((job) => ({
+        loc: `${BASE_URL}/jobs/${job.slug}`,
+        lastmod: job.datePosted,
+        priority: "0.6",
+      }));
 
     // Dynamic blog posts
     const blogPages = response.items.map((item) => ({
@@ -71,7 +88,7 @@ async function generateSitemap() {
       priority: "0.7",
     }));
 
-    const allPages = [...staticPages, ...blogPages];
+    const allPages = [...staticPages, ...jobPages, ...blogPages];
 
     // Generate XML
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
