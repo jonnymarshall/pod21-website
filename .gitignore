@@ -32,3 +32,4 @@ secrets/*.json
 !secrets/*.json.example
 .env*
 !.env*.example
+.env*.local

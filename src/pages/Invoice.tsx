@@ -75,11 +75,16 @@ const Invoice = () => {
     setPassphraseError(null);
   };
 
+  // Parse YYYY-MM-DD as a local date. Passing the raw string to new Date()
+  // would parse it as UTC midnight, shifting the day back for viewers behind UTC.
+  const parseLocalDate = (dateString: string): Date => {
+    const [year, month, day] = dateString.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  };
+
   // Calculate due date and check if overdue
   const calculateDueDate = (invoiceDate: string, dueWithin: number): { dueDate: Date; isOverdue: boolean } => {
-    // Parse YYYY-MM-DD format
-    const [year, month, day] = invoiceDate.split('-').map(Number);
-    const date = new Date(year, month - 1, day);
+    const date = parseLocalDate(invoiceDate);
     const dueDate = new Date(date);
     dueDate.setDate(dueDate.getDate() + dueWithin);
     const isOverdue = new Date() > dueDate;
@@ -300,7 +305,7 @@ const Invoice = () => {
                   Invoice Date:
                 </p>
                 <p className="text-body-lg-medium text-boneWhite">
-                  {invoice.invoiceDate ? formatDate(new Date(invoice.invoiceDate)) : "N/A"}
+                  {invoice.invoiceDate ? formatDate(parseLocalDate(invoice.invoiceDate)) : "N/A"}
                 </p>
                 <p className="text-body-sm-medium text-textBody mt-4">
                   Due Date:
