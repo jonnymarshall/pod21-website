@@ -27,8 +27,12 @@ dist-ssr
 # Temporary reference assets — safe to delete
 TEMPORARY_DELETEME
 
+# Local AI handoff folder - never commit files placed here
+.ai-handoff/
+
 # Secrets - keep private and local only
 secrets/*.json
 !secrets/*.json.example
 .env*
 !.env*.example
+.env*.local
