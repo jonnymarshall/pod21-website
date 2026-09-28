@@ -10,6 +10,7 @@ const { createClient } = pkg;
 import fs from "fs";
 import path from "path";
 import dotenv from 'dotenv';
+dotenv.config({ path: ".env.local" });
 dotenv.config();
 
 const SPACE_ID = process.env.VITE_CONTENTFUL_SPACE_ID;

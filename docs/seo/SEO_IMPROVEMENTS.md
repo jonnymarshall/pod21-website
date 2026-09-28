@@ -221,6 +221,7 @@ This ensures your sitemap is always up-to-date with the latest blog posts.
 - [ ] Add XML sitemap index for large sites
 - [ ] Monitor Core Web Vitals and implement performance optimizations
 - [ ] Add hreflang tags for international SEO (if applicable)
+- [ ] Evaluate Astro or Next.js migration for static/server-rendered marketing pages after key pages are prerendered
 
 ## Troubleshooting
 
