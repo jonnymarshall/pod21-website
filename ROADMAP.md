@@ -50,7 +50,7 @@ Check-in about a week later:
 Roughly in priority order:
 
 1. Google Business Profile, only if eligible (see notes below).
-2. Reviews and testimonials: ask current clients for reviews, and add the strongest ones to the site.
+2. Third-party reviews (owner, do later): set up or claim profiles on Clutch, Trustpilot, and LinkedIn, then ask clients to leave reviews there. On-site testimonials are already collected from all clients.
 3. Buyer-intent articles: write pages that match what people search when choosing a provider, for example "How much does podcast production cost", "Podcast agency vs freelancer", and "How to choose a podcast production company".
 4. Case studies: write up a few client projects (the problem, what Pod21 did, the result). Real experience is a trust signal for both Google and buyers.
 5. Directory and list placements: get listed in podcast industry directories and "best podcast production agencies" listicles. These are realistic first backlinks.
