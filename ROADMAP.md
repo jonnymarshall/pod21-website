@@ -13,12 +13,12 @@ Improve Pod21's organic search visibility by fixing crawler/indexing issues firs
 - Updated the sitemap generator so local builds can use the existing local environment setup.
 - Added `.ai-handoff/` as an ignored folder for temporary files shared with AI tools.
 - Added build-time prerendering for key pages (home, about, contact, blog index, each blog post, jobs index, each job post) so real HTML, meta tags, and schema are present before JavaScript runs.
+- Verified live production serves that prerendered HTML, and that it wins over the SPA catch-all rewrite (Vercel checks the filesystem before rewrites).
 
 ## Next Steps
 
-1. Merge and deploy the prerender PR, then verify the live HTML for the homepage and a blog post.
-2. Use Google Search Console to request indexing for the homepage and a few blog posts.
-3. Create dedicated service landing pages for high-intent searches:
+1. In Google Search Console, submit the sitemap and request indexing for the homepage and a few blog posts.
+2. Create dedicated service landing pages for high-intent searches:
    - `/podcast-production`
    - `/podcast-editing`
    - `/video-podcast-production`
@@ -29,6 +29,7 @@ Improve Pod21's organic search visibility by fixing crawler/indexing issues firs
 5. Improve Organization schema with real social links and contact details.
 6. Add `llms.txt` for AI search/readability support.
 7. Review bundle size and reduce JavaScript where practical.
+8. Move `middleware.js` off Vercel's deprecated edge runtime to the Node.js runtime (build warning).
 
 ## Known Tradeoff
 
