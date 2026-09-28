@@ -17,19 +17,46 @@ Improve Pod21's organic search visibility by fixing crawler/indexing issues firs
 
 ## Next Steps
 
-1. In Google Search Console, submit the sitemap and request indexing for the homepage and a few blog posts.
-2. Create dedicated service landing pages for high-intent searches:
+1. Create dedicated service landing pages for high-intent searches:
    - `/podcast-production`
    - `/podcast-editing`
    - `/video-podcast-production`
    - `/podcast-launch-service`
    - `/podcast-distribution`
    - `/social-clips-for-podcasts`
-4. Add FAQ schema to the visible FAQ sections.
-5. Improve Organization schema with real social links and contact details.
-6. Add `llms.txt` for AI search/readability support.
-7. Review bundle size and reduce JavaScript where practical.
-8. Move `middleware.js` off Vercel's deprecated edge runtime to the Node.js runtime (build warning).
+2. Add FAQ schema to the visible FAQ sections.
+3. Improve Organization schema with real social links and contact details.
+4. Add `llms.txt` for AI search/readability support.
+5. Review bundle size and reduce JavaScript where practical.
+6. Move `middleware.js` off Vercel's deprecated edge runtime to the Node.js runtime (build warning).
+
+## Google Search Console
+
+Setup done:
+- Sitemap submitted as the full URL `https://pod21.xyz/sitemap.xml`. The short form `sitemap.xml` was rejected by the form.
+- The sitemap lists all 12 URLs, including all 6 blog posts.
+- Manual "Request indexing" was used on the homepage and two blog posts only.
+
+Why the sitemap matters more than manual requests:
+- The sitemap is the master list. It tells Google about every URL, so no per-page action is needed.
+- "Request indexing" is a limited nudge (roughly ten a day; Google does not publish the exact number). It is for a few priority pages, not every page.
+
+Check-in about a week later:
+- Open Indexing > Pages. Report any blog posts still stuck as "Discovered" or "Crawled, not indexed".
+- The earlier "Page with redirect" note was for `http://pod21.xyz/` and is expected. Leave it.
+
+## Owner Actions (no code needed)
+
+Roughly in priority order:
+
+1. Google Business Profile: claim and fully complete it, add photos, and start collecting reviews. Helps brand searches and trust.
+2. Reviews and testimonials: ask current clients for reviews, and add the strongest ones to the site.
+3. Buyer-intent articles: write pages that match what people search when choosing a provider, for example "How much does podcast production cost", "Podcast agency vs freelancer", and "How to choose a podcast production company".
+4. Case studies: write up a few client projects (the problem, what Pod21 did, the result). Real experience is a trust signal for both Google and buyers.
+5. Directory and list placements: get listed in podcast industry directories and "best podcast production agencies" listicles. These are realistic first backlinks.
+6. Internal links: from each blog post, link naturally to the contact page and, once built, the service pages.
+
+Expect backlinks and rankings to take weeks to months. The fastest owner-side wins are the Google Business Profile, reviews, and buyer-intent content.
 
 ## Known Tradeoff
 
