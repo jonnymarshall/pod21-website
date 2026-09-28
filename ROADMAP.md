@@ -12,23 +12,27 @@ Improve Pod21's organic search visibility by fixing crawler/indexing issues firs
 - Regenerated the sitemap with current blog and jobs URLs.
 - Updated the sitemap generator so local builds can use the existing local environment setup.
 - Added `.ai-handoff/` as an ignored folder for temporary files shared with AI tools.
+- Added build-time prerendering for key pages (home, about, contact, blog index, each blog post, jobs index, each job post) so real HTML, meta tags, and schema are present before JavaScript runs.
 
 ## Next Steps
 
-1. Merge and deploy the blog crawler SEO PR.
-2. After deployment, use Google Search Console to request indexing for the homepage and a few blog posts.
-3. Add prerendering for key pages so Google receives real HTML before JavaScript runs.
-4. Create dedicated service landing pages for high-intent searches:
+1. Merge and deploy the prerender PR, then verify the live HTML for the homepage and a blog post.
+2. Use Google Search Console to request indexing for the homepage and a few blog posts.
+3. Create dedicated service landing pages for high-intent searches:
    - `/podcast-production`
    - `/podcast-editing`
    - `/video-podcast-production`
    - `/podcast-launch-service`
    - `/podcast-distribution`
    - `/social-clips-for-podcasts`
-5. Add FAQ schema to the visible FAQ sections.
-6. Improve Organization schema with real social links and contact details.
-7. Add `llms.txt` for AI search/readability support.
-8. Review bundle size and reduce JavaScript where practical.
+4. Add FAQ schema to the visible FAQ sections.
+5. Improve Organization schema with real social links and contact details.
+6. Add `llms.txt` for AI search/readability support.
+7. Review bundle size and reduce JavaScript where practical.
+
+## Known Tradeoff
+
+Prerendered pages show a brief on-brand static view before React replaces it. This is a loading-state compromise, not a bug. The longer-term fix is proper static generation or server rendering, which is the Astro/Next.js consideration below.
 
 ## Later Consideration
 
