@@ -49,7 +49,7 @@ Check-in about a week later:
 
 Roughly in priority order:
 
-1. Google Business Profile: claim and fully complete it, add photos, and start collecting reviews. Helps brand searches and trust.
+1. Google Business Profile, only if eligible (see notes below).
 2. Reviews and testimonials: ask current clients for reviews, and add the strongest ones to the site.
 3. Buyer-intent articles: write pages that match what people search when choosing a provider, for example "How much does podcast production cost", "Podcast agency vs freelancer", and "How to choose a podcast production company".
 4. Case studies: write up a few client projects (the problem, what Pod21 did, the result). Real experience is a trust signal for both Google and buyers.
@@ -57,6 +57,15 @@ Roughly in priority order:
 6. Internal links: from each blog post, link naturally to the contact page and, once built, the service pages.
 
 Expect backlinks and rankings to take weeks to months. The fastest owner-side wins are the Google Business Profile, reviews, and buyer-intent content.
+
+### Google Business Profile notes
+
+- Eligibility: Google expects a business to either have a location customers can visit, or to travel to customers (a service-area business). A fully remote, online-only business does not clearly fit either, so a profile can be rejected or suspended.
+- Do not use a registered-agent, accountant, or virtual-office address just to get listed. That is a common cause of suspension, and verification often fails.
+- If Pod21 has a real place where work happens (even a home setup used for recording), it can be used, but expect video verification showing the actual space and equipment. The address can be hidden while still setting service areas.
+- Accounts: any Google Account can own a profile, including a personal one. Simplest is the account already used for Search Console, then add the business email as a second owner so access is not tied to one person.
+- Value for a remote business is mainly the brand panel and reviews, not local map rankings, because buyers search nationally rather than locally.
+- If not eligible, put the effort into reviews elsewhere instead (Clutch, Trustpilot, LinkedIn, and on-site testimonials).
 
 ## Known Tradeoff
 
