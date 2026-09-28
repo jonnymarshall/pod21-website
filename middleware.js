@@ -1,7 +1,7 @@
 import { rewrite, next } from "@vercel/functions";
 
 const CRAWLER_UA =
-  /facebookexternalhit|WhatsApp|Twitterbot|LinkedInBot|Slackbot|TelegramBot|Pinterest|Googlebot|bingbot/i;
+  /facebookexternalhit|WhatsApp|Twitterbot|LinkedInBot|Slackbot|TelegramBot|Pinterest/i;
 
 export const config = {
   // Must match /blog/xxx (one or more path segments) so crawlers get OG meta from API
