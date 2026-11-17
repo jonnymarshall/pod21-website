@@ -1,6 +1,6 @@
 # pod21 - Podcast Production Service
 
-A professional podcast production service website with an integrated Bitcoin invoice and payment system.
+A professional podcast production service website for pod21.
 
 ## Quick Start
 
@@ -17,9 +17,9 @@ npm run build
 
 ## Features
 
-- **Invoice Management** — Create and manage invoices with itemized services
-- **Bitcoin Payments** — Accept payments in BTC with live price locking
-- **Email Confirmations** — Automated confirmation emails via EmailJS
+- **Contentful Blog** — Articles and guides published through Contentful
+- **Job Listings** — Open roles with dedicated job detail pages
+- **Contact Form** — Enquiry handling via EmailJS
 - **Responsive Design** — Built with React, TypeScript, and Tailwind CSS
 
 ## Tech Stack
@@ -30,12 +30,11 @@ npm run build
 - **Tailwind CSS** — Styling
 - **Framer Motion** — Animations
 - **React Router** — Client-side routing
+- **Contentful** — Blog content
 - **EmailJS** — Email notifications
-- **QR Code** — Bitcoin payment QR codes
-- **Coinbase API** — Live BTC prices
 
 ## Documentation
 
-- **[Invoice & Payments Guide](./docs/payments/README_PAYMENTS.md)** — Setup, configuration, and deployment for the Bitcoin payment system
+- **[SEO Improvements](./docs/seo/SEO_IMPROVEMENTS.md)** — Prerendering, sitemap, and structured data notes
 
 ---
