@@ -2,6 +2,16 @@
   "rewrites": [{ "source": "/((?!.*\\.[a-zA-Z]{2,4}$).*)", "destination": "/" }],
   "redirects": [
     {
+      "source": "/pay",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pay/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/:path(.*)/",
       "destination": "/:path",
       "permanent": true

@@ -13,8 +13,6 @@ import AboutUs from "./pages/AboutUs";
 import Links from "./pages/Links";
 import Jobs from "./pages/Jobs";
 import JobPost from "./pages/JobPost";
-import Invoice from "./pages/Invoice";
-import InvoiceConfirmation from "./pages/InvoiceConfirmation";
 
 const queryClient = new QueryClient();
 
@@ -34,8 +32,6 @@ const App = () => (
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/jobs/:slug" element={<JobPost />} />
             <Route path="/links" element={<Links />} />
-            <Route path="/pay/:invoiceId" element={<Invoice />} />
-            <Route path="/pay/:invoiceId/payment-registered" element={<InvoiceConfirmation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

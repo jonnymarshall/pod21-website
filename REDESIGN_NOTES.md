@@ -94,7 +94,6 @@ Design source: the approved "Command Center II" concept (`design-concepts/brand-
 
 ## Not touched
 
-- Invoice pages (`/pay/:invoiceId`, confirmation) — client-facing payment utilities, deliberately left alone.
 - All FAQ questions/answers, testimonial quotes, WhyPodcast feature lists, Services list, Process steps, stats.
 - SEO metadata, schema markup, Contentful integration, EmailJS contact form logic.
 - Public image files were not deleted; they are just no longer referenced.
